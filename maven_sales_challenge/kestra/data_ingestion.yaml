@@ -1,0 +1,131 @@
+id: data_ingestion
+namespace: maven_sales_challenge
+
+pluginDefaults:
+  - type: io.kestra.plugin.jdbc.postgresql
+    values:
+      url: jdbc:postgresql://host.docker.internal:5432/mavensales_db
+      username: kestra
+      password: k3str4
+
+tasks:
+
+  # Accounts Data Ingestion Workflow
+
+  - id: download_accounts
+    type: io.kestra.plugin.core.http.Download
+    uri: https://raw.githubusercontent.com/salacjamesrhode23/data-analyst-portfolio/refs/heads/main/maven-sales-challenge/dataset/accounts.csv
+
+  - id: create_accounts_table
+    type: io.kestra.plugin.jdbc.postgresql.Queries
+    sql: |
+      CREATE TABLE IF NOT EXISTS accounts (
+          account VARCHAR(100),
+          sector VARCHAR(50),
+          year_established INT,
+          revenue NUMERIC(15,2),
+          employees INT,
+          office_location VARCHAR(50),
+          subsidiary_of VARCHAR(100)
+      );
+
+  - id: truncate_accounts_table
+    type: io.kestra.plugin.jdbc.postgresql.Queries
+    sql: TRUNCATE TABLE accounts;
+
+  - id: ingest_accounts_data
+    type: io.kestra.plugin.jdbc.postgresql.CopyIn
+    format: CSV
+    from: "{{ outputs.download_accounts.uri }}"
+    table: accounts
+    header: true
+    delimiter: ","
+
+
+  # Products Data Ingestion Workflow
+
+  - id: download_products
+    type: io.kestra.plugin.core.http.Download
+    uri: https://raw.githubusercontent.com/salacjamesrhode23/data-analyst-portfolio/refs/heads/main/maven-sales-challenge/dataset/products.csv
+
+  - id: create_products_table
+    type: io.kestra.plugin.jdbc.postgresql.Queries
+    sql: |
+      CREATE TABLE IF NOT EXISTS products (
+          product VARCHAR(50),
+          series VARCHAR(20),
+          sales_price INT
+      );
+
+  - id: truncate_products_table
+    type: io.kestra.plugin.jdbc.postgresql.Queries
+    sql: TRUNCATE TABLE products;
+
+  - id: ingest_products_data
+    type: io.kestra.plugin.jdbc.postgresql.CopyIn
+    format: CSV
+    from: "{{ outputs.download_products.uri }}"
+    table: products
+    header: true
+    delimiter: ","
+
+
+  # Sales Teams Data Ingestion Workflow
+
+  - id: download_sales_teams
+    type: io.kestra.plugin.core.http.Download
+    uri: https://raw.githubusercontent.com/salacjamesrhode23/data-analyst-portfolio/refs/heads/main/maven-sales-challenge/dataset/sales_teams.csv
+
+  - id: create_sales_teams_table
+    type: io.kestra.plugin.jdbc.postgresql.Queries
+    sql: |
+      CREATE TABLE IF NOT EXISTS sales_teams (
+          sales_agent VARCHAR(100),
+          manager VARCHAR(100),
+          regional_office VARCHAR(50)
+      );
+
+  - id: truncate_sales_teams_table
+    type: io.kestra.plugin.jdbc.postgresql.Queries
+    sql: TRUNCATE TABLE sales_teams;
+
+  - id: ingest_sales_teams_data
+    type: io.kestra.plugin.jdbc.postgresql.CopyIn
+    format: CSV
+    from: "{{ outputs.download_sales_teams.uri }}"
+    table: sales_teams
+    header: true
+    delimiter: ","
+
+
+  # Sales Pipeline Data Ingestion Workflow
+
+  - id: download_sales_pipeline
+    type: io.kestra.plugin.core.http.Download
+    uri: https://raw.githubusercontent.com/salacjamesrhode23/data-analyst-portfolio/refs/heads/main/maven-sales-challenge/dataset/sales_pipeline.csv
+
+  - id: create_sales_pipeline_table
+    type: io.kestra.plugin.jdbc.postgresql.Queries
+    sql: |
+      CREATE TABLE IF NOT EXISTS sales_pipeline (
+          opportunity_id VARCHAR(20),
+          sales_agent VARCHAR(100),
+          product VARCHAR(50),
+          account VARCHAR(150),
+          deal_stage VARCHAR(20),
+          engage_date DATE,
+          close_date DATE,
+          close_value INT
+      );
+
+  - id: truncate_sales_pipeline_table
+    type: io.kestra.plugin.jdbc.postgresql.Queries
+    sql: TRUNCATE TABLE sales_pipeline;
+
+  - id: ingest_sales_pipeline_data
+    type: io.kestra.plugin.jdbc.postgresql.CopyIn
+    format: CSV
+    from: "{{ outputs.download_sales_pipeline.uri }}"
+    table: sales_pipeline
+    header: true
+    delimiter: ","
