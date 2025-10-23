@@ -8,6 +8,11 @@ pluginDefaults:
       username: kestra
       password: k3str4
 
+triggers:
+  - id: weekly_sales_pipeline_update
+    type: io.kestra.plugin.core.trigger.Schedule
+    cron: "0 8 * * 1"
+
 tasks:
 
   # Accounts Data Ingestion Workflow
@@ -102,7 +107,7 @@ tasks:
 
   - id: download_sales_pipeline
     type: io.kestra.plugin.core.http.Download
-    uri: https://raw.githubusercontent.com/salacjamesrhode23/data-analyst-portfolio/refs/heads/main/maven-sales-challenge/dataset/sales_pipeline.csv
+    uri: https://docs.google.com/spreadsheets/d/e/2PACX-1vTQY7DlJEuqsgXtgMLfsq-Z5N_BFyfBdVqB8NTdb8VzVjRBRzaIJ05Wx8RdviPiA-uHTLGeaLmaEf1P/pub?output=csv
 
   - id: create_sales_pipeline_table
     type: io.kestra.plugin.jdbc.postgresql.Queries
@@ -129,3 +134,13 @@ tasks:
     table: sales_pipeline
     header: true
     delimiter: ","
+
+  - id: purge_files
+    type: io.kestra.plugin.core.storage.PurgeCurrentExecutionFiles
+
+  - id: run_dbt
+    type: io.kestra.plugin.scripts.bash.Bash
+    commands:
+      - source /path/to/your/venv/bin/activate
+      - cd /path/to/your/dbt/project
+      - dbt run
