@@ -14,22 +14,22 @@ In an effort to become a data-driven organization, MavenTech, a company that spe
 
 ### ⚙️ Solution Approach
 
-**Datasets:**
+**Datasets:** <br>
 In real-world scenarios, datasets are dynamic and continuously updated. However, the datasets used in this project are static CSV files. To simulate a live data environment, the transaction data (sales_pipeline.csv) was converted into a public CSV export from Google Sheets, allowing it to function as a dynamic, continuously updating data source.
 
-**PostgreSQL Database:**
+**PostgreSQL Database:** <br>
 For this project, a PostgreSQL database was created using Docker Compose. The database serves both as OLTP (handling continuous insertion of sales pipeline transactions) and OLAP (executing analytical queries to prepare business-ready datasets).
 
-**Workflow Orchestation (Data Ingestion):**
+**Workflow Orchestation (Data Ingestion):** <br>
 A Kestra instance was deployed using Docker Compose, with the PostgreSQL database as its backend database. For data ingestion, both the static CSV files and the Google Sheets CSV export are directly loaded into the database.Since the data is assumed to be continuously updated, the Kestra workflow is scheduled to run weekly via cron jobs to ensure data freshness.
 
-**dbt Transformation**
+**dbt Transformation** <br>
 After all the data resides in the public (default) schema of the database, two additional schemas are created: <br>
 **Staging Schema:** Used for cleaning and standardizing raw data. <br>
 **Marts Schema:** Used for generating business-ready datasets for analysis. <br>
 Models are created within these schemas, and tests are implemented to validate business logic and ensure high data quality.
 
-**PowerBI dashboard**
+**PowerBI dashboard** <br>
 The interactive Power BI dashboard is divided into three sections aligned with the project objectives: <br>
 **First Page (Landing Page):** Focuses on visuals that provide managers with instant insights into how their teams are tracking against KPIs and how individual agents are performing. <br>
 **Second Page:** Highlights the products, sectors, and accounts the team should focus on, as they contribute the most to sales. It also provides suggested markup percentages for the strategic selling of products. <br>
