@@ -1,41 +1,49 @@
 ## Maven Sales Challenge
 
-Role: Data Analyst | BI Developer
-Tools Used : Power BI (DAX, Visualization), CloudSQL-PostgreSQL Instance, SQL-based tranformation (dbt) 
+**Role:** Data Analyst | BI Developer
+**Tools Used:** Power BI (DAX, Visualization), PostgreSQL, SQL-based tranformation (dbt), Workflow Orchestration (kestra) 
 
-🔍 Problem
- In an effort to become a data-driven organization. MavenTech, a company that specializes in selling computer hardware to large businesses wants to create an interactive dashboard that enables sales manger to track their team's quarterly performance and understand how they can still improve their sales performance. They been using a new CRM system to track the sales opportuniteis but they have no visibility of the data outside the platform.
+### 🔍 Problem
+In an effort to become a data-driven organization, MavenTech — a company that specializes in selling computer hardware to large businesses — wants to create an interactive dashboard that enables sales managers to track their team’s quarterly performance and identify areas for improvement. They have been using a new CRM system to track sales opportunities, but they currently have no visibility of the data outside the platform.
 
-🎯 Objectives  
-- Create an interactive dashboard for sales manager's to track their team quarterly performance
-- Suggest sales manager areas to focus for their teams effort to maximize opportunites and improve sales performance
-- Create a visualization for sales manager to understand how well their team is performing compared to their peers.
+### 🎯 Objectives  
+- Create an interactive dashboard for sales manager to track their team and agents quarterly performance.
+- Highlight key focus areas to help sales managers maximize opportunities and improve team performance.
+- Support sales managers in understanding how well their team is performing against other teams and business averages.
 
-⚙️ Solution Approach
+### ⚙️ Solution Approach
 
-Datasets:
-In real world scenarios, the dataset is dynamic and continuously updated. However, the datasets used in this project are CSV files, which are static in nature. For the purpose of this project, it is assumed that new data is continuously added to simulate a dynamic environment.
+**Datasets:**
+In real-world scenarios, datasets are dynamic and continuously updated. However, the datasets used in this project are static CSV files. To simulate a live data environment, the transaction data (sales_pipeline.csv) was converted into a public CSV export from Google Sheets, allowing it to function as a dynamic, continuously updating data source.
 
-CloudSQL PostgreSQL Instance:
-For this project a PostgreSQL instance is spinned up in CloudSQL in GCP. The database will serve both as OLAP (tranformation from staging data to analytics ready data) and as OLTP (managing realtime task logs and execution metadata from kestra workflow orchetration)
+**PostgreSQL Database:**
+For this project, a PostgreSQL database was created using Docker Compose. The database serves both as OLTP (handling continuous insertion of sales pipeline transactions) and OLAP (executing analytical queries to prepare business-ready datasets).
 
-Workflow Orchestation (Data Ingestion):
-Kestra instance is spinned up with docker compose using the PostgreSQl as its database. For data ingestion, as assumed data is conitnuosly added so kestra workflow is run every week with cron jobs. The workflow orchestration is shown below 
+**Workflow Orchestation (Data Ingestion):**
+A Kestra instance was deployed using Docker Compose, with the PostgreSQL database as its backend database. For data ingestion, both the static CSV files and the Google Sheets CSV export are directly loaded into the database.Since the data is assumed to be continuously updated, the Kestra workflow is scheduled to run weekly via cron jobs to ensure data freshness.
 
-[Add screenshot here]
+**dbt Transformation**
+After all the data resides in the public (default) schema of the database, two additional schemas are created:
+**Staging Schema:** Used for cleaning and standardizing raw data.
+**Marts Schema:** Used for generating business-ready datasets for analysis.
+Models are created within these schemas, and tests are implemented to validate business logic and ensure high data quality.
 
-dbt Transformation
-data is transformed from staging to analytics ready with SQL-based tranformation
+**PowerBI dashboard**
+The interactive Power BI dashboard is divided into three sections aligned with the project objectives:
+**First Page (Landing Page):** Focuses on visuals that provide managers with instant insights into how their teams are tracking against KPIs and how individual agents are performing
+**Second Page:** Highlights the products, sectors, and accounts the team should focus on, as they contribute the most to sales. It also provides suggested markup percentages for the strategic selling of products.
+**Third Page:** Highlights the team’s performance compared to other sales teams across various metrics. Managers can see how their teams rank within the overall business and whether they are performing above or below average.
 
-📈 Key Results
-✅ Highlighted underperforming sales agents and recommended targeted areas for improvement.
+### 📈 Key Results
+
+✅ Highlighted underperforming sales agents and tracked team performance against KPIs.
 ✅ Identified top products, sectors, and accounts driving 80% of sales and determined optimal markup strategies.
-✅ Enabled Sales Managers to benchmark team performance against peers and overall business averages.
+✅ Enabled Sales Managers to benchmark team performance against other sales teams and overall business averages.
 
-
+![Data Architecture](https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/maven_sales_challenge/data_architecture.jpg?raw=true)
 
 📊 Final Deliverables
 
-[![Watch the demo](https://img.youtube.com/vi/A4ATo3WMl-U/maxresdefault.jpg)](https://www.youtube.com/watch?v=A4ATo3WMl-U)
+[![Watch the demo](https://img.youtube.com/vi/suQ2LIrzfYU/maxresdefault.jpg)](https://www.youtube.com/watch?v=suQ2LIrzfYU)
 
 
