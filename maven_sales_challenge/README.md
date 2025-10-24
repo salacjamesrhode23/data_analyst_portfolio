@@ -24,15 +24,15 @@ For this project, a PostgreSQL database was created using Docker Compose. The da
 A Kestra instance was deployed using Docker Compose, with the PostgreSQL database as its backend database. For data ingestion, both the static CSV files and the Google Sheets CSV export are directly loaded into the database.Since the data is assumed to be continuously updated, the Kestra workflow is scheduled to run weekly via cron jobs to ensure data freshness.
 
 **dbt Transformation**
-After all the data resides in the public (default) schema of the database, two additional schemas are created:
-**Staging Schema:** Used for cleaning and standardizing raw data.
-**Marts Schema:** Used for generating business-ready datasets for analysis.
+After all the data resides in the public (default) schema of the database, two additional schemas are created: <br>
+**Staging Schema:** Used for cleaning and standardizing raw data. <br>
+**Marts Schema:** Used for generating business-ready datasets for analysis. <br>
 Models are created within these schemas, and tests are implemented to validate business logic and ensure high data quality.
 
 **PowerBI dashboard**
-The interactive Power BI dashboard is divided into three sections aligned with the project objectives:
-**First Page (Landing Page):** Focuses on visuals that provide managers with instant insights into how their teams are tracking against KPIs and how individual agents are performing
-**Second Page:** Highlights the products, sectors, and accounts the team should focus on, as they contribute the most to sales. It also provides suggested markup percentages for the strategic selling of products.
+The interactive Power BI dashboard is divided into three sections aligned with the project objectives: <br>
+**First Page (Landing Page):** Focuses on visuals that provide managers with instant insights into how their teams are tracking against KPIs and how individual agents are performing. <br>
+**Second Page:** Highlights the products, sectors, and accounts the team should focus on, as they contribute the most to sales. It also provides suggested markup percentages for the strategic selling of products. <br>
 **Third Page:** Highlights the team’s performance compared to other sales teams across various metrics. Managers can see how their teams rank within the overall business and whether they are performing above or below average.
 
 ![Data Architecture](https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/maven_sales_challenge/data_architecture.jpg?raw=true)
