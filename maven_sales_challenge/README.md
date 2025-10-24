@@ -5,7 +5,7 @@
                 Workflow Orchestration (kestra) 
 
 ### 🔍 Problem
-In an effort to become a data-driven organization, MavenTech — a company that specializes in selling computer hardware to large businesses — wants to create an interactive dashboard that enables sales managers to track their team’s quarterly performance and identify areas for improvement. They have been using a new CRM system to track sales opportunities, but they currently have no visibility of the data outside the platform.
+In an effort to become a data-driven organization, MavenTech, a company that specializes in selling computer hardware to large businesses, aims to create an interactive dashboard that allows sales managers to monitor their team’s quarterly performance and identify areas for improvement. The company has been using a new CRM system to track sales opportunities but currently lacks visibility into the data outside the platform.
 
 ### 🎯 Objectives  
 - Create an interactive dashboard for sales manager to track their team and agents quarterly performance.
@@ -35,13 +35,13 @@ The interactive Power BI dashboard is divided into three sections aligned with t
 **Second Page:** Highlights the products, sectors, and accounts the team should focus on, as they contribute the most to sales. It also provides suggested markup percentages for the strategic selling of products.
 **Third Page:** Highlights the team’s performance compared to other sales teams across various metrics. Managers can see how their teams rank within the overall business and whether they are performing above or below average.
 
+![Data Architecture](https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/maven_sales_challenge/data_architecture.jpg?raw=true)
+
 ### 📈 Key Results
 
-✅ Highlighted underperforming sales agents and tracked team performance against KPIs.
-✅ Identified top products, sectors, and accounts driving 80% of sales and determined optimal markup strategies.
-✅ Enabled Sales Managers to benchmark team performance against other sales teams and overall business averages.
-
-![Data Architecture](https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/maven_sales_challenge/data_architecture.jpg?raw=true)
+✅ Highlighted underperforming sales agents and tracked team performance against KPIs. <br>
+✅ Identified top products, sectors, and accounts driving 80% of sales and determined optimal markup strategies. <br>
+✅ Enabled Sales Managers to benchmark team performance against other sales teams and overall business averages. <br>
 
 📊 Final Deliverables
 
