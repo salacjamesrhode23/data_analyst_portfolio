@@ -1,7 +1,8 @@
 ## Maven Sales Challenge
 
 **Role:** Data Analyst | BI Developer <br>
-**Tools Used:** Power BI (DAX, Visualization), PostgreSQL, SQL-based tranformation (dbt), Workflow Orchestration (kestra) 
+**Tools Used:** Power BI (DAX, Visualization), PostgreSQL, SQL-based tranformation (dbt) <br>
+                Workflow Orchestration (kestra) 
 
 ### 🔍 Problem
 In an effort to become a data-driven organization, MavenTech — a company that specializes in selling computer hardware to large businesses — wants to create an interactive dashboard that enables sales managers to track their team’s quarterly performance and identify areas for improvement. They have been using a new CRM system to track sales opportunities, but they currently have no visibility of the data outside the platform.
