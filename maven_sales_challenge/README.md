@@ -1,6 +1,6 @@
 ## Maven Sales Challenge
 
-**Role:** Data Analyst | BI Developer
+**Role:** Data Analyst | BI Developer <br>
 **Tools Used:** Power BI (DAX, Visualization), PostgreSQL, SQL-based tranformation (dbt), Workflow Orchestration (kestra) 
 
 ### 🔍 Problem
