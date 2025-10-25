@@ -43,7 +43,7 @@ The interactive Power BI dashboard is divided into three sections aligned with t
 ✅ Identified top products, sectors, and accounts driving 80% of sales and determined optimal markup strategies. <br>
 ✅ Enabled Sales Managers to benchmark team performance against other sales teams and overall business averages. <br>
 
-📊 Final Deliverables
+### 📊 Final Deliverables
 
 [![Watch the demo](https://img.youtube.com/vi/suQ2LIrzfYU/maxresdefault.jpg)](https://www.youtube.com/watch?v=suQ2LIrzfYU)
 
