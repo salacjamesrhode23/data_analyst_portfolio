@@ -39,4 +39,4 @@ The most common formulas used in this project include:
 
 ### 📊 Final Deliverables
 
-[![Watch the demo](https://img.youtube.com/vi/A4ATo3WMl-U/maxresdefault.jpg)](https://www.youtube.com/watch?v=A4ATo3WMl-U)
+[![Watch the demo](https://img.youtube.com/vi/A4ATo3WMl-U/hqdefault.jpg)](https://www.youtube.com/watch?v=A4ATo3WMl-U)
