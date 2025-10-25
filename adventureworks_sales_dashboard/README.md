@@ -20,9 +20,9 @@ The analysis phase involves simultaneous data exploration and visualization, sup
 
 
 **Data Visualization** <br>
-- **Data Interactivity: ** Slicers allow end-users to explore sales performance across different regions and product categories.
-- **Charts: **Bar charts show detailed changes in sales from the previous to the current quarter for each subcategory. Multiple line charts display cumulative sales per quarter, highlighting both current and previous trends. A single line chart illustrates the current sales performance trend with a linear regression forecast.
-- **KPI Cards: **Highlight key performance indicators such as Customer Count, QTD Sales, QTD Units Sold, QTD Sales Growth, Sales Forecast, and Remaining Days Before Quarter End, giving management a quick overview of overall performance.
+- **Data Interactivity:** Slicers allow end-users to explore sales performance across different regions and product categories.
+- **Charts:** Bar charts show detailed changes in sales from the previous to the current quarter for each subcategory. Multiple line charts display cumulative sales per quarter, highlighting both current and previous trends. A single line chart illustrates the current sales performance trend with a linear regression forecast.
+- **KPI Cards:** Highlight key performance indicators such as Customer Count, QTD Sales, QTD Units Sold, QTD Sales Growth, Sales Forecast, and Remaining Days Before Quarter End, giving management a quick overview of overall performance.
 
 
 ### 📈 Key Results
