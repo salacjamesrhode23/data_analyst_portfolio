@@ -33,4 +33,4 @@ The analysis phase involves simultaneous data exploration and visualization, sup
 
 ### 📊 Final Deliverables
 
-[![Watch the demo](https://img.youtube.com/vi/TPZe-UXixfM/maxresdefault.jpg)](https://www.youtube.com/watch?v=TPZe-UXixfM)
+[![Watch the demo](https://img.youtube.com/vi/GTRyljpAXsM/maxresdefault.jpg)](https://www.youtube.com/watch?v=GTRyljpAXsM)
