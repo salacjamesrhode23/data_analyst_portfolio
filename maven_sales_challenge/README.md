@@ -45,6 +45,6 @@ The interactive Power BI dashboard is divided into three sections aligned with t
 
 ### 📊 Final Deliverables
 
-[![Watch the demo](https://img.youtube.com/vi/suQ2LIrzfYU/maxresdefault.jpg)](https://www.youtube.com/watch?v=suQ2LIrzfYU)
+[![Watch the demo](https://img.youtube.com/vi/suQ2LIrzfYU/hqdefault.jpg)](https://www.youtube.com/watch?v=suQ2LIrzfYU)
 
 
