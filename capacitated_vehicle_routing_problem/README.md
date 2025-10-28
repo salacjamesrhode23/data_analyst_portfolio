@@ -1,10 +1,10 @@
-## Automated School Form v.1.0
+## Capacitated Vehicle Routing Problem with Time Windows
 
 **Role:** Data Scientist | Supply Chain Analyst<br>
 **Tools Used:** Python (pandas, numpy,matplotlib, seaborn) | Geospatial Analysis (geopandas, osmnx, networkx) | Google OR-Tools
 
 ### 🔍 Problem
-A logistics company in Cagayan de Oro City aims to reduce operational costs by minimizing delivery time and fuel consumption, while ensuring that all customer orders are delivered within their specified service time windows. The challenge is to solve this capacitated vehicle routing problem using any methods or tools at your disposal.
+A logistics company in Cagayan de Oro City aims to reduce operational costs by minimizing delivery time and fuel consumption, while ensuring that all customer orders are delivered within their specified service time windows. The challenge is to solve this vehicle routing problem using any methods or tools at your disposal.
 
 ### 🎯 Objectives
 Determine the optimal routes for the company's fleet of vehicles ensuring that:
@@ -38,4 +38,4 @@ A function is defined to process the results of the Vehicle Routing Problem solu
 
 
 ### 📊 Final Deliverables
-[View full project](https://www.linkedin.com/in/jamesrhodesalac77/)
+[View full project](final_deliverables/Capacitated_Vehicle_Routing_Problem_with_Time_Windows.ipynb)
