@@ -1,0 +1,30 @@
+[0m06:55:39.909165 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x76faa68b5c90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x76faa25d1350>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x76faa534c450>]}
+
+
+============================== 06:55:39.913399 | caa01718-115f-4608-8a95-5e8ce98b25a1 ==============================
+[0m06:55:39.913399 [info ] [MainThread]: Running with dbt=1.10.15
+[0m06:55:39.914364 [debug] [MainThread]: running dbt with arguments {'send_anonymous_usage_stats': 'True', 'use_experimental_parser': 'False', 'warn_error': 'None', 'introspect': 'True', 'invocation_command': 'dbt init', 'target_path': 'None', 'log_cache_events': 'False', 'debug': 'False', 'version_check': 'True', 'partial_parse': 'True', 'no_print': 'None', 'log_path': 'logs', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'write_json': 'True', 'fail_fast': 'False', 'profiles_dir': '/home/salacjamesrhode23/.dbt', 'printer_width': '80', 'indirect_selection': 'eager', 'static_parser': 'True', 'use_colors': 'True', 'quiet': 'False', 'empty': 'None', 'log_format': 'default', 'cache_selected_only': 'False'}
+[0m06:55:50.297453 [debug] [MainThread]: Starter project path: /home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/dbt_venv/lib/python3.11/site-packages/dbt/include/starter_project
+[0m06:55:50.301058 [info ] [MainThread]: 
+Your new dbt project "ecomm_dbt" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m06:55:50.301773 [info ] [MainThread]: Setting up your profile.
+[0m07:01:11.866495 [info ] [MainThread]: Profile ecomm_dbt written to /home/salacjamesrhode23/.dbt/profiles.yml using target's profile_template.yml and your supplied values. Run 'dbt debug' to validate the connection.
+[0m07:01:11.868329 [debug] [MainThread]: Resource report: {"command_name": "init", "command_success": true, "command_wall_clock_time": 332.0278, "process_in_blocks": "0", "process_kernel_time": 0.917372, "process_mem_max_rss": "372220", "process_out_blocks": "80", "process_user_time": 4.849574}
+[0m07:01:11.869509 [debug] [MainThread]: Command `dbt init` succeeded at 07:01:11.869342 after 332.03 seconds
+[0m07:01:11.870139 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x76faa25d06d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x76faa6c97d50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x76faa6c97d90>]}
+[0m07:01:11.870819 [debug] [MainThread]: Flushing usage events
+[0m07:01:12.822183 [debug] [MainThread]: An error was encountered while trying to flush usage events

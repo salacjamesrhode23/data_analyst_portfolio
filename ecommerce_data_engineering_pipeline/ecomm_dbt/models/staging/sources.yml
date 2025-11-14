@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: staging
+    database: de-project-nyc-taxi
+    schema: ecomm_staging
+    tables:
+      - name: raw_customers
+      - name: raw_products
+      - name: raw_orders_emails
+      - name: raw_orders_faker
+      - name: raw_orders_postgres

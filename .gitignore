@@ -1,1 +1,5 @@
-maven_sales_challenge/dbt_venv/
+dbt_venv/
+pq/
+.ipynb_checkpoints/
+
+
