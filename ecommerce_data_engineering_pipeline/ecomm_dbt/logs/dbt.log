@@ -1,0 +1,752 @@
+[0m07:02:59.291205 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x71d2b9a34f10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x71d2b9a2d110>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x71d2b9a2d410>]}
+
+
+============================== 07:02:59.295654 | 736d61ce-ee52-41df-9bb8-814ce1ae34a6 ==============================
+[0m07:02:59.295654 [info ] [MainThread]: Running with dbt=1.10.15
+[0m07:02:59.296598 [debug] [MainThread]: running dbt with arguments {'no_print': 'None', 'indirect_selection': 'eager', 'log_path': '/home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/ecomm_dbt/logs', 'debug': 'False', 'invocation_command': 'dbt debug', 'write_json': 'True', 'empty': 'None', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'introspect': 'True', 'log_format': 'default', 'fail_fast': 'False', 'target_path': 'None', 'log_cache_events': 'False', 'version_check': 'True', 'use_experimental_parser': 'False', 'printer_width': '80', 'static_parser': 'True', 'warn_error': 'None', 'quiet': 'False', 'use_colors': 'True', 'cache_selected_only': 'False', 'profiles_dir': '/home/salacjamesrhode23/.dbt', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])'}
+[0m07:02:59.307415 [info ] [MainThread]: dbt version: 1.10.15
+[0m07:02:59.308093 [info ] [MainThread]: python version: 3.11.13
+[0m07:02:59.308719 [info ] [MainThread]: python path: /home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/dbt_venv/bin/python
+[0m07:02:59.309296 [info ] [MainThread]: os info: Linux-6.14.0-1019-gcp-x86_64-with-glibc2.39
+[0m07:03:02.451714 [info ] [MainThread]: Using profiles dir at /home/salacjamesrhode23/.dbt
+[0m07:03:02.452477 [info ] [MainThread]: Using profiles.yml file at /home/salacjamesrhode23/.dbt/profiles.yml
+[0m07:03:02.453040 [info ] [MainThread]: Using dbt_project.yml file at /home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/ecomm_dbt/dbt_project.yml
+[0m07:03:02.453564 [info ] [MainThread]: adapter type: bigquery
+[0m07:03:02.454078 [info ] [MainThread]: adapter version: 1.10.3
+[0m07:03:02.579780 [info ] [MainThread]: Configuration:
+[0m07:03:02.580678 [info ] [MainThread]:   profiles.yml file [[32mOK found and valid[0m]
+[0m07:03:02.581223 [info ] [MainThread]:   dbt_project.yml file [[32mOK found and valid[0m]
+[0m07:03:02.581788 [info ] [MainThread]: Required dependencies:
+[0m07:03:02.582587 [debug] [MainThread]: Executing "git --help"
+[0m07:03:02.586898 [debug] [MainThread]: STDOUT: "b"usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--bare]\n           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]\n           [--config-env=<name>=<envvar>] <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone     Clone a repository into a new directory\n   init      Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add       Add file contents to the index\n   mv        Move or rename a file, a directory, or a symlink\n   restore   Restore working tree files\n   rm        Remove files from the working tree and from the index\n\nexamine the history and state (see also: git help revisions)\n   bisect    Use binary search to find the commit that introduced a bug\n   diff      Show changes between commits, commit and working tree, etc\n   grep      Print lines matching a pattern\n   log       Show commit logs\n   show      Show various types of objects\n   status    Show the working tree status\n\ngrow, mark and tweak your common history\n   branch    List, create, or delete branches\n   commit    Record changes to the repository\n   merge     Join two or more development histories together\n   rebase    Reapply commits on top of another base tip\n   reset     Reset current HEAD to the specified state\n   switch    Switch branches\n   tag       Create, list, delete or verify a tag object signed with GPG\n\ncollaborate (see also: git help workflows)\n   fetch     Download objects and refs from another repository\n   pull      Fetch from and integrate with another repository or a local branch\n   push      Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n""
+[0m07:03:02.587598 [debug] [MainThread]: STDERR: "b''"
+[0m07:03:02.588074 [info ] [MainThread]:  - git [[32mOK found[0m]
+
+[0m07:03:02.588562 [info ] [MainThread]: Connection:
+[0m07:03:02.589126 [info ] [MainThread]:   method: service-account
+[0m07:03:02.589619 [info ] [MainThread]:   database: de-project-nyc-taxi
+[0m07:03:02.590090 [info ] [MainThread]:   execution_project: de-project-nyc-taxi
+[0m07:03:02.590552 [info ] [MainThread]:   schema: analytics
+[0m07:03:02.591023 [info ] [MainThread]:   location: US
+[0m07:03:02.591478 [info ] [MainThread]:   priority: interactive
+[0m07:03:02.591955 [info ] [MainThread]:   maximum_bytes_billed: None
+[0m07:03:02.592407 [info ] [MainThread]:   impersonate_service_account: None
+[0m07:03:02.592908 [info ] [MainThread]:   job_retry_deadline_seconds: None
+[0m07:03:02.593430 [info ] [MainThread]:   job_retries: 1
+[0m07:03:02.593859 [info ] [MainThread]:   job_creation_timeout_seconds: None
+[0m07:03:02.594323 [info ] [MainThread]:   job_execution_timeout_seconds: 300
+[0m07:03:02.594857 [info ] [MainThread]:   timeout_seconds: 300
+[0m07:03:02.595251 [info ] [MainThread]:   client_id: None
+[0m07:03:02.595668 [info ] [MainThread]:   token_uri: None
+[0m07:03:02.596055 [info ] [MainThread]:   compute_region: None
+[0m07:03:02.596445 [info ] [MainThread]:   dataproc_cluster_name: None
+[0m07:03:02.596908 [info ] [MainThread]:   gcs_bucket: None
+[0m07:03:02.597297 [info ] [MainThread]:   dataproc_batch: None
+[0m07:03:02.597934 [info ] [MainThread]: Registered adapter: bigquery=1.10.3
+[0m07:03:02.871128 [debug] [MainThread]: Acquiring new bigquery connection 'debug'
+[0m07:03:02.871784 [debug] [MainThread]: On debug: select 1 as id
+[0m07:03:02.872291 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m07:03:02.873101 [debug] [MainThread]: BigQuery adapter: Got an error when attempting to create a bigquery " "client: '[Errno 2] No such file or directory: '$HOME/creds/my-creds.json''
+[0m07:03:02.873708 [debug] [MainThread]: BigQuery adapter: Unhandled error while running:
+select 1 as id
+[0m07:03:02.874174 [debug] [MainThread]: BigQuery adapter: Database Error
+  [Errno 2] No such file or directory: '$HOME/creds/my-creds.json'
+[0m07:03:02.874664 [info ] [MainThread]:   Connection test: [[31mERROR[0m]
+
+[0m07:03:02.875297 [info ] [MainThread]: [31m1 check failed:[0m
+[0m07:03:02.875866 [info ] [MainThread]: dbt was unable to connect to the specified database.
+The database returned the following error:
+
+  >'NoneType' object has no attribute 'close'
+
+Check your database credentials and try again. For more information, visit:
+https://docs.getdbt.com/docs/configure-your-profile
+
+
+[0m07:03:02.877221 [debug] [MainThread]: Resource report: {"command_name": "debug", "command_success": false, "command_wall_clock_time": 3.655501, "process_in_blocks": "112", "process_kernel_time": 0.746508, "process_mem_max_rss": "376760", "process_out_blocks": "24", "process_user_time": 5.105733}
+[0m07:03:02.878211 [debug] [MainThread]: Command `dbt debug` failed at 07:03:02.878056 after 3.66 seconds
+[0m07:03:02.878790 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x71d2b9a35f10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x71d2b9a35450>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x71d2be0fc310>]}
+[0m07:03:02.879366 [debug] [MainThread]: Flushing usage events
+[0m07:03:03.869124 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m07:05:29.550969 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x73ede4a77050>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x73ede4a652d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x73ede4a7a5d0>]}
+
+
+============================== 07:05:29.555049 | 95db61fe-c9ed-410f-891b-72a0e077270b ==============================
+[0m07:05:29.555049 [info ] [MainThread]: Running with dbt=1.10.15
+[0m07:05:29.555896 [debug] [MainThread]: running dbt with arguments {'warn_error': 'None', 'fail_fast': 'False', 'no_print': 'None', 'send_anonymous_usage_stats': 'True', 'log_cache_events': 'False', 'version_check': 'True', 'log_path': '/home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/ecomm_dbt/logs', 'use_colors': 'True', 'empty': 'None', 'static_parser': 'True', 'cache_selected_only': 'False', 'introspect': 'True', 'quiet': 'False', 'profiles_dir': '/home/salacjamesrhode23/.dbt', 'debug': 'False', 'printer_width': '80', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'partial_parse': 'True', 'log_format': 'default', 'invocation_command': 'dbt init', 'indirect_selection': 'eager', 'write_json': 'True', 'target_path': 'None', 'use_experimental_parser': 'False'}
+[0m07:05:29.568391 [info ] [MainThread]: Setting up your profile.
+[0m07:05:36.281633 [error] [MainThread]: Encountered an error:
+
+[0m07:05:36.284203 [error] [MainThread]: Traceback (most recent call last):
+  File "/home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/dbt_venv/lib/python3.11/site-packages/dbt/cli/requires.py", line 178, in wrapper
+    result, success = func(*args, **kwargs)
+                      ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/dbt_venv/lib/python3.11/site-packages/dbt/cli/requires.py", line 128, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/dbt_venv/lib/python3.11/site-packages/dbt/cli/main.py", line 483, in init
+    results = task.run()
+              ^^^^^^^^^^
+  File "/home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/dbt_venv/lib/python3.11/site-packages/dbt/task/init.py", line 320, in run
+    self.setup_profile(profile_name)
+  File "/home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/dbt_venv/lib/python3.11/site-packages/dbt/task/init.py", line 248, in setup_profile
+    if not self.check_if_can_write_profile(profile_name=profile_name):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/dbt_venv/lib/python3.11/site-packages/dbt/task/init.py", line 211, in check_if_can_write_profile
+    response = click.confirm(
+               ^^^^^^^^^^^^^^
+  File "/home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/dbt_venv/lib/python3.11/site-packages/click/termui.py", line 239, in confirm
+    raise Abort() from None
+click.exceptions.Abort
+
+[0m07:05:36.286052 [debug] [MainThread]: Resource report: {"command_name": "init", "command_success": false, "command_wall_clock_time": 6.8044877, "process_in_blocks": "0", "process_kernel_time": 0.266682, "process_mem_max_rss": "100848", "process_out_blocks": "8", "process_user_time": 1.66971}
+[0m07:05:36.286879 [debug] [MainThread]: Command `dbt init` failed at 07:05:36.286682 after 6.81 seconds
+[0m07:05:36.287515 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x73ede4a65a50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x73ede4a654d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x73ede4a64f90>]}
+[0m07:05:36.288261 [debug] [MainThread]: Flushing usage events
+[0m07:05:37.273816 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m07:05:43.390849 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x70a2c4689110>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x70a2c4a285d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x70a2c4689190>]}
+
+
+============================== 07:05:43.395016 | 528c81bb-99ab-4a75-8953-73e7b187c970 ==============================
+[0m07:05:43.395016 [info ] [MainThread]: Running with dbt=1.10.15
+[0m07:05:43.395945 [debug] [MainThread]: running dbt with arguments {'log_format': 'default', 'empty': 'None', 'use_colors': 'True', 'warn_error': 'None', 'introspect': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'send_anonymous_usage_stats': 'True', 'use_experimental_parser': 'False', 'fail_fast': 'False', 'printer_width': '80', 'write_json': 'True', 'log_path': '/home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/ecomm_dbt/logs', 'static_parser': 'True', 'indirect_selection': 'eager', 'invocation_command': 'dbt debug', 'debug': 'False', 'no_print': 'None', 'log_cache_events': 'False', 'target_path': 'None', 'cache_selected_only': 'False', 'version_check': 'True', 'partial_parse': 'True', 'profiles_dir': '/home/salacjamesrhode23/.dbt', 'quiet': 'False'}
+[0m07:05:43.406893 [info ] [MainThread]: dbt version: 1.10.15
+[0m07:05:43.407685 [info ] [MainThread]: python version: 3.11.13
+[0m07:05:43.408282 [info ] [MainThread]: python path: /home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/dbt_venv/bin/python
+[0m07:05:43.408842 [info ] [MainThread]: os info: Linux-6.14.0-1019-gcp-x86_64-with-glibc2.39
+[0m07:05:46.568094 [info ] [MainThread]: Using profiles dir at /home/salacjamesrhode23/.dbt
+[0m07:05:46.568847 [info ] [MainThread]: Using profiles.yml file at /home/salacjamesrhode23/.dbt/profiles.yml
+[0m07:05:46.569395 [info ] [MainThread]: Using dbt_project.yml file at /home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/ecomm_dbt/dbt_project.yml
+[0m07:05:46.569945 [info ] [MainThread]: adapter type: bigquery
+[0m07:05:46.570421 [info ] [MainThread]: adapter version: 1.10.3
+[0m07:05:46.699647 [info ] [MainThread]: Configuration:
+[0m07:05:46.700294 [info ] [MainThread]:   profiles.yml file [[32mOK found and valid[0m]
+[0m07:05:46.700844 [info ] [MainThread]:   dbt_project.yml file [[32mOK found and valid[0m]
+[0m07:05:46.701323 [info ] [MainThread]: Required dependencies:
+[0m07:05:46.701895 [debug] [MainThread]: Executing "git --help"
+[0m07:05:46.704955 [debug] [MainThread]: STDOUT: "b"usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--bare]\n           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]\n           [--config-env=<name>=<envvar>] <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone     Clone a repository into a new directory\n   init      Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add       Add file contents to the index\n   mv        Move or rename a file, a directory, or a symlink\n   restore   Restore working tree files\n   rm        Remove files from the working tree and from the index\n\nexamine the history and state (see also: git help revisions)\n   bisect    Use binary search to find the commit that introduced a bug\n   diff      Show changes between commits, commit and working tree, etc\n   grep      Print lines matching a pattern\n   log       Show commit logs\n   show      Show various types of objects\n   status    Show the working tree status\n\ngrow, mark and tweak your common history\n   branch    List, create, or delete branches\n   commit    Record changes to the repository\n   merge     Join two or more development histories together\n   rebase    Reapply commits on top of another base tip\n   reset     Reset current HEAD to the specified state\n   switch    Switch branches\n   tag       Create, list, delete or verify a tag object signed with GPG\n\ncollaborate (see also: git help workflows)\n   fetch     Download objects and refs from another repository\n   pull      Fetch from and integrate with another repository or a local branch\n   push      Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n""
+[0m07:05:46.705548 [debug] [MainThread]: STDERR: "b''"
+[0m07:05:46.706055 [info ] [MainThread]:  - git [[32mOK found[0m]
+
+[0m07:05:46.706648 [info ] [MainThread]: Connection:
+[0m07:05:46.707227 [info ] [MainThread]:   method: service-account
+[0m07:05:46.707794 [info ] [MainThread]:   database: de-project-nyc-taxi
+[0m07:05:46.708301 [info ] [MainThread]:   execution_project: de-project-nyc-taxi
+[0m07:05:46.708834 [info ] [MainThread]:   schema: analytics
+[0m07:05:46.709345 [info ] [MainThread]:   location: US
+[0m07:05:46.709879 [info ] [MainThread]:   priority: interactive
+[0m07:05:46.710383 [info ] [MainThread]:   maximum_bytes_billed: None
+[0m07:05:46.710945 [info ] [MainThread]:   impersonate_service_account: None
+[0m07:05:46.711524 [info ] [MainThread]:   job_retry_deadline_seconds: None
+[0m07:05:46.712032 [info ] [MainThread]:   job_retries: 1
+[0m07:05:46.712583 [info ] [MainThread]:   job_creation_timeout_seconds: None
+[0m07:05:46.713157 [info ] [MainThread]:   job_execution_timeout_seconds: 300
+[0m07:05:46.713740 [info ] [MainThread]:   timeout_seconds: 300
+[0m07:05:46.714257 [info ] [MainThread]:   client_id: None
+[0m07:05:46.714799 [info ] [MainThread]:   token_uri: None
+[0m07:05:46.715307 [info ] [MainThread]:   compute_region: None
+[0m07:05:46.715870 [info ] [MainThread]:   dataproc_cluster_name: None
+[0m07:05:46.716433 [info ] [MainThread]:   gcs_bucket: None
+[0m07:05:46.717037 [info ] [MainThread]:   dataproc_batch: None
+[0m07:05:46.717864 [info ] [MainThread]: Registered adapter: bigquery=1.10.3
+[0m07:05:46.992179 [debug] [MainThread]: Acquiring new bigquery connection 'debug'
+[0m07:05:46.992853 [debug] [MainThread]: On debug: select 1 as id
+[0m07:05:46.993349 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m07:05:48.043057 [debug] [MainThread]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=de-project-nyc-taxi&j=bq:US:fb169014-890d-498d-ae59-609630a1de22&page=queryresults
+[0m07:05:48.790560 [info ] [MainThread]:   Connection test: [[32mOK connection ok[0m]
+
+[0m07:05:48.791400 [info ] [MainThread]: [32mAll checks passed![0m
+[0m07:05:48.793213 [debug] [MainThread]: Resource report: {"command_name": "debug", "command_success": true, "command_wall_clock_time": 5.4724865, "process_in_blocks": "8", "process_kernel_time": 0.777545, "process_mem_max_rss": "383104", "process_out_blocks": "8", "process_user_time": 5.2733}
+[0m07:05:48.794741 [debug] [MainThread]: Command `dbt debug` succeeded at 07:05:48.794459 after 5.47 seconds
+[0m07:05:48.795689 [debug] [MainThread]: Connection 'debug' was properly closed.
+[0m07:05:48.796631 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x70a2c8cb8590>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x70a2c4689550>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x70a2a40a4650>]}
+[0m07:05:48.797571 [debug] [MainThread]: Flushing usage events
+[0m07:05:49.776287 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m07:06:59.856391 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7bd86cf545d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7bd86cd81c10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7bd86cd81f50>]}
+
+
+============================== 07:06:59.860783 | d4f5ced5-958e-4a3b-b7f5-5607c9e3fad0 ==============================
+[0m07:06:59.860783 [info ] [MainThread]: Running with dbt=1.10.15
+[0m07:06:59.861828 [debug] [MainThread]: running dbt with arguments {'use_colors': 'True', 'printer_width': '80', 'use_experimental_parser': 'False', 'partial_parse': 'True', 'log_cache_events': 'False', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'no_print': 'None', 'quiet': 'False', 'profiles_dir': '/home/salacjamesrhode23/.dbt', 'version_check': 'True', 'target_path': 'None', 'indirect_selection': 'eager', 'log_format': 'default', 'send_anonymous_usage_stats': 'True', 'write_json': 'True', 'introspect': 'True', 'fail_fast': 'False', 'warn_error': 'None', 'invocation_command': 'dbt run', 'log_path': '/home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/ecomm_dbt/logs', 'empty': 'False', 'static_parser': 'True', 'debug': 'False', 'cache_selected_only': 'False'}
+[0m07:07:03.257533 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'd4f5ced5-958e-4a3b-b7f5-5607c9e3fad0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7bd84c89a190>]}
+[0m07:07:03.337343 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'd4f5ced5-958e-4a3b-b7f5-5607c9e3fad0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7bd86fb2edd0>]}
+[0m07:07:03.338367 [info ] [MainThread]: Registered adapter: bigquery=1.10.3
+[0m07:07:03.621382 [debug] [MainThread]: checksum: 14a228079bd6df63ba81633f9a3cf44ecfaa31056ac397c602753ec895dbf885, vars: {}, profile: , target: , version: 1.10.15
+[0m07:07:03.622503 [info ] [MainThread]: Unable to do partial parsing because saved manifest not found. Starting full parse.
+[0m07:07:03.623176 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'partial_parser', 'label': 'd4f5ced5-958e-4a3b-b7f5-5607c9e3fad0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7bd84c57e150>]}
+[0m07:07:05.089482 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'd4f5ced5-958e-4a3b-b7f5-5607c9e3fad0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7bd86de65490>]}
+[0m07:07:05.180511 [debug] [MainThread]: Wrote artifact WritableManifest to /home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/ecomm_dbt/target/manifest.json
+[0m07:07:05.183048 [debug] [MainThread]: Wrote artifact SemanticManifest to /home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/ecomm_dbt/target/semantic_manifest.json
+[0m07:07:05.199974 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': 'd4f5ced5-958e-4a3b-b7f5-5607c9e3fad0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7bd84b756110>]}
+[0m07:07:05.200776 [info ] [MainThread]: Found 2 models, 4 data tests, 510 macros
+[0m07:07:05.201382 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'd4f5ced5-958e-4a3b-b7f5-5607c9e3fad0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7bd84b8d3690>]}
+[0m07:07:05.203569 [info ] [MainThread]: 
+[0m07:07:05.204162 [info ] [MainThread]: Concurrency: 4 threads (target='dev')
+[0m07:07:05.204708 [info ] [MainThread]: 
+[0m07:07:05.205480 [debug] [MainThread]: Acquiring new bigquery connection 'master'
+[0m07:07:05.210885 [debug] [ThreadPool]: Acquiring new bigquery connection 'list_de-project-nyc-taxi'
+[0m07:07:05.211526 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m07:07:05.612465 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_de-project-nyc-taxi, now create_de-project-nyc-taxi_analytics)
+[0m07:07:05.613294 [debug] [ThreadPool]: Creating schema "database: "de-project-nyc-taxi"
+schema: "analytics"
+"
+[0m07:07:05.624719 [debug] [ThreadPool]: On create_de-project-nyc-taxi_analytics: /* {"app": "dbt", "dbt_version": "1.10.15", "profile_name": "ecomm_dbt", "target_name": "dev", "connection_name": "create_de-project-nyc-taxi_analytics"} */
+create schema if not exists `de-project-nyc-taxi`.`analytics`
+  
+[0m07:07:05.625329 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m07:07:06.170590 [debug] [ThreadPool]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=de-project-nyc-taxi&j=bq:US:e7709dc5-2946-4861-adfc-cae265b57c99&page=queryresults
+[0m07:07:07.000313 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly create_de-project-nyc-taxi_analytics, now list_de-project-nyc-taxi_analytics)
+[0m07:07:07.001146 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m07:07:07.557104 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'd4f5ced5-958e-4a3b-b7f5-5607c9e3fad0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7bd84c453e50>]}
+[0m07:07:07.558042 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m07:07:07.566498 [debug] [Thread-1 (]: Began running node model.ecomm_dbt.my_first_dbt_model
+[0m07:07:07.567451 [info ] [Thread-1 (]: 1 of 2 START sql table model analytics.my_first_dbt_model ...................... [RUN]
+[0m07:07:07.568295 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_de-project-nyc-taxi_analytics, now model.ecomm_dbt.my_first_dbt_model)
+[0m07:07:07.568960 [debug] [Thread-1 (]: Began compiling node model.ecomm_dbt.my_first_dbt_model
+[0m07:07:07.578970 [debug] [Thread-1 (]: Writing injected SQL for node "model.ecomm_dbt.my_first_dbt_model"
+[0m07:07:07.580035 [debug] [Thread-1 (]: Began executing node model.ecomm_dbt.my_first_dbt_model
+[0m07:07:07.623166 [debug] [Thread-1 (]: Writing runtime sql for node "model.ecomm_dbt.my_first_dbt_model"
+[0m07:07:07.624484 [debug] [Thread-1 (]: On model.ecomm_dbt.my_first_dbt_model: /* {"app": "dbt", "dbt_version": "1.10.15", "profile_name": "ecomm_dbt", "target_name": "dev", "node_id": "model.ecomm_dbt.my_first_dbt_model"} */
+
+  
+    
+
+    create or replace table `de-project-nyc-taxi`.`analytics`.`my_first_dbt_model`
+      
+    
+    
+
+    
+    OPTIONS()
+    as (
+      /*
+    Welcome to your first dbt model!
+    Did you know that you can also configure models directly within SQL files?
+    This will override configurations stated in dbt_project.yml
+
+    Try changing "table" to "view" below
+*/
+
+
+
+with source_data as (
+
+    select 1 as id
+    union all
+    select null as id
+
+)
+
+select *
+from source_data
+
+/*
+    Uncomment the line below to remove records with null `id` values
+*/
+
+-- where id is not null
+    );
+  
+[0m07:07:07.625191 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m07:07:08.422906 [debug] [Thread-1 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=de-project-nyc-taxi&j=bq:US:72048eab-c734-4c6d-a4ee-817128338ab9&page=queryresults
+[0m07:07:10.477081 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'd4f5ced5-958e-4a3b-b7f5-5607c9e3fad0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7bd84b74a890>]}
+[0m07:07:10.478193 [info ] [Thread-1 (]: 1 of 2 OK created sql table model analytics.my_first_dbt_model ................. [[32mCREATE TABLE (2.0 rows, 0 processed)[0m in 2.91s]
+[0m07:07:10.479200 [debug] [Thread-1 (]: Finished running node model.ecomm_dbt.my_first_dbt_model
+[0m07:07:10.480536 [debug] [Thread-3 (]: Began running node model.ecomm_dbt.my_second_dbt_model
+[0m07:07:10.481318 [info ] [Thread-3 (]: 2 of 2 START sql view model analytics.my_second_dbt_model ...................... [RUN]
+[0m07:07:10.482183 [debug] [Thread-3 (]: Acquiring new bigquery connection 'model.ecomm_dbt.my_second_dbt_model'
+[0m07:07:10.482724 [debug] [Thread-3 (]: Began compiling node model.ecomm_dbt.my_second_dbt_model
+[0m07:07:10.487128 [debug] [Thread-3 (]: Writing injected SQL for node "model.ecomm_dbt.my_second_dbt_model"
+[0m07:07:10.487905 [debug] [Thread-3 (]: Began executing node model.ecomm_dbt.my_second_dbt_model
+[0m07:07:10.511692 [debug] [Thread-3 (]: Writing runtime sql for node "model.ecomm_dbt.my_second_dbt_model"
+[0m07:07:10.512699 [debug] [Thread-3 (]: On model.ecomm_dbt.my_second_dbt_model: /* {"app": "dbt", "dbt_version": "1.10.15", "profile_name": "ecomm_dbt", "target_name": "dev", "node_id": "model.ecomm_dbt.my_second_dbt_model"} */
+
+
+  create or replace view `de-project-nyc-taxi`.`analytics`.`my_second_dbt_model`
+  OPTIONS()
+  as -- Use the `ref` function to select from other models
+
+select *
+from `de-project-nyc-taxi`.`analytics`.`my_first_dbt_model`
+where id = 1;
+
+
+[0m07:07:10.513344 [debug] [Thread-3 (]: Opening a new connection, currently in state init
+[0m07:07:11.479248 [debug] [Thread-3 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=de-project-nyc-taxi&j=bq:US:c19bd036-6e6c-42c7-ae58-93a86e7875f6&page=queryresults
+[0m07:07:12.141227 [debug] [Thread-3 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'd4f5ced5-958e-4a3b-b7f5-5607c9e3fad0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7bd84c512690>]}
+[0m07:07:12.142312 [info ] [Thread-3 (]: 2 of 2 OK created sql view model analytics.my_second_dbt_model ................. [[32mCREATE VIEW (0 processed)[0m in 1.66s]
+[0m07:07:12.143321 [debug] [Thread-3 (]: Finished running node model.ecomm_dbt.my_second_dbt_model
+[0m07:07:12.145553 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m07:07:12.147790 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m07:07:12.148276 [debug] [MainThread]: Connection 'model.ecomm_dbt.my_first_dbt_model' was properly closed.
+[0m07:07:12.148895 [debug] [MainThread]: Connection 'model.ecomm_dbt.my_second_dbt_model' was properly closed.
+[0m07:07:12.149478 [info ] [MainThread]: 
+[0m07:07:12.150238 [info ] [MainThread]: Finished running 1 table model, 1 view model in 0 hours 0 minutes and 6.94 seconds (6.94s).
+[0m07:07:12.151693 [debug] [MainThread]: Command end result
+[0m07:07:12.188141 [debug] [MainThread]: Wrote artifact WritableManifest to /home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/ecomm_dbt/target/manifest.json
+[0m07:07:12.190533 [debug] [MainThread]: Wrote artifact SemanticManifest to /home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/ecomm_dbt/target/semantic_manifest.json
+[0m07:07:12.197546 [debug] [MainThread]: Wrote artifact RunExecutionResult to /home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/ecomm_dbt/target/run_results.json
+[0m07:07:12.198100 [info ] [MainThread]: 
+[0m07:07:12.198980 [info ] [MainThread]: [32mCompleted successfully[0m
+[0m07:07:12.199579 [info ] [MainThread]: 
+[0m07:07:12.200212 [info ] [MainThread]: Done. PASS=2 WARN=0 ERROR=0 SKIP=0 NO-OP=0 TOTAL=2
+[0m07:07:12.201575 [debug] [MainThread]: Resource report: {"command_name": "run", "command_success": true, "command_wall_clock_time": 12.415805, "process_in_blocks": "128", "process_kernel_time": 0.871536, "process_mem_max_rss": "399964", "process_out_blocks": "3208", "process_user_time": 7.654518}
+[0m07:07:12.202251 [debug] [MainThread]: Command `dbt run` succeeded at 07:07:12.202122 after 12.42 seconds
+[0m07:07:12.202790 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7bd86cdb7a90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7bd871360590>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7bd871443350>]}
+[0m07:07:12.203306 [debug] [MainThread]: Flushing usage events
+[0m07:07:13.157198 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m07:24:39.085828 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7394356c3490>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7394383e0510>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7394383e3950>]}
+
+
+============================== 07:24:39.089933 | a210a8e1-9845-489b-92d6-f4178ca5eff3 ==============================
+[0m07:24:39.089933 [info ] [MainThread]: Running with dbt=1.10.15
+[0m07:24:39.090941 [debug] [MainThread]: running dbt with arguments {'debug': 'False', 'invocation_command': 'dbt debug', 'no_print': 'None', 'log_format': 'default', 'introspect': 'True', 'version_check': 'True', 'static_parser': 'True', 'empty': 'None', 'write_json': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'indirect_selection': 'eager', 'profiles_dir': '/home/salacjamesrhode23/.dbt', 'cache_selected_only': 'False', 'printer_width': '80', 'warn_error': 'None', 'fail_fast': 'False', 'log_path': '/home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/ecomm_dbt/logs', 'partial_parse': 'True', 'log_cache_events': 'False', 'target_path': 'None', 'send_anonymous_usage_stats': 'True', 'use_experimental_parser': 'False', 'use_colors': 'True', 'quiet': 'False'}
+[0m07:24:39.101978 [info ] [MainThread]: dbt version: 1.10.15
+[0m07:24:39.102775 [info ] [MainThread]: python version: 3.11.13
+[0m07:24:39.103360 [info ] [MainThread]: python path: /home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/dbt_venv/bin/python
+[0m07:24:39.103935 [info ] [MainThread]: os info: Linux-6.14.0-1019-gcp-x86_64-with-glibc2.39
+[0m07:24:42.233068 [info ] [MainThread]: Using profiles dir at /home/salacjamesrhode23/.dbt
+[0m07:24:42.233916 [info ] [MainThread]: Using profiles.yml file at /home/salacjamesrhode23/.dbt/profiles.yml
+[0m07:24:42.234489 [info ] [MainThread]: Using dbt_project.yml file at /home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/ecomm_dbt/dbt_project.yml
+[0m07:24:42.235094 [info ] [MainThread]: adapter type: bigquery
+[0m07:24:42.235626 [info ] [MainThread]: adapter version: 1.10.3
+[0m07:24:42.363405 [info ] [MainThread]: Configuration:
+[0m07:24:42.364373 [info ] [MainThread]:   profiles.yml file [[32mOK found and valid[0m]
+[0m07:24:42.364878 [info ] [MainThread]:   dbt_project.yml file [[32mOK found and valid[0m]
+[0m07:24:42.365324 [info ] [MainThread]: Required dependencies:
+[0m07:24:42.365804 [debug] [MainThread]: Executing "git --help"
+[0m07:24:42.368901 [debug] [MainThread]: STDOUT: "b"usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--bare]\n           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]\n           [--config-env=<name>=<envvar>] <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone     Clone a repository into a new directory\n   init      Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add       Add file contents to the index\n   mv        Move or rename a file, a directory, or a symlink\n   restore   Restore working tree files\n   rm        Remove files from the working tree and from the index\n\nexamine the history and state (see also: git help revisions)\n   bisect    Use binary search to find the commit that introduced a bug\n   diff      Show changes between commits, commit and working tree, etc\n   grep      Print lines matching a pattern\n   log       Show commit logs\n   show      Show various types of objects\n   status    Show the working tree status\n\ngrow, mark and tweak your common history\n   branch    List, create, or delete branches\n   commit    Record changes to the repository\n   merge     Join two or more development histories together\n   rebase    Reapply commits on top of another base tip\n   reset     Reset current HEAD to the specified state\n   switch    Switch branches\n   tag       Create, list, delete or verify a tag object signed with GPG\n\ncollaborate (see also: git help workflows)\n   fetch     Download objects and refs from another repository\n   pull      Fetch from and integrate with another repository or a local branch\n   push      Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n""
+[0m07:24:42.369586 [debug] [MainThread]: STDERR: "b''"
+[0m07:24:42.370063 [info ] [MainThread]:  - git [[32mOK found[0m]
+
+[0m07:24:42.370767 [info ] [MainThread]: Connection:
+[0m07:24:42.371317 [info ] [MainThread]:   method: service-account
+[0m07:24:42.371868 [info ] [MainThread]:   database: de-project-nyc-taxi
+[0m07:24:42.372365 [info ] [MainThread]:   execution_project: de-project-nyc-taxi
+[0m07:24:42.372921 [info ] [MainThread]:   schema: analytics
+[0m07:24:42.373412 [info ] [MainThread]:   location: US
+[0m07:24:42.373934 [info ] [MainThread]:   priority: interactive
+[0m07:24:42.374432 [info ] [MainThread]:   maximum_bytes_billed: None
+[0m07:24:42.374980 [info ] [MainThread]:   impersonate_service_account: None
+[0m07:24:42.375530 [info ] [MainThread]:   job_retry_deadline_seconds: None
+[0m07:24:42.376114 [info ] [MainThread]:   job_retries: 1
+[0m07:24:42.376796 [info ] [MainThread]:   job_creation_timeout_seconds: None
+[0m07:24:42.377335 [info ] [MainThread]:   job_execution_timeout_seconds: 300
+[0m07:24:42.377906 [info ] [MainThread]:   timeout_seconds: 300
+[0m07:24:42.378434 [info ] [MainThread]:   client_id: None
+[0m07:24:42.379013 [info ] [MainThread]:   token_uri: None
+[0m07:24:42.379539 [info ] [MainThread]:   compute_region: None
+[0m07:24:42.380113 [info ] [MainThread]:   dataproc_cluster_name: None
+[0m07:24:42.380687 [info ] [MainThread]:   gcs_bucket: None
+[0m07:24:42.381275 [info ] [MainThread]:   dataproc_batch: None
+[0m07:24:42.382190 [info ] [MainThread]: Registered adapter: bigquery=1.10.3
+[0m07:24:42.652102 [debug] [MainThread]: Acquiring new bigquery connection 'debug'
+[0m07:24:42.652746 [debug] [MainThread]: On debug: select 1 as id
+[0m07:24:42.653237 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m07:24:43.422328 [debug] [MainThread]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=de-project-nyc-taxi&j=bq:US:8971d24f-4556-4e70-ad68-abc8cbd7d72e&page=queryresults
+[0m07:24:44.139089 [info ] [MainThread]:   Connection test: [[32mOK connection ok[0m]
+
+[0m07:24:44.139911 [info ] [MainThread]: [32mAll checks passed![0m
+[0m07:24:44.141331 [debug] [MainThread]: Resource report: {"command_name": "debug", "command_success": true, "command_wall_clock_time": 5.1244206, "process_in_blocks": "0", "process_kernel_time": 0.748264, "process_mem_max_rss": "383040", "process_out_blocks": "16", "process_user_time": 5.244798}
+[0m07:24:44.142048 [debug] [MainThread]: Command `dbt debug` succeeded at 07:24:44.141900 after 5.13 seconds
+[0m07:24:44.142524 [debug] [MainThread]: Connection 'debug' was properly closed.
+[0m07:24:44.143078 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x739435a34050>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x739439c14c50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x739439cf73d0>]}
+[0m07:24:44.143689 [debug] [MainThread]: Flushing usage events
+[0m07:24:45.094904 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m07:24:55.148846 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x76b0b176b490>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x76b0b176a250>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x76b0b176a8d0>]}
+
+
+============================== 07:24:55.152977 | 03283a26-0997-4e07-8abd-02b5c499e65f ==============================
+[0m07:24:55.152977 [info ] [MainThread]: Running with dbt=1.10.15
+[0m07:24:55.153905 [debug] [MainThread]: running dbt with arguments {'warn_error': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'partial_parse': 'True', 'invocation_command': 'dbt run', 'profiles_dir': '/home/salacjamesrhode23/.dbt', 'no_print': 'None', 'empty': 'False', 'use_experimental_parser': 'False', 'log_format': 'default', 'debug': 'False', 'use_colors': 'True', 'write_json': 'True', 'introspect': 'True', 'send_anonymous_usage_stats': 'True', 'fail_fast': 'False', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'printer_width': '80', 'version_check': 'True', 'static_parser': 'True', 'target_path': 'None', 'cache_selected_only': 'False', 'log_path': '/home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/ecomm_dbt/logs', 'quiet': 'False'}
+[0m07:24:58.486165 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '03283a26-0997-4e07-8abd-02b5c499e65f', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x76b0911d1010>]}
+[0m07:24:58.564973 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '03283a26-0997-4e07-8abd-02b5c499e65f', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x76b0b44ea810>]}
+[0m07:24:58.566073 [info ] [MainThread]: Registered adapter: bigquery=1.10.3
+[0m07:24:58.847106 [debug] [MainThread]: checksum: 14a228079bd6df63ba81633f9a3cf44ecfaa31056ac397c602753ec895dbf885, vars: {}, profile: , target: , version: 1.10.15
+[0m07:24:58.955049 [info ] [MainThread]: Unable to do partial parsing because a project config has changed
+[0m07:24:58.955885 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'partial_parser', 'label': '03283a26-0997-4e07-8abd-02b5c499e65f', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x76b090e2e290>]}
+[0m07:25:00.308449 [warn ] [MainThread]: [[33mWARNING[0m]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 1 unused configuration paths:
+- models.ecomm_dbt.analytics
+[0m07:25:00.320646 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '03283a26-0997-4e07-8abd-02b5c499e65f', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x76b090287750>]}
+[0m07:25:00.408431 [debug] [MainThread]: Wrote artifact WritableManifest to /home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/ecomm_dbt/target/manifest.json
+[0m07:25:00.411111 [debug] [MainThread]: Wrote artifact SemanticManifest to /home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/ecomm_dbt/target/semantic_manifest.json
+[0m07:25:00.426621 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '03283a26-0997-4e07-8abd-02b5c499e65f', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x76b0902698d0>]}
+[0m07:25:00.427543 [info ] [MainThread]: Found 1 model, 5 sources, 510 macros
+[0m07:25:00.428144 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '03283a26-0997-4e07-8abd-02b5c499e65f', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x76b090285fd0>]}
+[0m07:25:00.430333 [info ] [MainThread]: 
+[0m07:25:00.430956 [info ] [MainThread]: Concurrency: 4 threads (target='dev')
+[0m07:25:00.431515 [info ] [MainThread]: 
+[0m07:25:00.432417 [debug] [MainThread]: Acquiring new bigquery connection 'master'
+[0m07:25:00.433929 [debug] [ThreadPool]: Acquiring new bigquery connection 'list_de-project-nyc-taxi'
+[0m07:25:00.434761 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m07:25:00.868124 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_de-project-nyc-taxi, now create_de-project-nyc-taxi_analytics_staging)
+[0m07:25:00.869048 [debug] [ThreadPool]: Creating schema "database: "de-project-nyc-taxi"
+schema: "analytics_staging"
+"
+[0m07:25:00.881031 [debug] [ThreadPool]: On create_de-project-nyc-taxi_analytics_staging: /* {"app": "dbt", "dbt_version": "1.10.15", "profile_name": "ecomm_dbt", "target_name": "dev", "connection_name": "create_de-project-nyc-taxi_analytics_staging"} */
+create schema if not exists `de-project-nyc-taxi`.`analytics_staging`
+  
+[0m07:25:00.881724 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m07:25:01.434200 [debug] [ThreadPool]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=de-project-nyc-taxi&j=bq:US:b25ab9db-6f09-49de-b5c2-fe1898fff0fe&page=queryresults
+[0m07:25:02.555835 [debug] [ThreadPool]: Acquiring new bigquery connection 'list_de-project-nyc-taxi_analytics_staging'
+[0m07:25:02.556734 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m07:25:03.038792 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '03283a26-0997-4e07-8abd-02b5c499e65f', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x76b090b8bdd0>]}
+[0m07:25:03.039958 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m07:25:03.045322 [debug] [Thread-1 (]: Began running node model.ecomm_dbt.stg_customers
+[0m07:25:03.046158 [info ] [Thread-1 (]: 1 of 1 START sql view model analytics_staging.stg_customers .................... [RUN]
+[0m07:25:03.046947 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_de-project-nyc-taxi_analytics_staging, now model.ecomm_dbt.stg_customers)
+[0m07:25:03.047500 [debug] [Thread-1 (]: Began compiling node model.ecomm_dbt.stg_customers
+[0m07:25:03.058192 [debug] [Thread-1 (]: Writing injected SQL for node "model.ecomm_dbt.stg_customers"
+[0m07:25:03.059149 [debug] [Thread-1 (]: Began executing node model.ecomm_dbt.stg_customers
+[0m07:25:03.091089 [debug] [Thread-1 (]: Writing runtime sql for node "model.ecomm_dbt.stg_customers"
+[0m07:25:03.092179 [debug] [Thread-1 (]: On model.ecomm_dbt.stg_customers: /* {"app": "dbt", "dbt_version": "1.10.15", "profile_name": "ecomm_dbt", "target_name": "dev", "node_id": "model.ecomm_dbt.stg_customers"} */
+
+
+  create or replace view `de-project-nyc-taxi`.`analytics_staging`.`stg_customers`
+  OPTIONS()
+  as 
+
+SELECT
+  CAST(`Address City` AS STRING) AS city,
+  CAST(`Address Company` AS STRING) AS company,
+  CAST(`Address Province` AS STRING) AS province,
+  CAST(`Address Zip` AS STRING) AS zip,
+  CAST(Email AS STRING) AS email,
+  CAST(`First Name` AS STRING) AS first_name,
+  CAST(`Full Name` AS STRING) AS full_name,
+  CAST(`Last Name` AS STRING) AS last_name,
+  CAST(Phone AS STRING) AS phone
+FROM `de-project-nyc-taxi`.`staging`.`stg_api_customers`;
+
+
+[0m07:25:03.092842 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m07:25:03.642853 [debug] [Thread-1 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=de-project-nyc-taxi&j=bq:US:a58bb1d9-8dad-415b-89a4-6522d2c4a5b2&page=queryresults
+[0m07:25:03.643866 [error] [Thread-1 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=de-project-nyc-taxi&j=bq:US:a58bb1d9-8dad-415b-89a4-6522d2c4a5b2&page=queryresults
+[0m07:25:03.655214 [debug] [Thread-1 (]: Database Error in model stg_customers (models/staging/stg_customers.sql)
+  Not found: Dataset de-project-nyc-taxi:staging was not found in location US
+  compiled code at target/run/ecomm_dbt/models/staging/stg_customers.sql
+[0m07:25:03.657540 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '03283a26-0997-4e07-8abd-02b5c499e65f', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x76b091092e50>]}
+[0m07:25:03.658559 [error] [Thread-1 (]: 1 of 1 ERROR creating sql view model analytics_staging.stg_customers ........... [[31mERROR[0m in 0.61s]
+[0m07:25:03.659511 [debug] [Thread-1 (]: Finished running node model.ecomm_dbt.stg_customers
+[0m07:25:03.660368 [debug] [Thread-7 (]: Marking all children of 'model.ecomm_dbt.stg_customers' to be skipped because of status 'error'.  Reason: Database Error in model stg_customers (models/staging/stg_customers.sql)
+  Not found: Dataset de-project-nyc-taxi:staging was not found in location US
+  compiled code at target/run/ecomm_dbt/models/staging/stg_customers.sql.
+[0m07:25:03.663822 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m07:25:03.666059 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m07:25:03.666519 [debug] [MainThread]: Connection 'create_de-project-nyc-taxi_analytics_staging' was properly closed.
+[0m07:25:03.667007 [debug] [MainThread]: Connection 'model.ecomm_dbt.stg_customers' was properly closed.
+[0m07:25:03.667517 [info ] [MainThread]: 
+[0m07:25:03.668089 [info ] [MainThread]: Finished running 1 view model in 0 hours 0 minutes and 3.24 seconds (3.24s).
+[0m07:25:03.669104 [debug] [MainThread]: Command end result
+[0m07:25:03.700574 [debug] [MainThread]: Wrote artifact WritableManifest to /home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/ecomm_dbt/target/manifest.json
+[0m07:25:03.703006 [debug] [MainThread]: Wrote artifact SemanticManifest to /home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/ecomm_dbt/target/semantic_manifest.json
+[0m07:25:03.710026 [debug] [MainThread]: Wrote artifact RunExecutionResult to /home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/ecomm_dbt/target/run_results.json
+[0m07:25:03.710539 [info ] [MainThread]: 
+[0m07:25:03.711233 [info ] [MainThread]: [31mCompleted with 1 error, 0 partial successes, and 0 warnings:[0m
+[0m07:25:03.711820 [info ] [MainThread]: 
+[0m07:25:03.712503 [error] [MainThread]: [31mFailure in model stg_customers (models/staging/stg_customers.sql)[0m
+[0m07:25:03.713172 [error] [MainThread]:   Database Error in model stg_customers (models/staging/stg_customers.sql)
+  Not found: Dataset de-project-nyc-taxi:staging was not found in location US
+  compiled code at target/run/ecomm_dbt/models/staging/stg_customers.sql
+[0m07:25:03.713694 [info ] [MainThread]: 
+[0m07:25:03.714308 [info ] [MainThread]:   compiled code at target/compiled/ecomm_dbt/models/staging/stg_customers.sql
+[0m07:25:03.714844 [info ] [MainThread]: 
+[0m07:25:03.715487 [info ] [MainThread]: Done. PASS=0 WARN=0 ERROR=1 SKIP=0 NO-OP=0 TOTAL=1
+[0m07:25:03.716997 [debug] [MainThread]: Resource report: {"command_name": "run", "command_success": false, "command_wall_clock_time": 8.636412, "process_in_blocks": "56", "process_kernel_time": 0.859901, "process_mem_max_rss": "399300", "process_out_blocks": "3144", "process_user_time": 7.363817}
+[0m07:25:03.717787 [debug] [MainThread]: Command `dbt run` failed at 07:25:03.717551 after 8.64 seconds
+[0m07:25:03.718492 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x76b0b1740690>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x76b0b1741a90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x76b0b2743c10>]}
+[0m07:25:03.719135 [debug] [MainThread]: Flushing usage events
+[0m07:25:04.696446 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m07:30:50.807843 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7c7e94a42ad0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7c7e94a2d6d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7c7e94899cd0>]}
+
+
+============================== 07:30:50.812183 | 72a572ba-b8a9-46e7-8586-8c6070ded4c7 ==============================
+[0m07:30:50.812183 [info ] [MainThread]: Running with dbt=1.10.15
+[0m07:30:50.813168 [debug] [MainThread]: running dbt with arguments {'profiles_dir': '/home/salacjamesrhode23/.dbt', 'debug': 'False', 'fail_fast': 'False', 'printer_width': '80', 'log_path': '/home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/ecomm_dbt/logs', 'introspect': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'invocation_command': 'dbt debug', 'empty': 'None', 'version_check': 'True', 'use_colors': 'True', 'quiet': 'False', 'log_cache_events': 'False', 'no_print': 'None', 'use_experimental_parser': 'False', 'send_anonymous_usage_stats': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'indirect_selection': 'eager', 'log_format': 'default', 'write_json': 'True', 'static_parser': 'True', 'warn_error': 'None', 'target_path': 'None'}
+[0m07:30:50.824055 [info ] [MainThread]: dbt version: 1.10.15
+[0m07:30:50.824768 [info ] [MainThread]: python version: 3.11.13
+[0m07:30:50.825382 [info ] [MainThread]: python path: /home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/dbt_venv/bin/python
+[0m07:30:50.825995 [info ] [MainThread]: os info: Linux-6.14.0-1019-gcp-x86_64-with-glibc2.39
+[0m07:30:54.039588 [info ] [MainThread]: Using profiles dir at /home/salacjamesrhode23/.dbt
+[0m07:30:54.040365 [info ] [MainThread]: Using profiles.yml file at /home/salacjamesrhode23/.dbt/profiles.yml
+[0m07:30:54.040971 [info ] [MainThread]: Using dbt_project.yml file at /home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/ecomm_dbt/dbt_project.yml
+[0m07:30:54.041534 [info ] [MainThread]: adapter type: bigquery
+[0m07:30:54.042068 [info ] [MainThread]: adapter version: 1.10.3
+[0m07:30:54.172485 [info ] [MainThread]: Configuration:
+[0m07:30:54.173174 [info ] [MainThread]:   profiles.yml file [[32mOK found and valid[0m]
+[0m07:30:54.173639 [info ] [MainThread]:   dbt_project.yml file [[32mOK found and valid[0m]
+[0m07:30:54.174133 [info ] [MainThread]: Required dependencies:
+[0m07:30:54.174691 [debug] [MainThread]: Executing "git --help"
+[0m07:30:54.177837 [debug] [MainThread]: STDOUT: "b"usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--bare]\n           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]\n           [--config-env=<name>=<envvar>] <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone     Clone a repository into a new directory\n   init      Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add       Add file contents to the index\n   mv        Move or rename a file, a directory, or a symlink\n   restore   Restore working tree files\n   rm        Remove files from the working tree and from the index\n\nexamine the history and state (see also: git help revisions)\n   bisect    Use binary search to find the commit that introduced a bug\n   diff      Show changes between commits, commit and working tree, etc\n   grep      Print lines matching a pattern\n   log       Show commit logs\n   show      Show various types of objects\n   status    Show the working tree status\n\ngrow, mark and tweak your common history\n   branch    List, create, or delete branches\n   commit    Record changes to the repository\n   merge     Join two or more development histories together\n   rebase    Reapply commits on top of another base tip\n   reset     Reset current HEAD to the specified state\n   switch    Switch branches\n   tag       Create, list, delete or verify a tag object signed with GPG\n\ncollaborate (see also: git help workflows)\n   fetch     Download objects and refs from another repository\n   pull      Fetch from and integrate with another repository or a local branch\n   push      Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n""
+[0m07:30:54.178447 [debug] [MainThread]: STDERR: "b''"
+[0m07:30:54.179092 [info ] [MainThread]:  - git [[32mOK found[0m]
+
+[0m07:30:54.179632 [info ] [MainThread]: Connection:
+[0m07:30:54.180208 [info ] [MainThread]:   method: service-account
+[0m07:30:54.180965 [info ] [MainThread]:   database: de-project-nyc-taxi
+[0m07:30:54.181709 [info ] [MainThread]:   execution_project: de-project-nyc-taxi
+[0m07:30:54.182374 [info ] [MainThread]:   schema: analytics
+[0m07:30:54.183089 [info ] [MainThread]:   location: asia-southeast1
+[0m07:30:54.183812 [info ] [MainThread]:   priority: interactive
+[0m07:30:54.184390 [info ] [MainThread]:   maximum_bytes_billed: None
+[0m07:30:54.185039 [info ] [MainThread]:   impersonate_service_account: None
+[0m07:30:54.185809 [info ] [MainThread]:   job_retry_deadline_seconds: None
+[0m07:30:54.186378 [info ] [MainThread]:   job_retries: 1
+[0m07:30:54.187010 [info ] [MainThread]:   job_creation_timeout_seconds: None
+[0m07:30:54.187580 [info ] [MainThread]:   job_execution_timeout_seconds: 300
+[0m07:30:54.188170 [info ] [MainThread]:   timeout_seconds: 300
+[0m07:30:54.188786 [info ] [MainThread]:   client_id: None
+[0m07:30:54.189351 [info ] [MainThread]:   token_uri: None
+[0m07:30:54.189976 [info ] [MainThread]:   compute_region: None
+[0m07:30:54.190530 [info ] [MainThread]:   dataproc_cluster_name: None
+[0m07:30:54.191220 [info ] [MainThread]:   gcs_bucket: None
+[0m07:30:54.191832 [info ] [MainThread]:   dataproc_batch: None
+[0m07:30:54.192660 [info ] [MainThread]: Registered adapter: bigquery=1.10.3
+[0m07:30:54.465233 [debug] [MainThread]: Acquiring new bigquery connection 'debug'
+[0m07:30:54.465967 [debug] [MainThread]: On debug: select 1 as id
+[0m07:30:54.466594 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m07:30:58.734682 [debug] [MainThread]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=de-project-nyc-taxi&j=bq:asia-southeast1:973035c4-e74a-4734-92f4-d511c72076e8&page=queryresults
+[0m07:30:59.152467 [info ] [MainThread]:   Connection test: [[32mOK connection ok[0m]
+
+[0m07:30:59.153214 [info ] [MainThread]: [32mAll checks passed![0m
+[0m07:30:59.154722 [debug] [MainThread]: Resource report: {"command_name": "debug", "command_success": true, "command_wall_clock_time": 8.416533, "process_in_blocks": "0", "process_kernel_time": 0.773179, "process_mem_max_rss": "382684", "process_out_blocks": "16", "process_user_time": 5.3464}
+[0m07:30:59.155630 [debug] [MainThread]: Command `dbt debug` succeeded at 07:30:59.155287 after 8.42 seconds
+[0m07:30:59.156234 [debug] [MainThread]: Connection 'debug' was properly closed.
+[0m07:30:59.156886 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7c7e948ab490>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7c7e98e14c50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7c7e741aacd0>]}
+[0m07:30:59.157558 [debug] [MainThread]: Flushing usage events
+[0m07:31:00.148743 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m07:31:06.642123 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7b7a99163490>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7b7a991623d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7b7a992f9110>]}
+
+
+============================== 07:31:06.646163 | 3957e927-407a-40fb-8a0c-1167b0c72ce4 ==============================
+[0m07:31:06.646163 [info ] [MainThread]: Running with dbt=1.10.15
+[0m07:31:06.647103 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'cache_selected_only': 'False', 'static_parser': 'True', 'indirect_selection': 'eager', 'use_experimental_parser': 'False', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'use_colors': 'True', 'profiles_dir': '/home/salacjamesrhode23/.dbt', 'quiet': 'False', 'log_path': '/home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/ecomm_dbt/logs', 'warn_error': 'None', 'printer_width': '80', 'fail_fast': 'False', 'no_print': 'None', 'invocation_command': 'dbt run', 'log_cache_events': 'False', 'send_anonymous_usage_stats': 'True', 'log_format': 'default', 'debug': 'False', 'target_path': 'None', 'introspect': 'True', 'empty': 'False', 'partial_parse': 'True', 'write_json': 'True'}
+[0m07:31:10.094901 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '3957e927-407a-40fb-8a0c-1167b0c72ce4', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7b7a78c23e90>]}
+[0m07:31:10.175341 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '3957e927-407a-40fb-8a0c-1167b0c72ce4', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7b7a9bed0bd0>]}
+[0m07:31:10.176462 [info ] [MainThread]: Registered adapter: bigquery=1.10.3
+[0m07:31:10.655911 [debug] [MainThread]: checksum: 14a228079bd6df63ba81633f9a3cf44ecfaa31056ac397c602753ec895dbf885, vars: {}, profile: , target: , version: 1.10.15
+[0m07:31:10.786716 [info ] [MainThread]: Unable to do partial parsing because profile has changed
+[0m07:31:10.787633 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'partial_parser', 'label': '3957e927-407a-40fb-8a0c-1167b0c72ce4', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7b7a9a2b7b50>]}
+[0m07:31:12.164185 [warn ] [MainThread]: [[33mWARNING[0m]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 1 unused configuration paths:
+- models.ecomm_dbt.analytics
+[0m07:31:12.176340 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '3957e927-407a-40fb-8a0c-1167b0c72ce4', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7b7a77e80610>]}
+[0m07:31:12.258759 [debug] [MainThread]: Wrote artifact WritableManifest to /home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/ecomm_dbt/target/manifest.json
+[0m07:31:12.261294 [debug] [MainThread]: Wrote artifact SemanticManifest to /home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/ecomm_dbt/target/semantic_manifest.json
+[0m07:31:12.276953 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '3957e927-407a-40fb-8a0c-1167b0c72ce4', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7b7a77d80490>]}
+[0m07:31:12.277775 [info ] [MainThread]: Found 1 model, 5 sources, 510 macros
+[0m07:31:12.278389 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '3957e927-407a-40fb-8a0c-1167b0c72ce4', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7b7a77db04d0>]}
+[0m07:31:12.280580 [info ] [MainThread]: 
+[0m07:31:12.281147 [info ] [MainThread]: Concurrency: 4 threads (target='dev')
+[0m07:31:12.281707 [info ] [MainThread]: 
+[0m07:31:12.282534 [debug] [MainThread]: Acquiring new bigquery connection 'master'
+[0m07:31:12.284043 [debug] [ThreadPool]: Acquiring new bigquery connection 'list_de-project-nyc-taxi'
+[0m07:31:12.284738 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m07:31:12.743576 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_de-project-nyc-taxi, now list_de-project-nyc-taxi_analytics_staging)
+[0m07:31:12.744483 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m07:31:13.205277 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '3957e927-407a-40fb-8a0c-1167b0c72ce4', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7b7a7877fc10>]}
+[0m07:31:13.206221 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m07:31:13.212473 [debug] [Thread-1 (]: Began running node model.ecomm_dbt.stg_customers
+[0m07:31:13.213267 [info ] [Thread-1 (]: 1 of 1 START sql view model analytics_staging.stg_customers .................... [RUN]
+[0m07:31:13.214045 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_de-project-nyc-taxi_analytics_staging, now model.ecomm_dbt.stg_customers)
+[0m07:31:13.214584 [debug] [Thread-1 (]: Began compiling node model.ecomm_dbt.stg_customers
+[0m07:31:13.225445 [debug] [Thread-1 (]: Writing injected SQL for node "model.ecomm_dbt.stg_customers"
+[0m07:31:13.226456 [debug] [Thread-1 (]: Began executing node model.ecomm_dbt.stg_customers
+[0m07:31:13.262442 [debug] [Thread-1 (]: Writing runtime sql for node "model.ecomm_dbt.stg_customers"
+[0m07:31:13.263536 [debug] [Thread-1 (]: On model.ecomm_dbt.stg_customers: /* {"app": "dbt", "dbt_version": "1.10.15", "profile_name": "ecomm_dbt", "target_name": "dev", "node_id": "model.ecomm_dbt.stg_customers"} */
+
+
+  create or replace view `de-project-nyc-taxi`.`analytics_staging`.`stg_customers`
+  OPTIONS()
+  as 
+
+SELECT
+  CAST(`Address City` AS STRING) AS city,
+  CAST(`Address Company` AS STRING) AS company,
+  CAST(`Address Province` AS STRING) AS province,
+  CAST(`Address Zip` AS STRING) AS zip,
+  CAST(Email AS STRING) AS email,
+  CAST(`First Name` AS STRING) AS first_name,
+  CAST(`Full Name` AS STRING) AS full_name,
+  CAST(`Last Name` AS STRING) AS last_name,
+  CAST(Phone AS STRING) AS phone
+FROM `de-project-nyc-taxi`.`staging`.`stg_api_customers`;
+
+
+[0m07:31:13.264246 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m07:31:13.507465 [debug] [Thread-1 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=de-project-nyc-taxi&j=bq:asia-southeast1:6fb7f07b-0602-4163-a842-7faea927fbe7&page=queryresults
+[0m07:31:13.508374 [error] [Thread-1 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=de-project-nyc-taxi&j=bq:asia-southeast1:6fb7f07b-0602-4163-a842-7faea927fbe7&page=queryresults
+[0m07:31:13.518567 [debug] [Thread-1 (]: Database Error in model stg_customers (models/staging/stg_customers.sql)
+  Not found: Dataset de-project-nyc-taxi:analytics_staging was not found in location asia-southeast1
+  compiled code at target/run/ecomm_dbt/models/staging/stg_customers.sql
+[0m07:31:13.520845 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '3957e927-407a-40fb-8a0c-1167b0c72ce4', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7b7a77e22190>]}
+[0m07:31:13.521873 [error] [Thread-1 (]: 1 of 1 ERROR creating sql view model analytics_staging.stg_customers ........... [[31mERROR[0m in 0.31s]
+[0m07:31:13.522840 [debug] [Thread-1 (]: Finished running node model.ecomm_dbt.stg_customers
+[0m07:31:13.523668 [debug] [Thread-7 (]: Marking all children of 'model.ecomm_dbt.stg_customers' to be skipped because of status 'error'.  Reason: Database Error in model stg_customers (models/staging/stg_customers.sql)
+  Not found: Dataset de-project-nyc-taxi:analytics_staging was not found in location asia-southeast1
+  compiled code at target/run/ecomm_dbt/models/staging/stg_customers.sql.
+[0m07:31:13.526484 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m07:31:13.528834 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m07:31:13.529481 [debug] [MainThread]: Connection 'model.ecomm_dbt.stg_customers' was properly closed.
+[0m07:31:13.530093 [info ] [MainThread]: 
+[0m07:31:13.530690 [info ] [MainThread]: Finished running 1 view model in 0 hours 0 minutes and 1.25 seconds (1.25s).
+[0m07:31:13.531789 [debug] [MainThread]: Command end result
+[0m07:31:13.567297 [debug] [MainThread]: Wrote artifact WritableManifest to /home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/ecomm_dbt/target/manifest.json
+[0m07:31:13.569699 [debug] [MainThread]: Wrote artifact SemanticManifest to /home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/ecomm_dbt/target/semantic_manifest.json
+[0m07:31:13.576810 [debug] [MainThread]: Wrote artifact RunExecutionResult to /home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/ecomm_dbt/target/run_results.json
+[0m07:31:13.577328 [info ] [MainThread]: 
+[0m07:31:13.578055 [info ] [MainThread]: [31mCompleted with 1 error, 0 partial successes, and 0 warnings:[0m
+[0m07:31:13.578584 [info ] [MainThread]: 
+[0m07:31:13.579325 [error] [MainThread]: [31mFailure in model stg_customers (models/staging/stg_customers.sql)[0m
+[0m07:31:13.580001 [error] [MainThread]:   Database Error in model stg_customers (models/staging/stg_customers.sql)
+  Not found: Dataset de-project-nyc-taxi:analytics_staging was not found in location asia-southeast1
+  compiled code at target/run/ecomm_dbt/models/staging/stg_customers.sql
+[0m07:31:13.580486 [info ] [MainThread]: 
+[0m07:31:13.581162 [info ] [MainThread]:   compiled code at target/compiled/ecomm_dbt/models/staging/stg_customers.sql
+[0m07:31:13.581769 [info ] [MainThread]: 
+[0m07:31:13.582424 [info ] [MainThread]: Done. PASS=0 WARN=0 ERROR=1 SKIP=0 NO-OP=0 TOTAL=1
+[0m07:31:13.584023 [debug] [MainThread]: Resource report: {"command_name": "run", "command_success": false, "command_wall_clock_time": 7.011211, "process_in_blocks": "0", "process_kernel_time": 0.857519, "process_mem_max_rss": "392924", "process_out_blocks": "3144", "process_user_time": 7.445309}
+[0m07:31:13.584927 [debug] [MainThread]: Command `dbt run` failed at 07:31:13.584771 after 7.01 seconds
+[0m07:31:13.585538 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7b7a99161a90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7b7a9d7185d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7b7a9d600390>]}
+[0m07:31:13.586172 [debug] [MainThread]: Flushing usage events
+[0m07:31:14.574526 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m07:43:02.069704 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7c2216752150>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7c22165aa710>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7c221675a7d0>]}
+
+
+============================== 07:43:02.073940 | 5c1be410-7d96-4c96-a14d-cc40bb06c8e7 ==============================
+[0m07:43:02.073940 [info ] [MainThread]: Running with dbt=1.10.15
+[0m07:43:02.074851 [debug] [MainThread]: running dbt with arguments {'invocation_command': 'dbt debug', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'write_json': 'True', 'indirect_selection': 'eager', 'empty': 'None', 'quiet': 'False', 'target_path': 'None', 'use_experimental_parser': 'False', 'no_print': 'None', 'send_anonymous_usage_stats': 'True', 'fail_fast': 'False', 'profiles_dir': '/home/salacjamesrhode23/.dbt', 'printer_width': '80', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'log_format': 'default', 'debug': 'False', 'introspect': 'True', 'use_colors': 'True', 'version_check': 'True', 'static_parser': 'True', 'warn_error': 'None', 'log_path': '/home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/ecomm_dbt/logs'}
+[0m07:43:02.085721 [info ] [MainThread]: dbt version: 1.10.15
+[0m07:43:02.086354 [info ] [MainThread]: python version: 3.11.13
+[0m07:43:02.086905 [info ] [MainThread]: python path: /home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/dbt_venv/bin/python
+[0m07:43:02.087345 [info ] [MainThread]: os info: Linux-6.14.0-1019-gcp-x86_64-with-glibc2.39
+[0m07:43:05.233670 [info ] [MainThread]: Using profiles dir at /home/salacjamesrhode23/.dbt
+[0m07:43:05.234483 [info ] [MainThread]: Using profiles.yml file at /home/salacjamesrhode23/.dbt/profiles.yml
+[0m07:43:05.235104 [info ] [MainThread]: Using dbt_project.yml file at /home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/ecomm_dbt/dbt_project.yml
+[0m07:43:05.235700 [info ] [MainThread]: adapter type: bigquery
+[0m07:43:05.236243 [info ] [MainThread]: adapter version: 1.10.3
+[0m07:43:05.367059 [info ] [MainThread]: Configuration:
+[0m07:43:05.367830 [info ] [MainThread]:   profiles.yml file [[32mOK found and valid[0m]
+[0m07:43:05.368412 [info ] [MainThread]:   dbt_project.yml file [[32mOK found and valid[0m]
+[0m07:43:05.369179 [info ] [MainThread]: Required dependencies:
+[0m07:43:05.369799 [debug] [MainThread]: Executing "git --help"
+[0m07:43:05.372826 [debug] [MainThread]: STDOUT: "b"usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--bare]\n           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]\n           [--config-env=<name>=<envvar>] <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone     Clone a repository into a new directory\n   init      Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add       Add file contents to the index\n   mv        Move or rename a file, a directory, or a symlink\n   restore   Restore working tree files\n   rm        Remove files from the working tree and from the index\n\nexamine the history and state (see also: git help revisions)\n   bisect    Use binary search to find the commit that introduced a bug\n   diff      Show changes between commits, commit and working tree, etc\n   grep      Print lines matching a pattern\n   log       Show commit logs\n   show      Show various types of objects\n   status    Show the working tree status\n\ngrow, mark and tweak your common history\n   branch    List, create, or delete branches\n   commit    Record changes to the repository\n   merge     Join two or more development histories together\n   rebase    Reapply commits on top of another base tip\n   reset     Reset current HEAD to the specified state\n   switch    Switch branches\n   tag       Create, list, delete or verify a tag object signed with GPG\n\ncollaborate (see also: git help workflows)\n   fetch     Download objects and refs from another repository\n   pull      Fetch from and integrate with another repository or a local branch\n   push      Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n""
+[0m07:43:05.373394 [debug] [MainThread]: STDERR: "b''"
+[0m07:43:05.373986 [info ] [MainThread]:  - git [[32mOK found[0m]
+
+[0m07:43:05.374536 [info ] [MainThread]: Connection:
+[0m07:43:05.375193 [info ] [MainThread]:   method: service-account
+[0m07:43:05.375914 [info ] [MainThread]:   database: de-project-nyc-taxi
+[0m07:43:05.376461 [info ] [MainThread]:   execution_project: de-project-nyc-taxi
+[0m07:43:05.377022 [info ] [MainThread]:   schema: ecomm
+[0m07:43:05.377553 [info ] [MainThread]:   location: asia-southeast1
+[0m07:43:05.378117 [info ] [MainThread]:   priority: interactive
+[0m07:43:05.378669 [info ] [MainThread]:   maximum_bytes_billed: None
+[0m07:43:05.379250 [info ] [MainThread]:   impersonate_service_account: None
+[0m07:43:05.379859 [info ] [MainThread]:   job_retry_deadline_seconds: None
+[0m07:43:05.380421 [info ] [MainThread]:   job_retries: 1
+[0m07:43:05.381062 [info ] [MainThread]:   job_creation_timeout_seconds: None
+[0m07:43:05.381792 [info ] [MainThread]:   job_execution_timeout_seconds: 300
+[0m07:43:05.382366 [info ] [MainThread]:   timeout_seconds: 300
+[0m07:43:05.382936 [info ] [MainThread]:   client_id: None
+[0m07:43:05.383439 [info ] [MainThread]:   token_uri: None
+[0m07:43:05.383952 [info ] [MainThread]:   compute_region: None
+[0m07:43:05.384447 [info ] [MainThread]:   dataproc_cluster_name: None
+[0m07:43:05.384983 [info ] [MainThread]:   gcs_bucket: None
+[0m07:43:05.385528 [info ] [MainThread]:   dataproc_batch: None
+[0m07:43:05.386320 [info ] [MainThread]: Registered adapter: bigquery=1.10.3
+[0m07:43:05.659273 [debug] [MainThread]: Acquiring new bigquery connection 'debug'
+[0m07:43:05.659911 [debug] [MainThread]: On debug: select 1 as id
+[0m07:43:05.660388 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m07:43:06.242377 [debug] [MainThread]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=de-project-nyc-taxi&j=bq:asia-southeast1:68e9aab4-470b-48fc-b4b6-5d2ba8f8103d&page=queryresults
+[0m07:43:06.517892 [info ] [MainThread]:   Connection test: [[32mOK connection ok[0m]
+
+[0m07:43:06.518756 [info ] [MainThread]: [32mAll checks passed![0m
+[0m07:43:06.520213 [debug] [MainThread]: Resource report: {"command_name": "debug", "command_success": true, "command_wall_clock_time": 4.5222535, "process_in_blocks": "0", "process_kernel_time": 0.852385, "process_mem_max_rss": "383204", "process_out_blocks": "24", "process_user_time": 5.187807}
+[0m07:43:06.520962 [debug] [MainThread]: Command `dbt debug` succeeded at 07:43:06.520798 after 4.52 seconds
+[0m07:43:06.521488 [debug] [MainThread]: Connection 'debug' was properly closed.
+[0m07:43:06.522116 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7c22165a9790>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7c221ab605d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7c21f5edf7d0>]}
+[0m07:43:06.522771 [debug] [MainThread]: Flushing usage events
+[0m07:43:07.513510 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m07:43:17.283533 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x78001c27f6d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x78001c3a6510>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x78001c289b10>]}
+
+
+============================== 07:43:17.287705 | 82768afc-9ebf-4c94-a189-462f1ce05bbb ==============================
+[0m07:43:17.287705 [info ] [MainThread]: Running with dbt=1.10.15
+[0m07:43:17.288638 [debug] [MainThread]: running dbt with arguments {'log_cache_events': 'False', 'static_parser': 'True', 'indirect_selection': 'eager', 'partial_parse': 'True', 'printer_width': '80', 'version_check': 'True', 'use_colors': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'invocation_command': 'dbt run', 'log_path': '/home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/ecomm_dbt/logs', 'use_experimental_parser': 'False', 'empty': 'False', 'send_anonymous_usage_stats': 'True', 'introspect': 'True', 'cache_selected_only': 'False', 'fail_fast': 'False', 'write_json': 'True', 'target_path': 'None', 'warn_error': 'None', 'profiles_dir': '/home/salacjamesrhode23/.dbt', 'debug': 'False', 'quiet': 'False', 'log_format': 'default', 'no_print': 'None'}
+[0m07:43:20.560966 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '82768afc-9ebf-4c94-a189-462f1ce05bbb', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x77fffbd44a90>]}
+[0m07:43:20.639531 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '82768afc-9ebf-4c94-a189-462f1ce05bbb', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x78001f0691d0>]}
+[0m07:43:20.640510 [info ] [MainThread]: Registered adapter: bigquery=1.10.3
+[0m07:43:20.919650 [debug] [MainThread]: checksum: 14a228079bd6df63ba81633f9a3cf44ecfaa31056ac397c602753ec895dbf885, vars: {}, profile: , target: , version: 1.10.15
+[0m07:43:21.018190 [info ] [MainThread]: Unable to do partial parsing because profile has changed
+[0m07:43:21.019014 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'partial_parser', 'label': '82768afc-9ebf-4c94-a189-462f1ce05bbb', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x78001d433c90>]}
+[0m07:43:22.378666 [warn ] [MainThread]: [[33mWARNING[0m]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 1 unused configuration paths:
+- models.ecomm_dbt.analytics
+[0m07:43:22.390982 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '82768afc-9ebf-4c94-a189-462f1ce05bbb', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x77fffbc9d990>]}
+[0m07:43:22.470765 [debug] [MainThread]: Wrote artifact WritableManifest to /home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/ecomm_dbt/target/manifest.json
+[0m07:43:22.473069 [debug] [MainThread]: Wrote artifact SemanticManifest to /home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/ecomm_dbt/target/semantic_manifest.json
+[0m07:43:22.487323 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '82768afc-9ebf-4c94-a189-462f1ce05bbb', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x77fffadaead0>]}
+[0m07:43:22.488133 [info ] [MainThread]: Found 1 model, 5 sources, 510 macros
+[0m07:43:22.488717 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '82768afc-9ebf-4c94-a189-462f1ce05bbb', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x77fffae23490>]}
+[0m07:43:22.490823 [info ] [MainThread]: 
+[0m07:43:22.491358 [info ] [MainThread]: Concurrency: 4 threads (target='dev')
+[0m07:43:22.491876 [info ] [MainThread]: 
+[0m07:43:22.492625 [debug] [MainThread]: Acquiring new bigquery connection 'master'
+[0m07:43:22.493928 [debug] [ThreadPool]: Acquiring new bigquery connection 'list_de-project-nyc-taxi'
+[0m07:43:22.494559 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m07:43:22.900149 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_de-project-nyc-taxi, now list_de-project-nyc-taxi_ecomm_staging)
+[0m07:43:22.900986 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m07:43:23.153454 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '82768afc-9ebf-4c94-a189-462f1ce05bbb', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x77fffad28ad0>]}
+[0m07:43:23.154253 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m07:43:23.160398 [debug] [Thread-1 (]: Began running node model.ecomm_dbt.stg_customers
+[0m07:43:23.161325 [info ] [Thread-1 (]: 1 of 1 START sql view model ecomm_staging.stg_customers ........................ [RUN]
+[0m07:43:23.162217 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_de-project-nyc-taxi_ecomm_staging, now model.ecomm_dbt.stg_customers)
+[0m07:43:23.162854 [debug] [Thread-1 (]: Began compiling node model.ecomm_dbt.stg_customers
+[0m07:43:23.173655 [debug] [Thread-1 (]: Writing injected SQL for node "model.ecomm_dbt.stg_customers"
+[0m07:43:23.174531 [debug] [Thread-1 (]: Began executing node model.ecomm_dbt.stg_customers
+[0m07:43:23.211262 [debug] [Thread-1 (]: Writing runtime sql for node "model.ecomm_dbt.stg_customers"
+[0m07:43:23.212532 [debug] [Thread-1 (]: On model.ecomm_dbt.stg_customers: /* {"app": "dbt", "dbt_version": "1.10.15", "profile_name": "ecomm_dbt", "target_name": "dev", "node_id": "model.ecomm_dbt.stg_customers"} */
+
+
+  create or replace view `de-project-nyc-taxi`.`ecomm_staging`.`stg_customers`
+  OPTIONS()
+  as 
+
+SELECT
+  CAST(`Address City` AS STRING) AS city,
+  CAST(`Address Company` AS STRING) AS company,
+  CAST(`Address Province` AS STRING) AS province,
+  CAST(`Address Zip` AS STRING) AS zip,
+  CAST(Email AS STRING) AS email,
+  CAST(`First Name` AS STRING) AS first_name,
+  CAST(`Full Name` AS STRING) AS full_name,
+  CAST(`Last Name` AS STRING) AS last_name,
+  CAST(Phone AS STRING) AS phone
+FROM `de-project-nyc-taxi`.`staging`.`stg_api_customers`;
+
+
+[0m07:43:23.213350 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m07:43:23.632468 [debug] [Thread-1 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=de-project-nyc-taxi&j=bq:asia-southeast1:4e012b08-4ba8-48dd-a735-67f90c82b6eb&page=queryresults
+[0m07:43:23.921989 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '82768afc-9ebf-4c94-a189-462f1ce05bbb', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x77fffb789790>]}
+[0m07:43:23.923092 [info ] [Thread-1 (]: 1 of 1 OK created sql view model ecomm_staging.stg_customers ................... [[32mCREATE VIEW (0 processed)[0m in 0.76s]
+[0m07:43:23.924078 [debug] [Thread-1 (]: Finished running node model.ecomm_dbt.stg_customers
+[0m07:43:23.926261 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m07:43:23.928458 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m07:43:23.929007 [debug] [MainThread]: Connection 'model.ecomm_dbt.stg_customers' was properly closed.
+[0m07:43:23.929568 [info ] [MainThread]: 
+[0m07:43:23.930203 [info ] [MainThread]: Finished running 1 view model in 0 hours 0 minutes and 1.44 seconds (1.44s).
+[0m07:43:23.931365 [debug] [MainThread]: Command end result
+[0m07:43:23.958859 [debug] [MainThread]: Wrote artifact WritableManifest to /home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/ecomm_dbt/target/manifest.json
+[0m07:43:23.961182 [debug] [MainThread]: Wrote artifact SemanticManifest to /home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/ecomm_dbt/target/semantic_manifest.json
+[0m07:43:23.967898 [debug] [MainThread]: Wrote artifact RunExecutionResult to /home/salacjamesrhode23/data_analyst_portfolio/ecommerce_data_engineering_pipeline/ecomm_dbt/target/run_results.json
+[0m07:43:23.968377 [info ] [MainThread]: 
+[0m07:43:23.969062 [info ] [MainThread]: [32mCompleted successfully[0m
+[0m07:43:23.969627 [info ] [MainThread]: 
+[0m07:43:23.970200 [info ] [MainThread]: Done. PASS=1 WARN=0 ERROR=0 SKIP=0 NO-OP=0 TOTAL=1
+[0m07:43:23.971583 [debug] [MainThread]: Resource report: {"command_name": "run", "command_success": true, "command_wall_clock_time": 6.7571177, "process_in_blocks": "0", "process_kernel_time": 0.848147, "process_mem_max_rss": "397104", "process_out_blocks": "3144", "process_user_time": 7.1664}
+[0m07:43:23.972308 [debug] [MainThread]: Command `dbt run` succeeded at 07:43:23.972175 after 6.76 seconds
+[0m07:43:23.972834 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7800208d85d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x77fffae81410>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x78001c2b9c10>]}
+[0m07:43:23.973343 [debug] [MainThread]: Flushing usage events
+[0m07:43:24.955779 [debug] [MainThread]: An error was encountered while trying to flush usage events
