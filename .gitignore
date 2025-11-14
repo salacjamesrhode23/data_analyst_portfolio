@@ -1,4 +1,5 @@
-maven_sales_challenge/dbt_venv/
-ecommerce_data_engineering_pipeline/dbt_venv/
-*.parquet
-*.csv
+dbt_venv/
+pq/
+.ipynb_checkpoints/
+
+
