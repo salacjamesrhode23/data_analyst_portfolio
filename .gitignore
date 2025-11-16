@@ -1,5 +1,5 @@
 dbt_venv/
 pq/
 .ipynb_checkpoints/
-
-
+logs/
+airflow/airflow.cfg

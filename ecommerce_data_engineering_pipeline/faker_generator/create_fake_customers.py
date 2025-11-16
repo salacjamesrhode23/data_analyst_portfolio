@@ -41,7 +41,7 @@ data = [{
     'Address Province': None,
     'Address Zip': None,
     'Phone': ph_phone()
-} for _ in range(500)]
+} for _ in range(10)]
 
 # Convert data to DataFrame
 customers_df = pd.DataFrame(data)
@@ -56,5 +56,5 @@ customers_df['Address Province'] = customers_df['Address Province'].fillna(custo
 # Lookup ZipCode Values to replace None
 customers_df['Address Zip'] = customers_df['Address Zip'].fillna(customers_df['Address City'].map(df_city.set_index('City')['ZipCode']))
 
-customers_df.to_csv(output_path, index=False)
+customers_df.to_csv("sample1-dag.csv", index=False)
 print(f"Saved {len(customers_df)} fake customers to {output_path}")
