@@ -1,4 +1,5 @@
 import os
+import csv
 import imaplib
 import email
 from email import policy
@@ -113,7 +114,11 @@ timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 file_name = f'output_files/from_emails/email_orders_{timestamp}.csv'
 
 bucket.blob(file_name).upload_from_string(
-    orders_df.to_csv(index=False),
+    orders_df.to_csv(
+        index=False,
+        quoting=csv.QUOTE_ALL,
+        encoding="utf-8-sig"
+    ),
     content_type='text/csv'
 )
 

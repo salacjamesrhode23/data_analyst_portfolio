@@ -1,5 +1,6 @@
 import requests
 import pandas as pd
+import csv
 from google.cloud import storage
 
 # Initialize GCS client and bucket
@@ -15,7 +16,11 @@ if response_customer.status_code == 200:
     data = response_customer.json()
     df_customers = pd.DataFrame(data)
     bucket.blob('output_files/from_api/customers.csv').upload_from_string(
-        df_customers.to_csv(index=False),
+        df_customers.to_csv(
+            index=False,
+            quoting=csv.QUOTE_ALL,
+            encoding="utf-8-sig"
+        ),
         content_type='text/csv'
     )
 else:
@@ -40,7 +45,11 @@ while True:
 if products_data:
     df_products = pd.DataFrame(products_data)
     bucket.blob('output_files/from_api/products.csv').upload_from_string(
-        df_products.to_csv(index=False),
+        df_products.to_csv(
+            index=False,
+            quoting=csv.QUOTE_ALL,
+            encoding="utf-8-sig"
+        ),
         content_type='text/csv'
     )
 else:

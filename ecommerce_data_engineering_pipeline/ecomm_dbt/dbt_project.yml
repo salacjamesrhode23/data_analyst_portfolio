@@ -33,5 +33,7 @@ models:
   ecomm_dbt:
     staging:
       +schema: staging
-    analytics:
-      +schema: analytics
+    core:
+      +schema: core
+    marts:
+      +schema: marts
