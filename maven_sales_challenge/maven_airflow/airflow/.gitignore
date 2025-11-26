@@ -5,16 +5,16 @@ __pycache__/
 *.pyd
 
 # Airflow database
-airflow/airflow.cfg
-airflow/airflow.db
-airflow/airflow.db-shm
-airflow/airflow.db-wal
+airflow.cfg
+airflow.db
+airflow.db-shm
+airflow.db-wal
 
 # Airflow authentication files
-airflow/simple_auth_manager_passwords.json
+simple_auth_manager_passwords.json
 
 # Airflow logs
-airflow/logs/
+logs/
 
 # OS files
 .DS_Store
