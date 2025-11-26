@@ -30,7 +30,7 @@ node_modules/
 *.bak
 
 # Secrets / profiles
-profiles.yml
+dbt_project/profiles.yml
 
 # Optional: If you have seeds generated from outside source
 # /seeds/   # Uncomment if seeds are generated automatically
