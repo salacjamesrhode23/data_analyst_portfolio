@@ -1,0 +1,12 @@
+sources:
+  - name: public
+    database: mavensales_db
+    schema: public
+    tables:
+      - name: accounts
+      - name: products
+      - name: sales_teams
+      - name: sales_pipeline
+
+
+              

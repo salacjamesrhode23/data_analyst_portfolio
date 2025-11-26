@@ -1,0 +1,12 @@
+default:
+  outputs:
+    dev:
+      dbname: mavensales_db
+      host: postgres
+      pass: dR4m%T6nb
+      port: 5432
+      schema: analytics
+      threads: 1
+      type: postgres
+      user: root
+  target: dev
