@@ -17,6 +17,8 @@ In an effort to become a data-driven organization, MavenTech, a company that spe
 **Datasets:** <br>
 In real-world scenarios, datasets are dynamic and continuously updated. However, the datasets used in this project are static CSV files. To simulate a live data environment, the transaction data (sales_pipeline.csv) was converted into a public CSV export from Google Sheets, allowing it to function as a dynamic, continuously updating data source.
 
+**Docker Container:** <br>
+
 **PostgreSQL Database:** <br>
 For this project, a PostgreSQL database was created using Docker Compose. The database serves both as OLTP (handling continuous insertion of sales pipeline transactions) and OLAP (executing analytical queries to prepare business-ready datasets).
 

@@ -1,0 +1,29 @@
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Airflow database
+airflow/airflow.cfg
+airflow/airflow.db
+airflow/airflow.db-shm
+airflow/airflow.db-wal
+
+# Airflow authentication files
+airflow/simple_auth_manager_passwords.json
+
+# Airflow logs
+airflow/logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Docker ignore
+*.log
+*.env
+
+# Virtual environments
+venv/
+.env/
