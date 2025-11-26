@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  maven-airflow:
+    container_name: maven_airflow
+    build: .
+    image: maven-airflow:latest
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./airflow:/opt/airflow
+      - /var/run/docker.sock:/var/run/docker.sock
+      - dbt_shared:/usr/app/dbt
+    networks:
+      - maven-network
+    command: airflow standalone
+
+volumes:
+  dbt_shared: {}
+
+networks:
+  maven-network:
+    external: true
