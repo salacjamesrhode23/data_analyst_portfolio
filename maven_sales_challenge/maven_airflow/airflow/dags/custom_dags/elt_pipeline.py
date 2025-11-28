@@ -4,6 +4,7 @@ from docker.types import Mount
 import tempfile
 import os
 import requests
+import pendulum
 
 from airflow import DAG
 from airflow.decorators import task
@@ -28,10 +29,12 @@ DOCKER_NETWORK = Variable.get("docker_network")  # e.g., "maven-network"
 # -----------------------------
 # DAG definition
 # -----------------------------
+local_tz = pendulum.timezone("Asia/Manila")
+
 with DAG(
     dag_id="ingest_multiple_csvs",
-    start_date=datetime(2025, 11, 22),
-    schedule="@daily",
+    start_date=pendulum.datetime(2025, 11, 22, tz=local_tz),
+    schedule="0 0 * * 1",
     catchup=False,
     default_args=DEFAULT_ARGS,
     max_active_runs=1,
