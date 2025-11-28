@@ -15,21 +15,20 @@ In an effort to become a data-driven organization, MavenTech, a company that spe
 ### ⚙️ Solution Approach
 
 **Datasets:** <br>
-In real-world scenarios, datasets are dynamic and continuously updated. However, the datasets used in this project are static CSV files. To simulate a live data environment, the transaction data (sales_pipeline.csv) was converted into a public CSV export from Google Sheets, allowing it to function as a dynamic, continuously updating data source.
+In real-world scenarios, datasets are dynamic and continuously updated. However, the datasets used in this project are static CSV files. To simulate a live data environment, the dataset was converted into a public CSV export in Google Sheets, allowing it to function as a dynamic, continuously updating data source.
 
 **Docker Container:** <br>
+There are 2 containers created for this project which are connected via docker network external to both containers. the purpose of these network is for both containers to share volumes so that airflow can run dbt the containers are the following: <br>
 
-**PostgreSQL Database:** <br>
-For this project, a PostgreSQL database was created using Docker Compose. The database serves both as OLTP (handling continuous insertion of sales pipeline transactions) and OLAP (executing analytical queries to prepare business-ready datasets).
+Docker Container 1 - this container contains PostgreSQL database instance which serves as datawarehouse. For convenience Pgadmin is also included in the container for viewing the database with graphical interface instead of typing command in the terminal. Additionally dbt-core is included in this container to perform transformation in the database to prepare business-ready datasets
 
-**Workflow Orchestation (Data Ingestion):** <br>
-A Kestra instance was deployed using Docker Compose, with the PostgreSQL database as its backend database. For data ingestion, both the static CSV files and the Google Sheets CSV export are directly loaded into the database.Since the data is assumed to be continuously updated, the Kestra workflow is scheduled to run weekly via cron jobs to ensure data freshness.
+Docker Container 2 - this container contains a custom image for airflow build with additional custom providers packages from the requirements.txt. Data ingestion tasks is run weekly to ingest weekly data from the public csv export to the database via cron jobs. After data is ingested it triggers dbt to run dbt debug, deps, an run.
 
 **dbt Transformation** <br>
-After all the data resides in the public (default) schema of the database, two additional schemas are created: <br>
-- **Staging Schema:** Used for cleaning and standardizing raw data. <br>
-- **Marts Schema:** Used for generating business-ready datasets for analysis. <br>
-Models are created within these schemas, and tests are implemented to validate business logic and ensure high data quality.
+The dbt models and configuration files reside on the local machine, but the project directory is mounted as a volume in the Docker container, making it accessible inside the container. After all data is ingested into the database’s default public schema, dbt performs the transformations and creates an additional schema for generating business-ready datasets for analysis.
+
+Models are defined within these schemas, and tests are implemented to validate business logic and ensure high data quality.
+
 
 **PowerBI dashboard** <br>
 The interactive Power BI dashboard is divided into three sections aligned with the project objectives: <br>
