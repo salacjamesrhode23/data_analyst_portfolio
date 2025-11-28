@@ -2,7 +2,7 @@
 
 **Role:** Data Analyst | BI Developer <br>
 **Tools Used:** Power BI (DAX, Visualization), PostgreSQL, SQL-based tranformation (dbt) <br>
-                Workflow Orchestration (kestra) 
+                Airflow (Workflow Orchestration), Docker 
 
 ### 🔍 Problem
 In an effort to become a data-driven organization, MavenTech, a company that specializes in selling computer hardware to large businesses, aims to create an interactive dashboard that allows sales managers to monitor their team’s quarterly performance and identify areas for improvement. The company has been using a new CRM system to track sales opportunities but currently lacks visibility into the data outside the platform.
