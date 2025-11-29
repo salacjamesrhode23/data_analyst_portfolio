@@ -1,4 +1,36 @@
-target/
-dbt_packages/
+# Logs
 logs/
-dbt_internal_packages/
+*.log
+
+# dbt compiled models and run artifacts
+target/
+compiled/
+run/
+
+# Python cache (if using any Python scripts)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE/project-specific files
+.vscode/
+.idea/
+
+# Node/npm dependencies (if used for dbt packages)
+node_modules/
+
+# Temporary files
+*.tmp
+*.swp
+*.bak
+
+# Secrets / profiles
+profiles.yml
+
+# Optional: If you have seeds generated from outside source
+# /seeds/   # Uncomment if seeds are generated automatically

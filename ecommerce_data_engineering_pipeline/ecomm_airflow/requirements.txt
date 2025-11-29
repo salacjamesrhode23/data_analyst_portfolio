@@ -1,3 +1,2 @@
-apache-airflow-providers-github
 apache-airflow-providers-google
-# Add more provider packages as needed
+psycopg2-binary

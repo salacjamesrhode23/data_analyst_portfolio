@@ -2,7 +2,7 @@
 
 **Role:** Data Analyst | BI Developer <br>
 **Tools Used:** Power BI (DAX, Visualization), PostgreSQL, SQL-based tranformation (dbt) <br>
-                Workflow Orchestration (kestra) 
+                Airflow (Workflow Orchestration), Docker 
 
 ### 🔍 Problem
 In an effort to become a data-driven organization, MavenTech, a company that specializes in selling computer hardware to large businesses, aims to create an interactive dashboard that allows sales managers to monitor their team’s quarterly performance and identify areas for improvement. The company has been using a new CRM system to track sales opportunities but currently lacks visibility into the data outside the platform.
@@ -15,20 +15,21 @@ In an effort to become a data-driven organization, MavenTech, a company that spe
 ### ⚙️ Solution Approach
 
 **Datasets:** <br>
-In real-world scenarios, datasets are dynamic and continuously updated. However, the datasets used in this project are static CSV files. To simulate a live data environment, the dataset was converted into a public CSV export in Google Sheets, allowing it to function as a dynamic, continuously updating data source.
+In real-world environments, datasets are continuously updated. However, this project initially used static CSV files. To simulate a dynamic, real-time data source, each dataset was uploaded to Google Sheets and converted into a public CSV export link. This approach allowed Airflow to pull updated data automatically, mimicking a live production scenario.
 
-**Docker Container:** <br>
-There are 2 containers created for this project which are connected via docker network external to both containers. the purpose of these network is for both containers to share volumes so that airflow can run dbt the containers are the following: <br>
+**Docker Containers:** <br>
+Two Docker containers were provisioned for this project, one for Airflow and another for dbt + PostgreSQL. Both containers are connected through an external Docker network, enabling communication and shared volumes so Airflow can execute dbt commands.<br>
 
-Docker Container 1 - this container contains PostgreSQL database instance which serves as datawarehouse. For convenience Pgadmin is also included in the container for viewing the database with graphical interface instead of typing command in the terminal. Additionally dbt-core is included in this container to perform transformation in the database to prepare business-ready datasets
+- Container 1: PostgreSQL + pgAdmin + dbt-core<br>
+This container hosts the PostgreSQL database, which serves as the project’s data warehouse. To simplify database exploration and debugging, pgAdmin is also included for GUI-based access. The container also includes dbt-core, which performs data modeling and transformation tasks inside the warehouse to prepare business-ready datasets.
 
-Docker Container 2 - this container contains a custom image for airflow build with additional custom providers packages from the requirements.txt. Data ingestion tasks is run weekly to ingest weekly data from the public csv export to the database via cron jobs. After data is ingested it triggers dbt to run dbt debug, deps, an run.
+- Container 2: Custom Airflow Image<br>
+This container runs Airflow using a custom image that includes additional providers specified in the requirements.txt. Airflow orchestrates the weekly ingestion workflow, scheduled to run every Monday at 12:00 AM, pulling fresh data from the public CSV export links into the PostgreSQL database.<br>
+After ingestion, Airflow triggers dbt commands (dbt debug, dbt deps, and dbt run) to validate connections, install dependencies, and apply transformations.
+
 
 **dbt Transformation** <br>
-The dbt models and configuration files reside on the local machine, but the project directory is mounted as a volume in the Docker container, making it accessible inside the container. After all data is ingested into the database’s default public schema, dbt performs the transformations and creates an additional schema for generating business-ready datasets for analysis.
-
-Models are defined within these schemas, and tests are implemented to validate business logic and ensure high data quality.
-
+The dbt project files remain on the local machine, but the project directory is mounted as a shared volume inside the dbt container. This setup allows dbt to run transformations directly within the Docker environment while keeping the code version-controlled locally. Dbt generates a dedicated schema for transformed, analysis-ready datasets. Models are structured within this schema, and built-in dbt tests are applied to enforce business rules and maintain data quality throughout the pipeline.
 
 **PowerBI dashboard** <br>
 The interactive Power BI dashboard is divided into three sections aligned with the project objectives: <br>
@@ -36,7 +37,7 @@ The interactive Power BI dashboard is divided into three sections aligned with t
 - **Second Page:** Highlights the products, sectors, and accounts the team should focus on, as they contribute the most to sales. It also provides suggested markup percentages for the strategic selling of products. <br>
 - **Third Page:** Highlights the team’s performance compared to other sales teams across various metrics. Managers can see how their teams rank within the overall business and whether they are performing above or below average.
 
-![Data Architecture](https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/maven_sales_challenge/data_architecture.jpg?raw=true)
+![Data Architecture](https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/maven_sales_challenge/data_architecture.png?raw=true)
 
 ### 📈 Key Results
 
