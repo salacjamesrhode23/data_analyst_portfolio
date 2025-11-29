@@ -10,13 +10,13 @@ from google.cloud import storage
 from datetime import datetime
 
 # ---------------------------
-# Email Configuration
+# Airflow Environment Variables
 # ---------------------------
 EMAIL_USER = 'salacjamesrhode23@gmail.com'
-EMAIL_PASSWORD = os.getenv('RECIPIENT_EMAIL_APP_PASSWORD')
+EMAIL_PASSWORD = 'dR4m%T6nb&G+k#F'
 IMAP_URL = 'imap.gmail.com'
-BATCH_SIZE = 100  # Number of emails to process per batch
-BATCH_DELAY = 1   # Delay in seconds between batches
+BATCH_SIZE = 100
+BATCH_DELAY = 1
 
 # ---------------------------
 # Helper Functions
