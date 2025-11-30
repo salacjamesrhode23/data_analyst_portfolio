@@ -10,6 +10,7 @@ x-airflow-common:
     AIRFLOW__DATABASE__SQL_ALCHEMY_CONN:   "postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres/${POSTGRES_DB}"
     AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
     AIRFLOW__API__AUTH_BACKENDS: 'airflow.api.auth.backend.basic_auth'
+    AIRFLOW__CORE__SQL_ALCHEMY_ENGINE_ARGS: '{"pool_pre_ping": true, "pool_size": 5, "max_overflow": 10, "pool_recycle": 1800}'
     _PIP_ADDITIONAL_REQUIREMENTS: ""
   volumes:
     - ./ecomm_airflow/dags:/opt/airflow/dags
@@ -32,7 +33,7 @@ services:
     ports:
       - "${POSTGRES_PORT}:5432"
     volumes:
-      - ./ecomm_airflow:/var/lib/postgresql
+      - postgres_data:/var/lib/postgresql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
       interval: 5s
@@ -44,7 +45,6 @@ services:
     container_name: pgadmin4
     image: dpage/pgadmin4
     restart: always
-
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: root
@@ -59,10 +59,8 @@ services:
     <<: *airflow-common
     container_name: airflow_webserver
     depends_on:
-      postgres:
-        condition: service_healthy
-      airflow-init:
-        condition: service_started
+      - postgres
+      - airflow-init
     command:  ["api-server"]
     ports:
       - "${AIRFLOW_PORT}:8080"
@@ -96,5 +94,5 @@ services:
     command: ["--version"]
 
 volumes:
-  airflow-postgres-data:
   pgadmin_data:
+  postgres_data:
