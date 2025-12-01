@@ -4,7 +4,7 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 from airflow.models import Variable
 
-from custom_functions.ingest_data_email.fetch_email import fetch_email
+from custom_functions.ingest_data_email.fetch_email import fetch_email_bodies
 from custom_functions.ingest_data_email.parse_email import email_orders_to_gcs
 
 # --- DAG Definition ---
@@ -24,7 +24,7 @@ with DAG(
         password = Variable.get("EMAIL_PASSWORD")
 
         # Fetch email bodies
-        email_bodies = fetch_email(user=user, password=password, subject_filter=subject_filter)
+        email_bodies = fetch_email_bodies(user=user, password=password, subject_filter=subject_filter)
 
         # Push to XCom for downstream tasks
         kwargs['ti'].xcom_push(key='email_bodies', value=email_bodies)

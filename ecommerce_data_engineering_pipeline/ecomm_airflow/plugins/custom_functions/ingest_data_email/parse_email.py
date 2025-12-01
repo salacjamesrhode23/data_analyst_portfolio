@@ -1,5 +1,7 @@
+import csv
 import pandas as pd
 from bs4 import BeautifulSoup
+from datetime import datetime
 
 def parse_order_email(body):
 
@@ -47,7 +49,7 @@ def email_orders_to_gcs(email_bodies: list):
 
     # Create a timestamped file name
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    file_path = f"dataset/email_orders_{timestamp}.csv"
+    file_path = f"/opt/airflow/data/email_orders_{timestamp}.csv"
 
     # Save to csv 
     df.to_csv(file_path, index=False, encoding="utf-8-sig", quoting=csv.QUOTE_ALL)
