@@ -2,6 +2,15 @@ import imaplib
 import email
 from email import policy
 
+def get_email_body(message):
+    if message.is_multipart():
+        for part in message.iter_parts():
+            content_type = part.get_content_type()
+            if content_type in ["text/plain", "text/html"]:
+                return part.get_content()
+    else:
+        return message.get_content()
+
 def fetch_email_bodies(user, password, subject_filter, imap_url='imap.gmail.com'):
     
     # Connect to mailbox
@@ -11,7 +20,7 @@ def fetch_email_bodies(user, password, subject_filter, imap_url='imap.gmail.com'
 
     # Search email matching subject
     status, data = mail.search(None, 'SUBJECT', subject_filter)
-    email_ids = data[0].split()
+    email_ids = data[0].split()[:5]
 
     all_bodies = []
 
