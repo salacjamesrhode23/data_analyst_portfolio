@@ -9,7 +9,7 @@ services:
     volumes:
       - ./ecomm_airflow/dags:/opt/airflow/dags
       - ./ecomm_airflow/logs:/opt/airflow/logs
-      - ./ecomm_airflow/plugins:/opt/airflow/plugins
+      - ./ecomm_airflow/utils:/opt/airflow/utils
       - ./ecomm_airflow/data:/opt/airflow/data
       - ./ecomm_dbt:/opt/airflow/dbt
     command:  airflow standalone
