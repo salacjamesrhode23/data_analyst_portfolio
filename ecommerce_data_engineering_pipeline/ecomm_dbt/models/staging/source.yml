@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: raw_data
+    schema: ecomm
+    description: "Raw ecommerce data ingested from different sources"
+    tables:
+      - name: parquet_orders
+      - name: email_orders
+      - name: database_orders
+      - name: customers
+      - name: products
+
