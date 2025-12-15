@@ -186,7 +186,7 @@ def process_email_orders(
     Returns file name uploaded to GCS.
     """
 
-    state_file = "etl_state/email_orders_state.json"
+    state_file = "idempotency_keys/email_orders_state.json"
 
     # Step 1: Load last timestamp
     state = read_state(bucket_name, state_file)

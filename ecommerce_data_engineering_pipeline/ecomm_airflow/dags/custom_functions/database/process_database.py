@@ -90,7 +90,7 @@ def process_database_orders(
     - Upload to GCS
     - Update state with max row_id
     """
-    state_file = "etl_state/db_orders_state.json"
+    state_file = "idempotency_keys/db_orders_state.json"
 
     # Step 1: Load last row_id processed
     state = read_state(bucket_name, state_file)
