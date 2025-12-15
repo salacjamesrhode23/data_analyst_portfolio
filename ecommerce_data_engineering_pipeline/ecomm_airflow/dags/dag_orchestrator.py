@@ -54,4 +54,4 @@ with DAG(
     )
 
     # Define execution order:
-    trigger_ingest_api_dimension >> [trigger_ingest_database_orders, trigger_ingest_email_orders] >> trigger_execute_dbt
+    trigger_ingest_api_dimension >> trigger_ingest_email_orders >> trigger_ingest_database_orders >> trigger_execute_dbt

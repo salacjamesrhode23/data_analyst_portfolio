@@ -1,10 +1,12 @@
 # Airflow providers (compatible with Airflow 3.1 / Astro 3.1-7)
-apache-airflow-providers-http==4.10.0
-apache-airflow-providers-postgres==5.11.2
-apache-airflow-providers-snowflake==6.6.1
+apache-airflow-providers-http
+apache-airflow-providers-postgres
+apache-airflow-providers-snowflake
+apache-airflow-providers-google
+
 
 # Cosmos (Airflow 3.x compatible)
-astronomer-cosmos==1.10.1
+astronomer-cosmos
 
 # Snowflake core dependency (explicit but compatible)
 snowflake-connector-python
