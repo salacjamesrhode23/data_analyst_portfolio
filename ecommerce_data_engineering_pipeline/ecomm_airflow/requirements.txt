@@ -1,5 +1,14 @@
-apache-airflow-providers-google
-apache-airflow-providers-http
-dbt-core
-dbt-bigquery
+# Airflow providers (compatible with Airflow 2.8.x)
+apache-airflow-providers-google==10.19.0
+apache-airflow-providers-http==4.10.0
+apache-airflow-providers-postgres==5.11.2
+
+# Cosmos
+astronomer-cosmos==1.10.1
+
+
+
+# Utilities (latest versions)
+beautifulsoup4
 requests
+snowflake-connector-python
