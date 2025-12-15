@@ -1,5 +1,17 @@
-apache-airflow-providers-google
+# Airflow providers (compatible with Airflow 3.1 / Astro 3.1-7)
 apache-airflow-providers-http
-dbt-core
-dbt-bigquery
+apache-airflow-providers-postgres
+apache-airflow-providers-snowflake
+apache-airflow-providers-google
+
+
+# Cosmos (Airflow 3.x compatible)
+astronomer-cosmos
+
+# Snowflake core dependency (explicit but compatible)
+snowflake-connector-python
+snowflake-sqlalchemy
+
+# Utilities (safe pins)
+beautifulsoup4
 requests
