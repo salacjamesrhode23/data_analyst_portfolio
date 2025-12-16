@@ -1,93 +1,65 @@
 import csv
 import pandas as pd
 from io import StringIO
-from airflow.providers.postgres.hooks.postgres import PostgresHook
-# from google.cloud import storage
-from airflow.providers.google.cloud.hooks.gcs import GCSHook
+from google.cloud import storage
+from google.cloud.sql.connector import Connector
+from airflow.models import Variable
+from sqlalchemy import create_engine
 import pendulum
 import json
 
 # ---------------------------
 # GCS STATE MANAGEMENT
 # ---------------------------
-def read_state(
-        bucket_name: str,
-        state_file: str,
-        gcp_conn_id : str = "gcp_connection"
-    ) -> dict:
-    """
-    Reads last processed row_id from GCS.
-    If the state file does not exist, return last_row_id = 0.
-    """
-    gcs_hook = GCSHook(gcp_conn_id=gcp_conn_id)
+def read_state(bucket_name: str, state_file: str) -> dict:
+    client = storage.Client()
+    bucket = client.bucket(bucket_name)
+    blob = bucket.blob(state_file)
 
-    # Check if the object exists
-    exists = gcs_hook.exists(
-        bucket_name=bucket_name,
-        object_name=state_file,
-    )
-
-    if not exists:
-        # First run
+    if not blob.exists():
         return {"last_row_id": 0}
 
-    # Download file content as string
-    content = gcs_hook.download(
-        bucket_name=bucket_name,
-        object_name=state_file,
-    )
-
+    content = blob.download_as_text()
     return json.loads(content)
 
+def write_state(bucket_name: str, state_file: str, state_dict: dict):
+    client = storage.Client()
+    bucket = client.bucket(bucket_name)
+    blob = bucket.blob(state_file)
+    blob.upload_from_string(json.dumps(state_dict), content_type="application/json")
 
-    # client = storage.Client()
-    # bucket = client.bucket(bucket_name)
-    # blob = bucket.blob(state_file)
+# ---------------------------
+# CLOUD SQL CONNECTION
+# ---------------------------
+connector = Connector()  # reuse connector across calls
 
-    # if not blob.exists():
-    #     # First run
-    #     return {"last_row_id": 0}
-
-    # content = blob.download_as_text()
-    # return json.loads(content)
-
-
-def write_state(
-        bucket_name: str,
-        state_file: str,
-        state_dict: dict,
-        gcp_conn_id : str = "gcp_connection"
-    ):
+def get_postgres_engine(instance_connection_name: str, db_user: str, db_pass: str, db_name: str):
     """
-    Writes last processed row_id into GCS.
+    Returns a SQLAlchemy engine for Cloud SQL Postgres using Python Connector.
     """
-    gcs_hook = GCSHook(gcp_conn_id=gcp_conn_id)
+    def getconn():
+        return connector.connect(
+            instance_connection_name,
+            "pg8000",
+            user=db_user,
+            password=db_pass,
+            db=db_name
+        )
 
-    gcs_hook.upload(
-        bucket_name=bucket_name,
-        object_name=state_file,
-        data=json.dumps(state_dict),
-        mime_type="application/json"
-    )
-
-    # client = storage.Client()
-    # bucket = client.bucket(bucket_name)
-    # blob = bucket.blob(state_file)
-
-    # blob.upload_from_string(
-    #     json.dumps(state_dict),
-    #     content_type="application/json"
-    # )
+    engine = create_engine("postgresql+pg8000://", creator=getconn)
+    return engine
 
 # ---------------------------
 # FETCH FROM POSTGRES (ROW-ID)
 # ---------------------------
-def fetch_database_orders(postgres_conn_id: str, last_row_id: int) -> pd.DataFrame:
-    """
-    Fetches only new rows from orders table using row_id-based incremental load.
-    """
-    pg_hook = PostgresHook(postgres_conn_id=postgres_conn_id)
-    engine = pg_hook.get_sqlalchemy_engine()
+def fetch_database_orders(
+    instance_connection_name: str,
+    db_user: str,
+    db_pass: str,
+    db_name: str,
+    last_row_id: int
+) -> pd.DataFrame:
+    engine = get_postgres_engine(instance_connection_name, db_user, db_pass, db_name)
 
     query = f"""
         SELECT *
@@ -102,7 +74,7 @@ def fetch_database_orders(postgres_conn_id: str, last_row_id: int) -> pd.DataFra
 # ---------------------------
 # UPLOAD TO GCS
 # ---------------------------
-def upload_df_to_gcs(df: pd.DataFrame, bucket_name: str, file_name: str, gcp_conn_id="gcp_connection") -> None:
+def upload_df_to_gcs(df: pd.DataFrame, bucket_name: str, file_name: str) -> None:
     """
     Convert DataFrame to CSV and upload to GCS.
     """
@@ -110,29 +82,16 @@ def upload_df_to_gcs(df: pd.DataFrame, bucket_name: str, file_name: str, gcp_con
     df.to_csv(csv_buffer, index=False, quoting=csv.QUOTE_ALL, encoding="utf-8-sig")
     csv_data = csv_buffer.getvalue()
 
-    hook = GCSHook(gcp_conn_id=gcp_conn_id)
-
-    hook.upload(
-        bucket_name=bucket_name,
-        object_name=file_name,
-        data=csv_buffer.getvalue(),
-        mime_type="text/csv"
-    )
-
-    # client = storage.Client()
-    # bucket = client.bucket(bucket_name)
-    # blob = bucket.blob(file_name)
-    # blob.upload_from_string(csv_data, content_type="text/csv")
+    client = storage.Client()
+    bucket = client.bucket(bucket_name)
+    blob = bucket.blob(file_name)
+    blob.upload_from_string(csv_data, content_type="text/csv")
 
 
 # ---------------------------
 # MAIN ORCHESTRATION
 # ---------------------------
-def process_database_orders(
-    postgres_conn_id: str,
-    bucket_name: str,
-    gcp_conn_id: str = "gcp_connection"
-):
+def process_database_orders(bucket_name: str):
     """
     Main ETL: 
     - Read state
@@ -140,14 +99,20 @@ def process_database_orders(
     - Upload to GCS
     - Update state with max row_id
     """
+    # Cloud SQL credentials from environment or variables
+    instance_connection_name = "de-project-ecomm:asia-southeast1:ecomm-db"
+    db_user = "airflow"
+    db_pass = Variable.get("DB_PASSWORD")
+    db_name = "ecomm_db"
+
     state_file = "idempotency_keys/db_orders_state.json"
 
     # Step 1: Load last row_id processed
-    state = read_state(bucket_name, state_file, gcp_conn_id=gcp_conn_id)
+    state = read_state(bucket_name, state_file)
     last_row_id = int(state["last_row_id"])
 
     # Step 2: Fetch new rows
-    df = fetch_database_orders(postgres_conn_id, last_row_id)
+    df = fetch_database_orders(instance_connection_name, db_user, db_pass, db_name, last_row_id)
 
     if df.empty:
         print("No new transactions to process.")
@@ -155,14 +120,12 @@ def process_database_orders(
 
     # Step 3: Upload result CSV to GCS
     now = pendulum.now()
-    file_name = (
-        f"from_database/orders_{now.to_datetime_string().replace(':','').replace(' ','_')}.csv"
-    )
-    upload_df_to_gcs(df, bucket_name, file_name, gcp_conn_id=gcp_conn_id)
+    file_name = f"from_database/orders_{now.to_datetime_string().replace(':','').replace(' ','_')}.csv"
+    upload_df_to_gcs(df, bucket_name, file_name)
 
     # Step 4: Update the state with the newest row_id
     new_last_row_id = int(df["row_id"].max())
-    write_state(bucket_name, state_file, {"last_row_id": new_last_row_id}, gcp_conn_id=gcp_conn_id)
+    write_state(bucket_name, state_file, {"last_row_id": new_last_row_id})
 
     print(f"Processed {len(df)} rows and uploaded to {file_name}")
     return file_name

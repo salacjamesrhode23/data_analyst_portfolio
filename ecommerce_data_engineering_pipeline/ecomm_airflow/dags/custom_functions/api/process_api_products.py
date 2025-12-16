@@ -5,8 +5,7 @@ import pandas as pd
 
 # Third-party libraries
 from io import StringIO
-# from google.cloud import storage
-from airflow.providers.google.cloud.hooks.gcs import GCSHook
+from google.cloud import storage
 
 
 # -----------------------------
@@ -44,7 +43,7 @@ def fetch_products_from_api(base_url: str, page_limit: int) -> pd.DataFrame:
 # ---------------------------
 # UPLOAD TO GCS FUNCTION
 # ---------------------------
-def upload_df_to_gcs(df: pd.DataFrame, bucket_name: str, file_name: str, gcp_conn_id="gcp_connection") -> None:
+def upload_df_to_gcs(df: pd.DataFrame, bucket_name: str, file_name: str) -> None:
 
     """
     Convert Dataframe to csv then upload to GCS bucket
@@ -54,13 +53,10 @@ def upload_df_to_gcs(df: pd.DataFrame, bucket_name: str, file_name: str, gcp_con
     df.to_csv(csv_buffer, index=False, quoting=csv.QUOTE_ALL, encoding="utf-8-sig")
     csv_data = csv_buffer.getvalue()
 
-    hook = GCSHook(gcp_conn_id=gcp_conn_id)
-    hook.upload(bucket_name=bucket_name, object_name=file_name, data=csv_data)
-
-    # client = storage.Client()
-    # bucket = client.bucket(bucket_name)
-    # blob = bucket.blob(file_name)
-    # blob.upload_from_string(csv_data, content_type="text/csv")
+    client = storage.Client()
+    bucket = client.bucket(bucket_name)
+    blob = bucket.blob(file_name)
+    blob.upload_from_string(csv_data, content_type="text/csv")
     
 
 # ---------------------------
@@ -69,8 +65,7 @@ def upload_df_to_gcs(df: pd.DataFrame, bucket_name: str, file_name: str, gcp_con
 def process_api_products(
     base_url: str,
     page_limit: int,
-    bucket_name: str,
-    gcp_conn_id="gcp_connection"
+    bucket_name: str
 ) -> str:
 
     """
@@ -82,6 +77,6 @@ def process_api_products(
 
     # Step 2: Upload DataFrame to CSV in GCS
     file_name = "from_api/products_latest.csv"
-    upload_df_to_gcs(df, bucket_name, file_name, gcp_conn_id=gcp_conn_id)
+    upload_df_to_gcs(df, bucket_name, file_name)
 
     return file_name

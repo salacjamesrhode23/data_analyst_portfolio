@@ -10,8 +10,7 @@ import json
 
 # Third-party libraries
 from bs4 import BeautifulSoup
-# from google.cloud import storage
-from airflow.providers.google.cloud.hooks.gcs import GCSHook
+from google.cloud import storage
 import pendulum
 
 # ---------------------------
@@ -26,55 +25,30 @@ def read_state(
     Reads last processed email timestamp from GCS.
     Returns default earliest timestamp if state doesn’t exist.
     """
-    hook = GCSHook(gcp_conn_id=gcp_conn_id)
 
-    # Check if the object exists
-    exists = hook.exists(
-        bucket_name=bucket_name,
-        object_name=state_file,
-    )
+    client = storage.Client()
+    bucket = client.bucket(bucket_name)
+    blob = bucket.blob(state_file)
 
-    if not exists:
-        # First run
+    if not blob.exists():
+        # First run, start from a very early date
         return {"last_email_timestamp": "1970-01-01T00:00:00Z"}
 
-    # Download file content as string
-    content = hook.download(bucket_name=bucket_name, object_name=state_file).decode("utf-8")
-
+    content = blob.download_as_text()
     return json.loads(content)
-
-    # client = storage.Client()
-    # bucket = client.bucket(bucket_name)
-    # blob = bucket.blob(state_file)
-
-    # if not blob.exists():
-    #     # First run, start from a very early date
-    #     return {"last_email_timestamp": "1970-01-01T00:00:00Z"}
-
-    # content = blob.download_as_text()
-    # return json.loads(content)
 
 def write_state(bucket_name: str, state_file: str, state_dict: dict, gcp_conn_id : str = "gcp_connection"):
     """
     Writes last processed email timestamp to GCS.
     """
-    hook = GCSHook(gcp_conn_id=gcp_conn_id)
+    client = storage.Client()
+    bucket = client.bucket(bucket_name)
+    blob = bucket.blob(state_file)
 
-    hook.upload(
-        bucket_name=bucket_name,
-        object_name=state_file,
-        data=json.dumps(state_dict),
-        mime_type="application/json"
+    blob.upload_from_string(
+        json.dumps(state_dict),
+        content_type="application/json"
     )
-
-    # client = storage.Client()
-    # bucket = client.bucket(bucket_name)
-    # blob = bucket.blob(state_file)
-
-    # blob.upload_from_string(
-    #     json.dumps(state_dict),
-    #     content_type="application/json"
-    # )
 
 # -----------------------------
 # FETCH EMAIL FUNCTION
@@ -199,20 +173,12 @@ def upload_df_to_gcs(
     df.to_csv(csv_buffer, index=False, quoting=csv.QUOTE_ALL, encoding="utf-8-sig")
     csv_data = csv_buffer.getvalue()
 
-    hook = GCSHook(gcp_conn_id=gcp_conn_id)
-    hook.upload(
-        bucket_name=bucket_name,
-        object_name=file_name,
-        data=csv_buffer.getvalue(),
-        mime_type="text/csv"
-    )
-
-    # client = storage.Client()
-    # bucket = client.bucket(bucket_name)
-    # blob = bucket.blob(file_name)
-    # blob.upload_from_string(csv_data, content_type="text/csv")
+    client = storage.Client()
+    bucket = client.bucket(bucket_name)
+    blob = bucket.blob(file_name)
+    blob.upload_from_string(csv_data, content_type="text/csv")
     
-    # print(f"Uploaded CSV to: gs://{bucket_name}/{file_name}")
+    print(f"Uploaded CSV to: gs://{bucket_name}/{file_name}")
 
 # ---------------------------
 # ORCHESTRATION FUNCTION
@@ -234,7 +200,7 @@ def process_email_orders(
     state_file = "idempotency_keys/email_orders_state.json"
 
     # Step 1: Load last timestamp
-    state = read_state(bucket_name, state_file, gcp_conn_id=gcp_conn_id)
+    state = read_state(bucket_name, state_file)
     last_ts = pendulum.parse(state["last_email_timestamp"])
 
     # Step 2: Fetch only new emails
@@ -252,11 +218,11 @@ def process_email_orders(
     # Step 4: Upload DataFrame to CSV in GCS
     now = pendulum.now()
     file_name = f"from_emails/orders_{now.to_datetime_string().replace(':','').replace(' ','_')}.csv"
-    upload_df_to_gcs(df, bucket_name, file_name, gcp_conn_id=gcp_conn_id)
+    upload_df_to_gcs(df, bucket_name, file_name)
 
     # Step 5: Update state using the max email timestamp
     new_last_ts = max(pendulum.parse(e["email_timestamp"]) for e in emails)
-    write_state(bucket_name, state_file, {"last_email_timestamp": new_last_ts.to_iso8601_string()}, gcp_conn_id=gcp_conn_id)
+    write_state(bucket_name, state_file, {"last_email_timestamp": new_last_ts.to_iso8601_string()})
 
     print(f"Processed {len(df)} rows. Latest timestamp: {new_last_ts}")
 

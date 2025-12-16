@@ -4,6 +4,13 @@ apache-airflow-providers-postgres
 apache-airflow-providers-snowflake
 apache-airflow-providers-google
 
+# CloudSQL
+cloud-sql-python-connector
+sqlalchemy
+pg8000
+
+# Google Cloud
+google-cloud-storage
 
 # Cosmos (Airflow 3.x compatible)
 astronomer-cosmos

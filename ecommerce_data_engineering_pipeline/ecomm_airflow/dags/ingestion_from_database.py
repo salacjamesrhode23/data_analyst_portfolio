@@ -19,7 +19,6 @@ with DAG(
         task_id="process_database_orders_to_gcs",
         python_callable=process_database_orders,
         op_kwargs={
-            "postgres_conn_id": "cloudsql_postgres_conn",
             "bucket_name": Variable.get("GCS_BUCKET")
         },
     )

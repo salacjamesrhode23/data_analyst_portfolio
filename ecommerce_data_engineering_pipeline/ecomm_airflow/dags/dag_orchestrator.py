@@ -4,8 +4,8 @@ import pendulum
 
 with DAG(
     dag_id="orchestrator_elt_pipeline",
-    start_date=pendulum.datetime(2025, 11, 22, tz=pendulum.timezone("Asia/Manila")),
-    schedule="30 10 * * *",
+    start_date=pendulum.datetime(2025, 12, 16, tz=pendulum.timezone("Asia/Manila")),
+    schedule="6 22 * * *",
     catchup=False
 ) as dag:
     
@@ -54,4 +54,4 @@ with DAG(
     )
 
     # Define execution order:
-    trigger_ingest_api_dimension >> trigger_ingest_email_orders >> trigger_ingest_database_orders >> trigger_execute_dbt
+    trigger_ingest_api_dimension >> [trigger_ingest_email_orders, trigger_ingest_database_orders] >> trigger_execute_dbt
