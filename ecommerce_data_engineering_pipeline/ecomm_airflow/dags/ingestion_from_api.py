@@ -24,8 +24,7 @@ with DAG(
         python_callable=process_api_customers,
         op_kwargs={
             "base_url": Variable.get("BASE_URL"),
-            "bucket_name": Variable.get("GCS_BUCKET"),
-            "gcp_conn_id": "gcp_connection"
+            "bucket_name": Variable.get("GCS_BUCKET")
         }
     )
 
@@ -38,8 +37,7 @@ with DAG(
         op_kwargs={
             "base_url": Variable.get("BASE_URL"),
             "page_limit": 50,
-            "bucket_name": Variable.get("GCS_BUCKET"),
-            "gcp_conn_id": "gcp_connection"
+            "bucket_name": Variable.get("GCS_BUCKET")
         }
     )
 
