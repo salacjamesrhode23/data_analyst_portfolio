@@ -1,0 +1,8 @@
+-- Create a database
+CREATE DATABASE IF NOT EXISTS ECOMM_DB;
+
+-- Switch to database
+USE DATABASE ECOMM_DB;
+
+-- Create schemas
+CREATE SCHEMA IF NOT EXISTS ECOMM;

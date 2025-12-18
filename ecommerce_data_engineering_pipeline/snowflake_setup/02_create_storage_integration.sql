@@ -1,0 +1,12 @@
+-- Switch to database
+USE DATABASE ECOMM_DB;
+USE SCHEMA ECOMM;
+
+-- Creat Storage Integration pointing to GCS bucket
+CREATE STORAGE INTEGRATION MY_GCS_INTEGRATION
+  TYPE = EXTERNAL_STAGE
+  STORAGE_PROVIDER = GCS
+  ENABLED = TRUE
+  STORAGE_ALLOWED_LOCATIONS = ('gcs://bucket_ecomm/');
+
+DESC INTEGRATION my_gcs_integration;
