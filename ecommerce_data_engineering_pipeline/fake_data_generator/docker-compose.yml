@@ -1,0 +1,11 @@
+services:
+  flask_api:
+    container_name: flask_api
+    build:
+      context: ./flask_api
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./airflow/data:/opt/airflow/data
