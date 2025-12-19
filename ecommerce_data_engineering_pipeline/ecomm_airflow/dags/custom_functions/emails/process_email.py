@@ -82,7 +82,7 @@ def fetch_email_bodies(
         None,
         'SUBJECT', f'"{subject_filter}"'
     )
-    email_ids = data[0].split()[:5]
+    email_ids = data[0].split()
 
     results = []
 
