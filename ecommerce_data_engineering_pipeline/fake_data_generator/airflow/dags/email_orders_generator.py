@@ -4,13 +4,10 @@ import pendulum
 
 from custom_functions import run_email_orders_pipeline
 
-# --- DAG Definition ---
-local_tz = pendulum.timezone("Asia/Manila")
-
 with DAG(
     dag_id="email_orders_generator",
-    start_date=pendulum.datetime(2025, 12, 2, tz=local_tz),
-    schedule="0 10 * * *",
+    start_date=pendulum.datetime(2025, 12, 2, tz=pendulum.timezone("Asia/Manila")),
+    schedule=None,
     catchup=False,
     tags=["database", "postgres"]
 ) as dag:
