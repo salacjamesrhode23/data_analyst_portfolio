@@ -3,7 +3,8 @@ from datetime import datetime, timedelta
 from typing import List
 import pandas as pd
 
-from utils import random_number, dataframe_to_lookup, generate_line_items_for_order
+from .lineitem_orders import generate_line_items_for_order
+from .helper_functions import dataframe_to_lookup, snake_case_formatting
 
 def generate_orders(
     customers_df: pd.DataFrame,
@@ -27,7 +28,10 @@ def generate_orders(
     customers = customers_df["Full Name"].tolist()
     products = products_df["Title"].tolist()
 
-    # 🚀 Fast lookups
+    # Reference numbers generator
+    random_number = lambda: f"#{random.randint(100_000_000_000, 999_999_999_999)}"
+
+    # Fast lookups
     customer_lookup = dataframe_to_lookup(customers_df, "Full Name")
     product_lookup = dataframe_to_lookup(products_df, "Title")
 
@@ -56,4 +60,7 @@ def generate_orders(
             )
         )
 
-    return pd.DataFrame(data)
+    df = pd.DataFrame(data)
+    df.columns = [snake_case_formatting(col) for col in df.columns]
+
+    return df

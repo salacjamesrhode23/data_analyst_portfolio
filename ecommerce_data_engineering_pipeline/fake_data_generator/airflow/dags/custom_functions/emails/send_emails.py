@@ -2,8 +2,8 @@ import pandas as pd
 from datetime import datetime, timedelta
 from airflow.models import Variable
 
-from utils import generate_orders
-from email import create_email_bodies
+from custom_functions.utils.generate_orders import generate_orders
+from custom_functions.emails.create_emails import create_email_bodies
 
 def run_email_orders_pipeline():
     # -----------------------------
