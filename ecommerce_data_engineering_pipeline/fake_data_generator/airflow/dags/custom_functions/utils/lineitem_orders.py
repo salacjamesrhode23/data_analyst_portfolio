@@ -12,24 +12,7 @@ def generate_line_items_for_order(
     customer_lookup: Dict[str, dict],
     product_lookup: Dict[str, dict],
 ) -> List[Dict]:
-    """
-    Generate line items for a single order.
 
-    Each order can have 1-3 line items. Payment info is shared across all items.
-    
-    Args:
-        order_number (str): Unique order number.
-        order_date (datetime): Date of the order.
-        billing_name (str): Customer's billing name.
-        payment_method (str): Payment method.
-        payment_reference (str): Payment reference number.
-        products (List[str]): List of available product names.
-        customer_lookup (Dict[str, dict]): Dictionary mapping customer names to details.
-        product_lookup (Dict[str, dict]): Dictionary mapping product names to details.
-
-    Returns:
-        List[Dict]: List of line item records for the order.
-    """
     records = []
 
     for _ in range(random.randint(1, 3)):
