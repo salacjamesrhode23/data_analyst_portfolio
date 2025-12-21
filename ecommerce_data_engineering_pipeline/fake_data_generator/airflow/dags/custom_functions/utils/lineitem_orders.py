@@ -30,7 +30,6 @@ def generate_line_items_for_order(
             "fulfillment_date": order_date + timedelta(days=random.uniform(1, 2)),
         }
 
-        # Merge customer and product details
         record.update(customer_lookup.get(billing_name, {}))
         record.update(product_lookup.get(product_name, {}))
 

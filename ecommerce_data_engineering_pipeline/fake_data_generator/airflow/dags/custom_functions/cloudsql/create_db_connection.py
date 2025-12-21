@@ -2,8 +2,6 @@ import pandas as pd
 import sqlalchemy
 from google.cloud.sql.connector import Connector
 
-
-
 def ingest_dataframe_to_cloudsql(
     df: pd.DataFrame,
     table_name: str,

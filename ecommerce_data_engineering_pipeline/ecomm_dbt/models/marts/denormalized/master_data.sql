@@ -42,7 +42,7 @@ products as (
 )
 
 SELECT
-    -- Customer information
+
     c.CUSTOMER_ID,
     c.CUSTOMER_NAME,
     c.EMAIL,
@@ -52,7 +52,6 @@ SELECT
     c.ZIP,
     c.PHONE,
     
-    -- Product information
     p.PRODUCT_ID,
     p.PRODUCT_NAME,
     p.PRODUCT_DESCRIPTION,
@@ -60,7 +59,6 @@ SELECT
     p.VENDOR,
     p.IMAGE_SRC,
     
-    -- Order / Transaction information
     o.ORDER_NUMBER,
     o.QUANTITY,
     o.UNIT_PRICE,

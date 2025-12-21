@@ -12,9 +12,6 @@ with DAG(
     catchup=False,
 ) as dag:
 
-    # ---------------------------
-    # Task 1: Process emails and upload orders CSV to GCS
-    # ---------------------------
     process_orders = PythonOperator(
         task_id="process_email_orders_to_gcs",
         python_callable=process_email_orders,
@@ -25,9 +22,6 @@ with DAG(
         }
     )
 
-    # ---------------------------
-    # Task 2: Load CSV from GCS into Snowflake table
-    # ---------------------------
     load_email_orders = PythonOperator(
         task_id="load_email_orders_to_snowflake",
         python_callable=load_csv_to_snowflake,
@@ -38,5 +32,4 @@ with DAG(
         }
     )
 
-    # Define task order
     process_orders >> load_email_orders

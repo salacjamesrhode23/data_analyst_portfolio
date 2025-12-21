@@ -4,5 +4,4 @@ sqlalchemy
 psycopg2-binary
 pg8000
 cloud-sql-python-connector
-google-cloud-sql-connector
 google-cloud-storage

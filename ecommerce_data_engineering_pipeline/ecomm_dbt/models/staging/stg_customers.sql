@@ -1,10 +1,8 @@
 {{ config(materialized='view') }}
 
 SELECT
-  -- Primary identifiers
   CAST(FULL_NAME AS STRING) AS CUSTOMER_NAME,
   
-  -- Names and descriptive fields
   CAST(EMAIL AS STRING) AS EMAIL,
   CAST(FIRST_NAME AS STRING) AS FIRST_NAME,
   CAST(LAST_NAME AS STRING) AS LAST_NAME,

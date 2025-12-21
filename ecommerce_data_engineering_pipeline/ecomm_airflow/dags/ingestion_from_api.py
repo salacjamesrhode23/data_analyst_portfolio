@@ -16,9 +16,6 @@ with DAG(
     catchup=False,
 ) as dag:
 
-    # ---------------------------
-    # Task 1: Process api for customers and upload CSV to GCS
-    # ---------------------------
     process_customers = PythonOperator(
         task_id="process_api_customers_to_gcs",
         python_callable=process_api_customers,
@@ -28,9 +25,6 @@ with DAG(
         }
     )
 
-    # ---------------------------
-    # Task 2: Process api for products and upload CSV to GCS
-    # ---------------------------
     process_products = PythonOperator(
         task_id="process_api_products_to_gcs",
         python_callable=process_api_products,
@@ -41,9 +35,6 @@ with DAG(
         }
     )
 
-    # ---------------------------
-    # Task 3A: Load Customers CSV into Snowflake
-    # ---------------------------
     load_customers = PythonOperator(
         task_id="load_customers_to_snowflake",
         python_callable=load_csv_to_snowflake,
@@ -54,9 +45,6 @@ with DAG(
         }
     )
 
-    # ---------------------------
-    # Task 3B: Load Products CSV into Snowflake
-    # ---------------------------
     load_products = PythonOperator(
         task_id="load_products_to_snowflake",
         python_callable=load_csv_to_snowflake,
@@ -67,6 +55,5 @@ with DAG(
         }
     )
 
-    # Define task order
     process_customers >> load_customers
     process_products >> load_products
