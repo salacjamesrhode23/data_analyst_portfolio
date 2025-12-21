@@ -1,91 +1,83 @@
-import csv
-import pandas as pd
-from io import StringIO
-from google.cloud import storage
-from google.cloud.sql.connector import Connector
 from airflow.models import Variable
-from sqlalchemy import create_engine
 import pendulum
-import json
+
+from custom_functions import read_state, write_state, upload_df_to_gcs
+from .fetch_database import fetch_database_orders
+
 
 # ---------------------------
 # GCS STATE MANAGEMENT
 # ---------------------------
-def read_state(bucket_name: str, state_file: str) -> dict:
-    client = storage.Client()
-    bucket = client.bucket(bucket_name)
-    blob = bucket.blob(state_file)
+# def read_state(bucket_name: str, state_file: str) -> dict:
+#     client = storage.Client()
+#     bucket = client.bucket(bucket_name)
+#     blob = bucket.blob(state_file)
 
-    if not blob.exists():
-        return {"last_row_id": 0}
+#     if not blob.exists():
+#         return {"last_row_id": 0}
 
-    content = blob.download_as_text()
-    return json.loads(content)
+#     content = blob.download_as_text()
+#     return json.loads(content)
 
-def write_state(bucket_name: str, state_file: str, state_dict: dict):
-    client = storage.Client()
-    bucket = client.bucket(bucket_name)
-    blob = bucket.blob(state_file)
-    blob.upload_from_string(json.dumps(state_dict), content_type="application/json")
+# def write_state(bucket_name: str, state_file: str, state_dict: dict):
+#     client = storage.Client()
+#     bucket = client.bucket(bucket_name)
+#     blob = bucket.blob(state_file)
+#     blob.upload_from_string(json.dumps(state_dict), content_type="application/json")
 
 # ---------------------------
 # CLOUD SQL CONNECTION
 # ---------------------------
-connector = Connector()  # reuse connector across calls
+# connector = Connector()  # reuse connector across calls
 
-def get_postgres_engine(instance_connection_name: str, db_user: str, db_pass: str, db_name: str):
-    """
-    Returns a SQLAlchemy engine for Cloud SQL Postgres using Python Connector.
-    """
-    def getconn():
-        return connector.connect(
-            instance_connection_name,
-            "pg8000",
-            user=db_user,
-            password=db_pass,
-            db=db_name
-        )
+# def get_postgres_engine(instance_connection_name: str, db_user: str, db_pass: str, db_name: str):
 
-    engine = create_engine("postgresql+pg8000://", creator=getconn)
-    return engine
+#     def getconn():
+#         return connector.connect(
+#             instance_connection_name,
+#             "pg8000",
+#             user=db_user,
+#             password=db_pass,
+#             db=db_name
+#         )
 
-# ---------------------------
-# FETCH FROM POSTGRES (ROW-ID)
-# ---------------------------
-def fetch_database_orders(
-    instance_connection_name: str,
-    db_user: str,
-    db_pass: str,
-    db_name: str,
-    last_row_id: int
-) -> pd.DataFrame:
-    engine = get_postgres_engine(instance_connection_name, db_user, db_pass, db_name)
+#     engine = create_engine("postgresql+pg8000://", creator=getconn)
+#     return engine
 
-    query = f"""
-        SELECT *
-        FROM orders
-        WHERE row_id > {last_row_id}
-        ORDER BY row_id ASC;
-    """
+# def fetch_database_orders(
+#     instance_connection_name: str,
+#     db_user: str,
+#     db_pass: str,
+#     db_name: str,
+#     last_row_id: int
+# ) -> pd.DataFrame:
+#     engine = get_postgres_engine(instance_connection_name, db_user, db_pass, db_name)
 
-    df = pd.read_sql(query, engine)
-    return df
+#     query = f"""
+#         SELECT *
+#         FROM orders
+#         WHERE row_id > {last_row_id}
+#         ORDER BY row_id ASC;
+#     """
+
+#     df = pd.read_sql(query, engine)
+#     return df
 
 # ---------------------------
 # UPLOAD TO GCS
 # ---------------------------
-def upload_df_to_gcs(df: pd.DataFrame, bucket_name: str, file_name: str) -> None:
-    """
-    Convert DataFrame to CSV and upload to GCS.
-    """
-    csv_buffer = StringIO()
-    df.to_csv(csv_buffer, index=False, quoting=csv.QUOTE_ALL, encoding="utf-8-sig")
-    csv_data = csv_buffer.getvalue()
+# def upload_df_to_gcs(df: pd.DataFrame, bucket_name: str, file_name: str) -> None:
+#     """
+#     Convert DataFrame to CSV and upload to GCS.
+#     """
+#     csv_buffer = StringIO()
+#     df.to_csv(csv_buffer, index=False, quoting=csv.QUOTE_ALL, encoding="utf-8-sig")
+#     csv_data = csv_buffer.getvalue()
 
-    client = storage.Client()
-    bucket = client.bucket(bucket_name)
-    blob = bucket.blob(file_name)
-    blob.upload_from_string(csv_data, content_type="text/csv")
+#     client = storage.Client()
+#     bucket = client.bucket(bucket_name)
+#     blob = bucket.blob(file_name)
+#     blob.upload_from_string(csv_data, content_type="text/csv")
 
 
 # ---------------------------
@@ -125,7 +117,7 @@ def process_database_orders(bucket_name: str):
 
     # Step 4: Update the state with the newest row_id
     new_last_row_id = int(df["row_id"].max())
-    write_state(bucket_name, state_file, {"last_row_id": new_last_row_id})
+    write_state(bucket_name, state_file, {"last_row_id": new_last_row_id}, {"last_row_id": 0})
 
     print(f"Processed {len(df)} rows and uploaded to {file_name}")
     return file_name

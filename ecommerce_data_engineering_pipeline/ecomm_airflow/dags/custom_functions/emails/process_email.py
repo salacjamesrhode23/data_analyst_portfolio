@@ -1,184 +1,172 @@
-# Standard library
-import csv
-import email
-from email import policy
-from email.utils import parsedate_to_datetime
-import imaplib
-from io import StringIO
-import pandas as pd
-import json
-
-# Third-party libraries
-from bs4 import BeautifulSoup
-from google.cloud import storage
 import pendulum
+
+from custom_functions import read_state, write_state, upload_df_to_gcs
+from .fetch_email import fetch_email_bodies
+from .parse_email import parse_emails_to_df
+
+# {"last_email_timestamp": "1970-01-01T00:00:00Z"}
 
 # ---------------------------
 # GCS STATE MANAGEMENT
 # ---------------------------
-def read_state(
-        bucket_name: str,
-        state_file: str,
-        gcp_conn_id : str = "gcp_connection"
-    ) -> dict:
-    """
-    Reads last processed email timestamp from GCS.
-    Returns default earliest timestamp if state doesn’t exist.
-    """
+# def read_state(
+#         bucket_name: str,
+#         state_file: str,
+#         gcp_conn_id : str = "gcp_connection"
+#     ) -> dict:
+#     client = storage.Client()
+#     bucket = client.bucket(bucket_name)
+#     blob = bucket.blob(state_file)
 
-    client = storage.Client()
-    bucket = client.bucket(bucket_name)
-    blob = bucket.blob(state_file)
+#     if not blob.exists():
+#         # First run, start from a very early date
+#         return {"last_email_timestamp": "1970-01-01T00:00:00Z"}
 
-    if not blob.exists():
-        # First run, start from a very early date
-        return {"last_email_timestamp": "1970-01-01T00:00:00Z"}
+#     content = blob.download_as_text()
+#     return json.loads(content)
 
-    content = blob.download_as_text()
-    return json.loads(content)
+# def write_state(bucket_name: str, state_file: str, state_dict: dict, gcp_conn_id : str = "gcp_connection"):
+    # """
+    # Writes last processed email timestamp to GCS.
+    # """
+    # client = storage.Client()
+    # bucket = client.bucket(bucket_name)
+    # blob = bucket.blob(state_file)
 
-def write_state(bucket_name: str, state_file: str, state_dict: dict, gcp_conn_id : str = "gcp_connection"):
-    """
-    Writes last processed email timestamp to GCS.
-    """
-    client = storage.Client()
-    bucket = client.bucket(bucket_name)
-    blob = bucket.blob(state_file)
-
-    blob.upload_from_string(
-        json.dumps(state_dict),
-        content_type="application/json"
-    )
+    # blob.upload_from_string(
+    #     json.dumps(state_dict),
+    #     content_type="application/json"
+    # )
 
 # -----------------------------
 # FETCH EMAIL FUNCTION
 # -----------------------------
-def fetch_email_bodies(
-    user: str,
-    password: str,
-    last_timestamp: pendulum.DateTime,
-    subject_filter='[demo-store] Order Confirmation for',
-    imap_url='imap.gmail.com'
-) -> list:
+# def fetch_email_bodies(
+#     user: str,
+#     password: str,
+#     last_timestamp: pendulum.DateTime,
+#     subject_filter='[demo-store] Order Confirmation for',
+#     imap_url='imap.gmail.com'
+# ) -> list:
 
-    """
-    Fetch only new emails (using email header Date field)
-    """
+#     """
+#     Fetch only new emails (using email header Date field)
+#     """
 
-    def get_email_body(message):
-        if message.is_multipart():
-            for part in message.iter_parts():
-                content_type = part.get_content_type()
-                if content_type in ["text/plain", "text/html"]:
-                    return part.get_content()
-        else:
-            return message.get_content()
+#     def get_email_body(message):
+#         if message.is_multipart():
+#             for part in message.iter_parts():
+#                 content_type = part.get_content_type()
+#                 if content_type in ["text/plain", "text/html"]:
+#                     return part.get_content()
+#         else:
+#             return message.get_content()
 
-    mail = imaplib.IMAP4_SSL(imap_url)
-    mail.login(user, password)
-    mail.select('Inbox')
+#     mail = imaplib.IMAP4_SSL(imap_url)
+#     mail.login(user, password)
+#     mail.select('Inbox')
 
-    status, data = mail.search(
-        None,
-        'SUBJECT', f'"{subject_filter}"'
-    )
-    email_ids = data[0].split()
+#     status, data = mail.search(
+#         None,
+#         'SUBJECT', f'"{subject_filter}"'
+#     )
+#     email_ids = data[0].split()
 
-    results = []
+#     results = []
 
-    for email_id in email_ids:
-        status, data = mail.fetch(email_id, '(RFC822)')
-        for _, raw_msg in (part for part in data if isinstance(part, tuple)):
+#     for email_id in email_ids:
+#         status, data = mail.fetch(email_id, '(RFC822)')
+#         for _, raw_msg in (part for part in data if isinstance(part, tuple)):
 
-            msg = email.message_from_bytes(raw_msg, policy=policy.default)
+#             msg = email.message_from_bytes(raw_msg, policy=policy.default)
 
-            header_date = msg.get("Date")
-            email_ts = parsedate_to_datetime(header_date)
-            email_ts = pendulum.instance(email_ts)
+#             header_date = msg.get("Date")
+#             email_ts = parsedate_to_datetime(header_date)
+#             email_ts = pendulum.instance(email_ts)
 
-            if email_ts <= last_timestamp:
-                continue
+#             if email_ts <= last_timestamp:
+#                 continue
 
-            body = get_email_body(msg)
+#             body = get_email_body(msg)
 
-            results.append({
-                "body": body,
-                "email_timestamp": email_ts.to_iso8601_string()
-            })
+#             results.append({
+#                 "body": body,
+#                 "email_timestamp": email_ts.to_iso8601_string()
+#             })
 
-    mail.logout()
-    return results
+#     mail.logout()
+#     return results
 
 # -----------------------------
 # PARSE EMAIL FUNCTION
 # -----------------------------
-def parse_emails_to_df(emails: list[dict]) -> pd.DataFrame:
-    """
-    Parse list of email dicts (with body + timestamp) into a DataFrame.
-    """
+# def parse_emails_to_df(emails: list[dict]) -> pd.DataFrame:
+    # """
+    # Parse list of email dicts (with body + timestamp) into a DataFrame.
+    # """
 
-    all_rows = []
+    # all_rows = []
 
-    for e in emails:
-        body = e["body"]
-        email_timestamp = e["email_timestamp"]
+    # for e in emails:
+    #     body = e["body"]
+    #     email_timestamp = e["email_timestamp"]
 
-        soup = BeautifulSoup(body, 'html.parser')
+    #     soup = BeautifulSoup(body, 'html.parser')
 
-        # Extract fields from HTML
-        customer = soup.find(text="Customer:").parent.next_sibling.strip()
-        order_date = soup.find(text="Order Date:").parent.next_sibling.strip()
-        total_amount = soup.find_all('tr')[-1].find_all('td')[-1].text.strip()
+    #     # Extract fields from HTML
+    #     customer = soup.find(text="Customer:").parent.next_sibling.strip()
+    #     order_date = soup.find(text="Order Date:").parent.next_sibling.strip()
+    #     total_amount = soup.find_all('tr')[-1].find_all('td')[-1].text.strip()
 
-        payment_method = soup.find(text="Payment Method:").parent.next_sibling.strip()
-        payment_reference = soup.find(text="Payment Reference:").parent.next_sibling.strip()
-        payment_date = soup.find(text="Payment Date:").parent.next_sibling.strip()
+    #     payment_method = soup.find(text="Payment Method:").parent.next_sibling.strip()
+    #     payment_reference = soup.find(text="Payment Reference:").parent.next_sibling.strip()
+    #     payment_date = soup.find(text="Payment Date:").parent.next_sibling.strip()
 
-        # Extract line items
-        for tr in soup.find_all('tr')[1:-1]:
-            tds = [td.text.strip() for td in tr.find_all('td')]
+    #     # Extract line items
+    #     for tr in soup.find_all('tr')[1:-1]:
+    #         tds = [td.text.strip() for td in tr.find_all('td')]
 
-            all_rows.append({
-                'customer': customer,
-                'product': tds[0],
-                'sku': tds[1],
-                'qty': tds[2],
-                'price': tds[3],
-                'line_total': tds[4],
-                'total_amount': total_amount,
-                'payment_method': payment_method,
-                'payment_reference': payment_reference,
-                'order_date': order_date,
-                'payment_date': payment_date,
-                'email_timestamp': email_timestamp  # important!
-            })
+    #         all_rows.append({
+    #             'customer': customer,
+    #             'product': tds[0],
+    #             'sku': tds[1],
+    #             'qty': tds[2],
+    #             'price': tds[3],
+    #             'line_total': tds[4],
+    #             'total_amount': total_amount,
+    #             'payment_method': payment_method,
+    #             'payment_reference': payment_reference,
+    #             'order_date': order_date,
+    #             'payment_date': payment_date,
+    #             'email_timestamp': email_timestamp  # important!
+    #         })
 
-    return pd.DataFrame(all_rows)
+    # return pd.DataFrame(all_rows)
 
 # ---------------------------
 # UPLOAD TO GCS FUNCTION
 # ---------------------------
-def upload_df_to_gcs(
-        df: pd.DataFrame,
-        bucket_name: str,
-        file_name: str,
-        gcp_conn_id : str = "gcp_connection"
-    ) -> None:
+# def upload_df_to_gcs(
+#         df: pd.DataFrame,
+#         bucket_name: str,
+#         file_name: str,
+#         gcp_conn_id : str = "gcp_connection"
+#     ) -> None:
 
-    """
-    Convert Dataframe to csv then upload to GCS bucket
-    """
+#     """
+#     Convert Dataframe to csv then upload to GCS bucket
+#     """
 
-    csv_buffer = StringIO()
-    df.to_csv(csv_buffer, index=False, quoting=csv.QUOTE_ALL, encoding="utf-8-sig")
-    csv_data = csv_buffer.getvalue()
+#     csv_buffer = StringIO()
+#     df.to_csv(csv_buffer, index=False, quoting=csv.QUOTE_ALL, encoding="utf-8-sig")
+#     csv_data = csv_buffer.getvalue()
 
-    client = storage.Client()
-    bucket = client.bucket(bucket_name)
-    blob = bucket.blob(file_name)
-    blob.upload_from_string(csv_data, content_type="text/csv")
+#     client = storage.Client()
+#     bucket = client.bucket(bucket_name)
+#     blob = bucket.blob(file_name)
+#     blob.upload_from_string(csv_data, content_type="text/csv")
     
-    print(f"Uploaded CSV to: gs://{bucket_name}/{file_name}")
+#     print(f"Uploaded CSV to: gs://{bucket_name}/{file_name}")
 
 # ---------------------------
 # ORCHESTRATION FUNCTION
@@ -188,8 +176,7 @@ def process_email_orders(
     password: str,
     bucket_name: str,
     subject_filter='[demo-store] Order Confirmation for',
-    imap_url='imap.gmail.com',
-    gcp_conn_id : str = "gcp_connection"
+    imap_url='imap.gmail.com'
 ) -> str:
 
     """
@@ -198,9 +185,10 @@ def process_email_orders(
     """
 
     state_file = "idempotency_keys/email_orders_state.json"
+    default_state = {"last_email_timestamp": "1970-01-01T00:00:00Z"}
 
     # Step 1: Load last timestamp
-    state = read_state(bucket_name, state_file)
+    state = read_state(bucket_name, state_file, default_state)
     last_ts = pendulum.parse(state["last_email_timestamp"])
 
     # Step 2: Fetch only new emails
