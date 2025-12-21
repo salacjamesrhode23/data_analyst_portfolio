@@ -14,6 +14,7 @@ services:
       - ./gcp_key/gcp_sa.json:/opt/airflow/gcp_sa.json:ro
     environment:
       - GOOGLE_APPLICATION_CREDENTIALS=/opt/airflow/gcp_sa.json
+      - AIRFLOW__WEBSERVER__WEB_SERVER_HOST=0.0.0.0
     command: airflow standalone
 
   flask_api:
