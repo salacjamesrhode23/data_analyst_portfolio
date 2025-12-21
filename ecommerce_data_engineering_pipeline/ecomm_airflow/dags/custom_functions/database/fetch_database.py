@@ -3,7 +3,7 @@ import pandas as pd
 from google.cloud.sql.connector import Connector
 from sqlalchemy import create_engine
 
-connector = Connector()  # reuse connector across calls
+connector = Connector()
 
 def get_postgres_engine(instance_connection_name: str, db_user: str, db_pass: str, db_name: str):
 

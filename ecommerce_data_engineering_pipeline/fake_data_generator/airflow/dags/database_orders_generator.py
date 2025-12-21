@@ -12,7 +12,6 @@ with DAG(
     tags=["database", "postgres"]
 ) as dag:
 
-    # Task 1: Generate Orders
     run_cloudsql_orders_pipeline_task = PythonOperator(
         task_id="run_cloudsql_orders_pipeline",
         python_callable=run_cloudsql_orders_pipeline

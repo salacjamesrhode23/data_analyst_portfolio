@@ -11,7 +11,6 @@ def parse_emails_to_df(emails: list[dict]) -> pd.DataFrame:
 
         soup = BeautifulSoup(body, 'html.parser')
 
-        # Extract fields from HTML
         customer = soup.find(text="Customer:").parent.next_sibling.strip()
         order_date = soup.find(text="Order Date:").parent.next_sibling.strip()
         total_amount = soup.find_all('tr')[-1].find_all('td')[-1].text.strip()
@@ -20,7 +19,6 @@ def parse_emails_to_df(emails: list[dict]) -> pd.DataFrame:
         payment_reference = soup.find(text="Payment Reference:").parent.next_sibling.strip()
         payment_date = soup.find(text="Payment Date:").parent.next_sibling.strip()
 
-        # Extract line items
         for tr in soup.find_all('tr')[1:-1]:
             tds = [td.text.strip() for td in tr.find_all('td')]
 
@@ -36,7 +34,7 @@ def parse_emails_to_df(emails: list[dict]) -> pd.DataFrame:
                 'payment_reference': payment_reference,
                 'order_date': order_date,
                 'payment_date': payment_date,
-                'email_timestamp': email_timestamp  # important!
+                'email_timestamp': email_timestamp
             })
 
     return pd.DataFrame(all_rows)

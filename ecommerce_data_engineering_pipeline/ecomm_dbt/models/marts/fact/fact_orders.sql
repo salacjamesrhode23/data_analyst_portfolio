@@ -31,16 +31,11 @@ products as (
 )
 
 select
-    -- Transaction identifiers
+
     o.ORDER_NUMBER,
-    
-    -- Customer reference
     c.CUSTOMER_ID,
-    
-    -- Product reference
     p.PRODUCT_ID,
     
-    -- Transaction details
     o.QUANTITY,
     o.UNIT_PRICE,
     o.LINE_TOTAL,

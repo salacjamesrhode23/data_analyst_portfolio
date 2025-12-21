@@ -7,8 +7,6 @@ def load_csv_to_snowflake(
     file_name: str
 ) -> None:
 
-    """ Load csv file from Google Cloud Storage through Snowflake stage into a target table """
-
     conn = BaseHook.get_connection("snowflake_conn")
 
     ctx = snowflake.connector.connect(
