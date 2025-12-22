@@ -11,16 +11,20 @@ from airflow.models import Variable
 from custom_functions.utils.generate_orders import generate_orders
 from custom_functions.cloudsql.create_db_connection import ingest_dataframe_to_cloudsql
 
+
 def run_cloudsql_orders_pipeline():
 
     products_df = pd.read_csv("/opt/airflow/data/fake_products.csv")
     customers_df = pd.read_csv("/opt/airflow/data/fake_dbcustomers.csv")
     customers_df = customers_df.drop(columns=["First Name", "Last Name"])
 
+    # -----------------------------
+    # Generate fake orders
+    # -----------------------------
     orders_df = generate_orders(
         customers_df=customers_df,
         products_df=products_df,
-        num_orders=5000,
+        num_orders=5,
         reference_date=datetime.now() - timedelta(days=1),
     )
 

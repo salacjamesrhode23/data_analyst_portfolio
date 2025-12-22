@@ -28,8 +28,10 @@ def generate_orders(
     customers = customers_df["Full Name"].tolist()
     products = products_df["Title"].tolist()
 
+    # Reference numbers generator
     random_number = lambda: f"#{random.randint(100_000_000_000, 999_999_999_999)}"
 
+    # Fast lookups
     customer_lookup = dataframe_to_lookup(customers_df, "Full Name")
     product_lookup = dataframe_to_lookup(products_df, "Title")
 

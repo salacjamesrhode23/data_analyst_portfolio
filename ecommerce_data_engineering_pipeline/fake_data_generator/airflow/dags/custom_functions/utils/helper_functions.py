@@ -15,6 +15,6 @@ def dataframe_to_lookup(
 
 
 def snake_case_formatting(s: str) -> str:
-    s = re.sub(r"[^\w\s]", "", s)
-    s = re.sub(r"\s+", "_", s)
+    s = re.sub(r"[^\w\s]", "", s)  # remove punctuation
+    s = re.sub(r"\s+", "_", s)     # replace spaces with underscore
     return s.lower()
