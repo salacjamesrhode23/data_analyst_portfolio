@@ -18,9 +18,6 @@ def run_cloudsql_orders_pipeline():
     customers_df = pd.read_csv("/opt/airflow/data/fake_dbcustomers.csv")
     customers_df = customers_df.drop(columns=["First Name", "Last Name"])
 
-    # -----------------------------
-    # Generate fake orders
-    # -----------------------------
     orders_df = generate_orders(
         customers_df=customers_df,
         products_df=products_df,

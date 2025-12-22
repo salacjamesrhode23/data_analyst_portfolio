@@ -9,9 +9,6 @@ import pandas as pd
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-# -----------------------------
-# Email Body Content Generator
-# -----------------------------
 def create_email_bodies(
     orders_df: pd.DataFrame,
     email_sender: str,
