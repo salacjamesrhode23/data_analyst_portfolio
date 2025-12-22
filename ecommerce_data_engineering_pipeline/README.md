@@ -4,80 +4,78 @@
 **Tools Used:** Airflow, Docker, Google Cloud Platform (Cloud Storage, Compute Engine, CloudSQL), Snowflake <br>
                 SQL-based transformation (dbt), Python scripts and DAGs
 
-### 🔍 Problem (TAKE REFERENCE TO SOME JOB POSTS AND JOB DESCRIPTIONS)
-In today’s data-driven eCommerce landscape, businesses must manage rapidly growing volumes of transactional, customer, and product data. Efficiently collecting, processing, and analyzing this diverse data is challenging due to inconsistent formats, disparate sources, and the need for real-time updates. Without a robust and scalable data engineering pipeline, organizations struggle to transform raw data into actionable insights for decision-making, operational optimization, and customer experience enhancement.
+### 🔍 Problem
+Modern retail operations generate vast amounts of transactional, customer, and product data across multiple channels. Managing and analyzing this data efficiently is a complex challenge that demands robust data engineering solutions. This project demonstrates a practical approach to tackling these challenges in an omnichannel retail environment.
 
+Scenario:
+The company has accumulated over 10 years of historical sales data, stored in Parquet files, and has recently migrated its online transactions to a PostgreSQL database.
+
+Each branch store operates its own point-of-sale system. Occasionally, network or software issues can make a store’s primary database temporarily unavailable. In such situations, order confirmation emails—automatically sent for every completed in-store purchase—serve as a reliable backup source of transaction data, enabling the company to track and validate sales even when the main system is offline.
+
+In addition, product and customer master data are accessible via REST APIs, providing another layer of source diversity and ensuring comprehensive data coverage across the organization.
 
 ### 🎯 Objectives
-- Design and implement a scalable and automated ELT pipeline to ingest, process, and centralize data from multiple dynamic and static sources.
-- Transform raw data into clean, standardized, and analytics-ready tables suitable for BI reporting and machine learning applications.
-- Establish a reproducible, containerized environment using Docker and Airflow to facilitate collaboration, monitoring, and deployment.
+- Design and implement a robust data engineering pipeline that ingests data from diverse sources, including Parquet files, relational databases, order confirmation emails, and REST APIs.
+- Transform and consolidate these data streams into unified, analytics-ready tables to support reporting, operational monitoring, and data-driven decision-making across both online and in-store channels.
+- Build a reproducible, containerized environment for the pipeline using Docker to streamline collaboration, monitoring, and deployment.
 
 
 ### ⚙️ Solution Approach
 
 **Datasets:** <br>
-The objective of this project is to extract data from multiple sources and unify them in a centralized data warehouse. Since no single public dataset can fully satisfy the requirement, a custom synthetic dataset was created using the Faker library.
+This project extracts and unifies data from multiple sources into a centralized data warehouse. Since no single public dataset fully meets the requirements, custom synthetic datasets were created using the Faker library.
 
-Several Python scripts were developed to simulate realistic data sources:
+Python scripts developed to simulate realistic data sources:
 
-For dimensions data sources:
-A Flask-based RESTful API is created to load customers and product data from csv files then exposes endpoints for queries to retrived the data.
+**Dimension data sources:** A Flask-based RESTful API loads customer and product data from CSV files and exposes endpoints for querying the data.
 
-For transactions data sources:
-Fake order generator scripts are created to generate multiple logical sources:
-
-Email source: Generates daily confirmation emails containing order transaction details for selected locations for the most recent month (December 2025).
-
-Database source: Generates daily orders data then ingest to CloudSQL Postgres database for selected location for the most recent month (December 2025)
-
-Static historical data: Generates Big Data (10 years of historical orders data) stored as repartitioned parquet files.
-
-
+**Transaction data sources:** Multiple scripts generate synthetic order data from different sources:
+- **Database source:** Generates daily orders ingested into a Cloud SQL PostgreSQL database simulating online transactions.
+- **Email source:** Generates daily order confirmation emails simulating transactions for each branch stores.
+- **Static source:** Generates over 10 years of historical sales data stored as Parquet files.
 
 **Docker Containers:** <br>
-To make the pipeline works the same way in any environment making it scallable and easier to collaborate with. Docker container were used. Two Docker containers were provisioned for this project:
+To ensure the pipeline works consistently across environments, making it scalable and easier to collaborate on, Docker containers were used.Two containers were provisioned for this project:
 
 Fake Data Generator Container:
-The Docker cotnainer that runs the python scripts to generate synthetic data . This container uses a lightweight Docker setup only as data generation is not the primary focus of this project and also to avoid conflict with port mapping with the other container.
+Uses a lightweight Docker setup to avoid port mapping conflict. This container runs the python scripts and DAGs that creates synthetic data source, from generating database transactions, email orders, historical orders, and mock API using Flask
 
-Airflow Container:
-The docker container that runs the main orchestration layer (extracting data from sources to loading to data warehouse then perform data transformation). Astro CLI was used to scaffold the environment for this container, a platform that simplifies the deployment, monitoring, and management of Apache Airflow workflows.
+Ecommerce Airflow Container:
+Scaffolded using Astro CLI for simplified management of Apache Airflow workflows. This container runs the main orchestration layer, handling extraction from data sources, ingestion to Google Cloud Storage, loading into the Snowflake data warehouse, and performing in-warehouse transformations.
 
 
 **Data Ingestion** <br>
-Custom python functions/scripst were create to ingest data from dynamic sources:
-For api data source the scripts fetch customer and products by requesting data to the api then convert the json response to csv which will be uploaded to Google Cloud Storage bucket and then load it to Snowflake data warehouse
+To avoid creating duplicate records during ingestion from **dynamic data sources**, the scripts are implemented following the principles of idempotency.
+- **API data ingestion:** Fetches customer and product data by sending requests to the REST API then converts JSON responses to CSV files, overwriting files each run for idempotency.
+- **Email data ingestion:** Incrementally extracts order details by tracking the last processed email timestamp fetching only new order confirmations and parsing them into structured CSV files.
+- **PostgreSQL data ingestion:** Incrementally extracts new order records from a Cloud SQL PostgreSQL database by tracking the last processed row ID in Cloud Storage, fetching only unseen rows to structured CSV files.
 
-For email data sources, the scripts incrementally extract order details by tracking the last processed email timestamp in cloud storage, fetching only new email confirmations, parsing them into structured data, then upload the results as CSV files to a Google Cloud Storage bucket and then load it to Snowflake data warehouse
+All process data uploads to Google Cloud Storage (GCS) bucket, and loads to the tables in Snowflake data warehouse.
 
-For database sources, the scripts incrementally extracts new order records from a Cloud SQL PostgreSQL database by tracking the last processed row ID in Google Cloud Storage, fetches only unseen rows, then upload the results as CSV files to a Google Cloud Storage bucket and then load it to Snowflake data warehouse
+As for the **static data source** parquet files are simply uploaded to Google Cloud Storage (GCS) bucket and loaded directly into Snowflake.
 
-Lastly, for the parquet files considering it is a statics data source it is just simply uploaded to Google Cloud Storage bucket and loaded directly to Snowflake 
 
 **Snowflake Setup** <br>
-Before data can be loaded to Snowflake. It must have a destination first so first Database and schema must be created.After that setup an external stage pointing to the GCS bucket using a storage integration that securely connects Snowflake to GCS bucket. Once everything is setup you can now create the target tables, inspect the dataset in the stage thorougly to know the data structure (column types) before loading data to it. For statics files you can create a quesry to directly load data to it but for dynamic files loading is executed via Airflow Dags
+Before loading data into Snowflake:
+1. Create a database and schema as the destination.
+2. Configure an external stage pointing to the GCS bucket using a storage integration.
+3. Create target tables and inspect the staged datasets to determine correct column types.
+4. Load static files directly via SQL queries; dynamic files are loaded through Airflow DAGs.
 
 **dbt Transformation** <br>
-dbt is used to perform in-warehouse transformations within Snowflake, converting loaded raw data into analytics-ready datasets.
+dbt is used for in-warehouse transformations, converting raw data into analytics-ready datasets. Data flows through three layers:
 
-The dataset is processed throughout different layers to make it usable:
-Staging - Clean and standardize raw source data usually (One-to-one with raw source tables)
-Intermediate - Perform complex transformations by applying calculations, deduplications, and combining multiple staging models either by performing joins or union
-Marts - Dataset exposed to end-users, business-focused models (facts & dimensions), aggregated, and optimized for BI tools and analysts.
+- **Staging:** Cleans and standardizes raw source data (typically one-to-one with raw tables).
+- **Intermediate:** Performs complex transformations, deduplications, calculations, and combines multiple staging models via joins or unions.
+- **Marts:** Produces business-focused, aggregated models (facts and dimensions) optimized for BI tools and analysts.
 
-For development the dbt project exists at the repository root allowing testing without running the whole pipeline. A duplicate copy of the dbt project must be then included inside the Airflow DAGs directory so it can be executed as part of the ELT pipeline.
-
+The dbt project exists in the repository root for development testing. A duplicate copy is included in the Airflow DAGs directory to be executed as part of the ELT pipeline.
 
 **Data Serving (Next Projects)** <br>
-The transformed and aggregated datasets are designed for downstream consumption, including:
+Transformed datasets support downstream use cases, including:
 
-Business Intelligence:
-Data marts can be visualized using tools such as Power BI or Tableau to support self-service analytics and dashboards.
-
-Machine Learning:
-Processed datasets can be used as inputs to machine learning models for advanced analytics and predictive use cases.
-
+- **Business Intelligence:** Data marts can be visualized in Power BI or Tableau for self-service analytics and dashboards.
+- **Machine Learning:** Processed datasets can serve as inputs for predictive modeling and advanced analytics.
 
 ![Data Architecture](https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/ecommerce_data_engineering_pipeline/data_architecture.png?raw=true)
 
