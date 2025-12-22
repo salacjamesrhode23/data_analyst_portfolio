@@ -5,11 +5,10 @@ import pendulum
 with DAG(
     dag_id="fake_data_orchestrator",
     start_date=pendulum.datetime(2025, 12, 16, tz=pendulum.timezone("Asia/Manila")),
-    schedule="0 19 * * 0",
+    schedule="6 22 * * *",
     catchup=False
 ) as dag:
     
-
     trigger_email_orders_generator = TriggerDagRunOperator(
         task_id="trigger_email_orders_generator",
         trigger_dag_id="email_orders_generator",
@@ -17,7 +16,6 @@ with DAG(
         poke_interval=30,
         conf={"triggered_by": "fake_data_orchestrator"},
     )
-
 
     trigger_database_orders_generator = TriggerDagRunOperator(
         task_id="trigger_database_orders_generator",

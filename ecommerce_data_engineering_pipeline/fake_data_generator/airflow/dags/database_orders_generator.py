@@ -8,8 +8,7 @@ with DAG(
     dag_id="database_orders_generator",
     start_date=pendulum.datetime(2025, 12, 2, tz=pendulum.timezone("Asia/Manila")),
     schedule=None,
-    catchup=False,
-    tags=["database", "postgres"]
+    catchup=False
 ) as dag:
 
     run_cloudsql_orders_pipeline_task = PythonOperator(
