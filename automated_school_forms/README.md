@@ -13,26 +13,22 @@ At the end of each semester, senior high school class advisers face significant 
 
 ### ⚙️ Solution Approach
 
-**Data Entry and Validation:** <br>
-Excel tables were primarily used for data entry. To validate and standardize data formats and avoid errors, dropdown menus, input messages, and error alerts were included.
+**Data Entry:** <br>
+- Enforces consistency across worksheets, primarily used excel table with data validation to restrict input types (example: dropdown list to limit choices or numeric to only allow numeric values), also includes prompts and error messages to guide users. 
 
 **Automation:** <br>
-A combination of Macro recording and VBA scripts is used to automate repetitive tasks. These scripts is attached to objects (buttons) performing functions such as page navigation, saving copies, printing, etc.
+- Combination of both Macro recording and VBA scripts used to develop a VBA project . These scripts are attached to objects (buttons) automating repetitive task such as page navigation, saving copies, printing, etc.
 
 **Excel Formulas:** <br>
-The most common formulas used in this project include:
-
-- **Lookup Functions** (particularly **INDEX-MATCH**) – used to retrieve data from any column into report cards and permanent records.
-
-- **Calculated Columns** – used to derive information for each student by performing calculations between columns; also applied in text concatenation and date/time calculations.
-
-- **Aggregate Calculations** – used to summarize or combine data from multiple rows, commonly for KPIs such as total absences or student GPA.
-
-- **Logical Calculations** – used to return results based on logical tests, typically for remarks such as *Pass* or *Fail*.
+Some of the formulas used in the project:
+- **Lookup Functions** (particularly **INDEX-MATCH**) – retrieves data from any column into report cards and permanent records.
+- **Calculated Columns** – derives information for each student by performing calculations between columns, used in text concatenation and date/time calculations.
+- **Aggregate Calculations** – summarize or combine data from multiple rows, commonly for KPIs such as total absences or student GPA.
+- **Logical Calculations** – return results based on logical tests, typically for remarks such as *Pass* or *Fail*.
 
 ### 📈 Key Results
 
-✅Streamlined the preparation of school forms, cutting processing time from 1 week to less than one day.<br> 
+✅Streamlined school form preparation using Excel/VBA, reducing processing time from one week to less than a day <br>
 ✅Eliminated 100% of data-entry errors, removing the need for manual cross-checks.<br>
 ✅Delivered a practical, easy-to-use solution adopted by senior high school advisers for two consecutive school years.
 

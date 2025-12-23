@@ -34,14 +34,14 @@ Python scripts developed to simulate realistic data sources:
 - **Email source:** Generates daily order confirmation emails simulating transactions for each branch stores.
 - **Static source:** Generates over 10 years of historical sales data stored as Parquet files.
 
-**Docker Containers:** <br>
-To ensure the pipeline works consistently across environments, making it scalable and easier to collaborate on, Docker containers were used.Two containers were provisioned for this project:
+**Docker:** <br>
+To ensure the pipeline works consistently across environments, making it scalable and easier to collaborate on, Docker containers were used.Two groups of services were provisioned for this project:
 
-Fake Data Generator Container:
-Uses a lightweight Docker setup to avoid port mapping conflict. This container runs the python scripts and DAGs that creates synthetic data source, from generating database transactions, email orders, historical orders, and mock API using Flask
+Fake Data Generator Services:
+Uses a lightweight Docker setup to avoid port mapping conflicts. This group of containers runs the Python scripts and DAGs that create synthetic data sources, including database transactions, email orders, historical orders, and a mock API using Flask.
 
-Ecommerce Airflow Container:
-Scaffolded using Astro CLI for simplified management of Apache Airflow workflows. This container runs the main orchestration layer, handling extraction from data sources, ingestion to Google Cloud Storage, loading into the Snowflake data warehouse, and performing in-warehouse transformations.
+Ecommerce Airflow Services:
+Scaffolded using Astro CLI for simplified management of Apache Airflow workflows. This group of containers runs the main orchestration layer, handling extraction from data sources, ingestion to Google Cloud Storage, loading into the Snowflake data warehouse, and performing in-warehouse transformations.
 
 
 **Data Ingestion** <br>

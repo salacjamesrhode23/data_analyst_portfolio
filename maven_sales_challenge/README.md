@@ -15,21 +15,13 @@ In an effort to become a data-driven organization, MavenTech, a company that spe
 ### ⚙️ Solution Approach
 
 **Datasets:** <br>
-In real-world environments, datasets are continuously updated. However, this project initially used static CSV files. To simulate a dynamic, real-time data source, each dataset was uploaded to Google Sheets and converted into a public CSV export link. This approach allowed Airflow to pull updated data automatically, mimicking a live production scenario.
+In real-world application, datasets are continuously updated. However, this challenge gives a static source of data (CSV files). To simulate a dynamic, real-time data source, all csv files were uploaded to Google Sheets and converted into a public CSV export link. This approach allowed Airflow to pull updated data automatically, mimicking a live production scenario.
 
-**Docker Containers:** <br>
-Two Docker containers were provisioned for this project, one for Airflow and another for dbt + PostgreSQL. Both containers are connected through an external Docker network, enabling communication and shared volumes so Airflow can execute dbt commands.<br>
+**Docker:** <br>
+Two docker compose projects were provisioned for this project, one for Airflow services and another for dbt + PostgreSQL + pgAdmin setup. Both docker compose projects are connected via an external Docker network which enables communication and shared volumes so Airflow services can execute dbt commands.<br>
 
-- Container 1: PostgreSQL + pgAdmin + dbt-core<br>
-This container hosts the PostgreSQL database, which serves as the project’s data warehouse. To simplify database exploration and debugging, pgAdmin is also included for GUI-based access. The container also includes dbt-core, which performs data modeling and transformation tasks inside the warehouse to prepare business-ready datasets.
-
-- Container 2: Custom Airflow Image<br>
-This container runs Airflow using a custom image that includes additional providers specified in the requirements.txt. Airflow orchestrates the weekly ingestion workflow, scheduled to run every Monday at 12:00 AM, pulling fresh data from the public CSV export links into the PostgreSQL database.<br>
-After ingestion, Airflow triggers dbt commands (dbt debug, dbt deps, and dbt run) to validate connections, install dependencies, and apply transformations.
-
-
-**dbt Transformation** <br>
-The dbt project files remain on the local machine, but the project directory is mounted as a shared volume inside the dbt container. This setup allows dbt to run transformations directly within the Docker environment while keeping the code version-controlled locally. Dbt generates a dedicated schema for transformed, analysis-ready datasets. Models are structured within this schema, and built-in dbt tests are applied to enforce business rules and maintain data quality throughout the pipeline.
+**Pipeline** <br>
+Tables were created in PostgreSQL to set up the database for incoming data from CSV files. Data from public CSV exports were then downloaded as temporary files to enable the COPY command in Postgres to load them into the database. After loading, the temporary CSV files were deleted. Finally, a series of dbt commands transformed the data within the database, producing datasets ready for analysis and visualization.
 
 **PowerBI dashboard** <br>
 The interactive Power BI dashboard is divided into three sections aligned with the project objectives: <br>
