@@ -30,29 +30,27 @@ Python scripts developed to simulate realistic data sources:
 **Dimension data sources:** A Flask-based RESTful API loads customer and product data from CSV files and exposes endpoints for querying the data.
 
 **Transaction data sources:** Multiple scripts generate synthetic order data from different sources:
-- **Database source:** Generates daily orders ingested into a Cloud SQL PostgreSQL database simulating online transactions.
-- **Email source:** Generates daily order confirmation emails simulating transactions for each branch stores.
+- **Database source:** Generates daily orders ingested into a Cloud SQL PostgreSQL database, simulating online transactions.
+- **Email source:** Generates daily order confirmation emails simulating transactions for individual branch stores.
 - **Static source:** Generates over 10 years of historical sales data stored as Parquet files.
 
 **Docker:** <br>
 To ensure the pipeline works consistently across environments, making it scalable and easier to collaborate on, Docker containers were used.Two groups of services were provisioned for this project:
 
-Fake Data Generator Services:
-Uses a lightweight Docker setup to avoid port mapping conflicts. This group of containers runs the Python scripts and DAGs that create synthetic data sources, including database transactions, email orders, historical orders, and a mock API using Flask.
+**Fake Data Generator Services:** Uses a lightweight Docker setup to avoid port mapping conflicts. This group of containers runs the Python scripts and DAGs that create synthetic data sources, including database transactions, email orders, historical orders, and a mock API using Flask.
 
-Ecommerce Airflow Services:
-Scaffolded using Astro CLI for simplified management of Apache Airflow workflows. This group of containers runs the main orchestration layer, handling extraction from data sources, ingestion to Google Cloud Storage, loading into the Snowflake data warehouse, and performing in-warehouse transformations.
+**Ecommerce Airflow Services:** Scaffolded using Astro CLI for simplified management of Apache Airflow workflows. This group of containers runs the main orchestration layer, handling extraction from data sources, ingestion to Google Cloud Storage, loading into the Snowflake data warehouse, and performing in-warehouse transformations.
 
 
 **Data Ingestion** <br>
 To avoid creating duplicate records during ingestion from **dynamic data sources**, the scripts are implemented following the principles of idempotency.
-- **API data ingestion:** Fetches customer and product data by sending requests to the REST API then converts JSON responses to CSV files, overwriting files each run for idempotency.
-- **Email data ingestion:** Incrementally extracts order details by tracking the last processed email timestamp fetching only new order confirmations and parsing them into structured CSV files.
-- **PostgreSQL data ingestion:** Incrementally extracts new order records from a Cloud SQL PostgreSQL database by tracking the last processed row ID in Cloud Storage, fetching only unseen rows to structured CSV files.
+- **API data ingestion:** Fetches customer and product data from a REST API, converts JSON responses to CSV files, and overwrites the files on each run to maintain idempotency.
+- **Email data ingestion:** Incrementally extracts order details by tracking the last processed email timestamp, fetching only new order confirmations and parsing them into structured CSV files.
+- **PostgreSQL data ingestion:** Incrementally extracts new order records from a Cloud SQL PostgreSQL database by tracking the last processed row ID in Cloud Storage, fetching only unseen rows and converting them into structured CSV files.
 
-All process data uploads to Google Cloud Storage (GCS) bucket, and loads to the tables in Snowflake data warehouse.
+All processed data is uploaded to a Google Cloud Storage (GCS) bucket and loaded into tables in the Snowflake data warehouse.
 
-As for the **static data source** parquet files are simply uploaded to Google Cloud Storage (GCS) bucket and loaded directly into Snowflake.
+For the **static data source**, Parquet files are uploaded directly to Google Cloud Storage (GCS) and loaded into Snowflake without additional transformation.
 
 
 **Snowflake Setup** <br>
@@ -84,8 +82,8 @@ Transformed datasets support downstream use cases, including:
 ✅ Built a scalable ELT pipeline to collect and centralize 6 million rows of synthetic data from APIs, emails, database and parquet files into Snowflake data warehouse.  <br>
 ✅ Automated data ingestion and processing using Python scripts and SQL/dbt models, transforming raw datasets into analytics-ready tables for BI and data analytics. <br>
 
-This project draws inspiration from: 
-Build an End-to-End Data Engineering Pipeline for eCommerce with the Modern Data-Stack by sclauguico
+This project draws inspiration from: <br>
+Build an End-to-End Data Engineering Pipeline for eCommerce with the Modern Data-Stack by sclauguico <br>
 Data Engineering Zoomcamp: A Free 9-Week Course on Data Engineering Fundamentals
 
 

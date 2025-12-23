@@ -3,16 +3,15 @@
 ## Projects
 | **Project** | **Type** | **Description** | **Tech** |
 |----------|------|--------------|------|
-| [Maven Sales Challenge](/maven_sales_challenge/) | Data Engineering + Power BI Dashboard | End-to-end BI solution that orchestrates automated workflows from data ingestion to data transformation, with Power BI visualizations designed to help Maventech’s sales manager monitor team performance and uncover growth opportunities. | Kestra, PostgreSQL, dbt, Power BI, DAX |
-| [AdventureWorks Sales Dashboard](/adventureworks_sales_dashboard/) | Excel Dashboard | An interactive Excel dashboard built entirely in Microsoft Excel to track quarterly sales performance, visualize growth trends, and support data-driven decision-making for AdventureWorks. | Power Query, MS Excel (Formulas, Pivot Tables, Charts, Slicers) |
+| [E-commerce Data Engineering Pipeline](/ecommerce_data_engineering_pipeline/) | Data Engineering | A scalable ELT pipeline for an omnichannel retail environment that consolidates data from APIs, emails, databases, and Parquet files into a centralized data warehouse. The workflow is orchestrated with Airflow from data extraction through the delivery of analytics-ready datasets. | Airflow, Docker, Google Cloud Platform, Snowflake, SQL, Python |
+| [Maven Sales Challenge](/maven_sales_challenge/) | Data Engineering + Power BI Dashboard | End-to-end BI solution that orchestrates automated workflows from data extraction to data transformation, with Power BI visualizations designed to help Maventech’s sales manager monitor sales team and agents performance. | Power BI, DAX, Airflow, PostgreSQL, Python, SQL |
 | [Automated School Forms](/automated_school_forms/) | Excel Template | Excel-VBA automation system that streamlined school form preparation for senior high school advisers, reducing processing time and eliminating data entry errors. | VBA and Macros, MS Excel (Formulas, Pivot Tables) |
-| [Capacitated Vehicle Routing Problem with Time Windows](capacitated_vehicle_routing_problem) | Data Science | Solution to the Vehicle Routing Problem for a logistics company in Cagayan de Oro City to optimize delivery routes while meeting constraints on truck capacities and customer time windows. | Python (pandas, numpy, matplotlib, seaborn), Geospatial Analysis (geopandas, osmnx, networkx), Google OR-Tools |
 
 ## Data Stack
 ![Data Stack](https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/landing_page/tech_stack.png?raw=true)
 
 ## About Me
-Hi! I'm James, a Licensed Mechanical Engineer and Statistics Teacher transitioning into Data Analytics & Data Engineering. I specialize in using Business Intelligence solutions to generate insights that drives results helping businesses operate more efficiently and profitably.
+Hi! I’m James, a Licensed Mechanical Engineer and Statistics Teacher transitioning into Data Analytics and Data Engineering. I build end-to-end data solutions ranging from scalable ETL/ELT pipelines and automated BI dashboards to workflow automation, turning complex, multi-source data into actionable insights that support more efficient decision-making.
 
 Feel free to connect with me for my data services or collaboration opportunities. 
 
