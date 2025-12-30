@@ -4,8 +4,8 @@ import pendulum
 
 with DAG(
     dag_id="orchestrator_elt_pipeline",
-    start_date=pendulum.datetime(2025, 12, 16, tz=pendulum.timezone("Asia/Manila")),
-    schedule="5 19 * * 0",
+    start_date=pendulum.datetime(2025, 12, 1, tz=pendulum.timezone("Asia/Manila")),
+    schedule="45 10 * * 1",
     catchup=False
 ) as dag:
     
