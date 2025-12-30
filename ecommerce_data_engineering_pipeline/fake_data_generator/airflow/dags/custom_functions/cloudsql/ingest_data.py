@@ -21,7 +21,7 @@ def run_cloudsql_orders_pipeline():
     orders_df = generate_orders(
         customers_df=customers_df,
         products_df=products_df,
-        num_orders=5,
+        num_orders=800,
         reference_date=datetime.now() - timedelta(days=1),
     )
 

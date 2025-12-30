@@ -7,10 +7,12 @@
 ### 🔍 Problem
 Modern retail operations generate vast amounts of transactional, customer, and product data across multiple channels. Managing and analyzing this data efficiently is a complex challenge that demands robust data engineering solutions. This project demonstrates a practical approach to tackling these challenges in an omnichannel retail environment.
 
-Scenario:
-The company has accumulated over 10 years of historical sales data, stored in Parquet files, and has recently migrated its online transactions to a PostgreSQL database.
+Scenario: <br>
+A company has accumulated over 10 years of historical sales data stored in Parquet files.
 
-Each branch store operates its own point-of-sale system. Occasionally, network or software issues can make a store’s primary database temporarily unavailable. In such situations, order confirmation emails—automatically sent for every completed in-store purchase—serve as a reliable backup source of transaction data, enabling the company to track and validate sales even when the main system is offline.
+As the business expanded into both online and physical retail, it began storing online store transactions in a PostgreSQL database, while each physical branch store stores transactions in its own POS database.
+
+Occasionally, network or software issues can make a store’s primary database temporarily unavailable. In such situations, order confirmation emails—automatically sent for every completed in-store purchase—serve as a reliable backup source of transaction data, enabling the company to track and validate sales even when the main system is offline.
 
 In addition, product and customer master data are accessible via REST APIs, providing another layer of source diversity and ensuring comprehensive data coverage across the organization.
 
@@ -21,6 +23,8 @@ In addition, product and customer master data are accessible via REST APIs, prov
 
 
 ### ⚙️ Solution Approach
+**Overview** <br>
+![Data Architecture](https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/ecommerce_data_engineering_pipeline/data_architecture.png?raw=true)
 
 **Datasets:** <br>
 This project extracts and unifies data from multiple sources into a centralized data warehouse. Since no single public dataset fully meets the requirements, custom synthetic datasets were created using the Faker library.
@@ -58,7 +62,7 @@ Before loading data into Snowflake:
 1. Create a database and schema as the destination.
 2. Configure an external stage pointing to the GCS bucket using a storage integration.
 3. Create target tables and inspect the staged datasets to determine correct column types.
-4. Load static files directly via SQL queries; dynamic files are loaded through Airflow DAGs.
+4. Load static files directly via SQL queries; dynamic files are loaded via Airflow DAGs.
 
 **dbt Transformation** <br>
 dbt is used for in-warehouse transformations, converting raw data into analytics-ready datasets. Data flows through three layers:
@@ -69,18 +73,22 @@ dbt is used for in-warehouse transformations, converting raw data into analytics
 
 The dbt project exists in the repository root for development testing. A duplicate copy is included in the Airflow DAGs directory to be executed as part of the ELT pipeline.
 
-**Data Serving (Next Projects)** <br>
+**Data Serving (Next Plans)** <br>
 Transformed datasets support downstream use cases, including:
 
-- **Business Intelligence:** Data marts can be visualized in Power BI or Tableau for self-service analytics and dashboards.
-- **Machine Learning:** Processed datasets can serve as inputs for predictive modeling and advanced analytics.
-
-![Data Architecture](https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/ecommerce_data_engineering_pipeline/data_architecture.png?raw=true)
+- **Business Intelligence:** Data marts can be visualized in tools like Power BI or Tableau to enable self-service analytics and dashboards for Business Users, BI analysts, and Data analysts.
+- **Data Science and Machine Learning** Processed datasets can be used by Data Scientists and Machine Learning Engineers for training machine learning and AI models.
 
 ### 📈 Key Results
 
 ✅ Built a scalable ELT pipeline to collect and centralize 6 million rows of synthetic data from APIs, emails, database and parquet files into Snowflake data warehouse.  <br>
-✅ Automated data ingestion and processing using Python scripts and SQL/dbt models, transforming raw datasets into analytics-ready tables for BI and data analytics. <br>
+✅ Automated data ingestion and processing using Python scripts and SQL/dbt models, transforming raw datasets into analytics-ready tables for business users, BI analysts, and data analysts or data science applications. <br>
+
+![Fake Data Generation](https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/ecommerce_data_engineering_pipeline/data_architecture.png?raw=true)<br>_Figure 1: Fake Data Generation Workflow Orhcestration_
+
+![Main Workflow](https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/ecommerce_data_engineering_pipeline/data_architecture.png?raw=true)<br>_Figure 2: Main Workflow Orhcestration_
+
+
 
 This project draws inspiration from: <br>
 Build an End-to-End Data Engineering Pipeline for eCommerce with the Modern Data-Stack by sclauguico <br>

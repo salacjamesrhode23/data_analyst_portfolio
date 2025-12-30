@@ -13,7 +13,7 @@ def run_email_orders_pipeline():
     orders_df = generate_orders(
         customers_df=customers_df,
         products_df=products_df,
-        num_orders=5,
+        num_orders=100,
         reference_date=datetime.now() - timedelta(days=1),
     )
 
