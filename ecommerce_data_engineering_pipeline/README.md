@@ -88,10 +88,7 @@ Transformed datasets support downstream use cases, including:
 
 ![Main Workflow](https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/ecommerce_data_engineering_pipeline/elt_pipeline_orchestrator.jpg?raw=true)<br>_Figure 2: Main Workflow Orhcestration_
 
-
-
-This project draws inspiration from: <br>
+**Acknowledgements/References:** <br  >
+This project was inspired by the following resources: <br>
 Build an End-to-End Data Engineering Pipeline for eCommerce with the Modern Data-Stack by sclauguico <br>
-Data Engineering Zoomcamp: A Free 9-Week Course on Data Engineering Fundamentals
-
-
+Data Engineering Zoomcamp Guided Project: NY Taxi Data End‑to‑End Data Engineering Pipeline by DataTalks.Club
