@@ -28,6 +28,6 @@ FROM (
         $1:"product_sku"::VARCHAR,
         $1:"unit_price"::FLOAT,
         $1:"vendor"::VARCHAR
-    FROM @PARQUET_STAGE/TEST
+    FROM @PARQUET_STAGE/from_faker
 )
 FILE_FORMAT = 'MY_PARQUET_FORMAT';
