@@ -41,4 +41,17 @@ The interactive Power BI dashboard is divided into three sections aligned with t
 
 [![Watch the demo](https://img.youtube.com/vi/suQ2LIrzfYU/hqdefault.jpg)](https://www.youtube.com/watch?v=suQ2LIrzfYU)
 
+**Acknowledgements/References:** <br  >
+
+This dashboard was inspired by the insights and design recommendations shared during the **Maven Sales Challenge – Winner Selection Voting**.
+
+In particular, I’d like to acknowledge the work of:
+- **Kerryn Gresswell**
+- **Gerard Duggan**
+- **Vince McSkimmings**
+
+Their dashboards influenced the analytical focus, KPI selection, and storytelling approach used in this project.  
+All implementation, data modeling, and visual design decisions are my own.
+
+
 
