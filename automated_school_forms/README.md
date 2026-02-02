@@ -1,3 +1,6 @@
+### Project Overview
+[![Watch the demo](https://img.youtube.com/vi/A4ATo3WMl-U/hqdefault.jpg)](https://www.youtube.com/watch?v=A4ATo3WMl-U)
+
 ## Automated School Form v.1.0
 
 **Role:** Special Science Teacher | Admin Support - Excel Automation<br>
@@ -31,8 +34,3 @@ Some of the formulas used in the project:
 ✅Streamlined school form preparation using Excel/VBA, reducing processing time from one week to less than a day <br>
 ✅Eliminated 100% of data-entry errors, removing the need for manual cross-checks.<br>
 ✅Delivered a practical, easy-to-use solution adopted by senior high school advisers for two consecutive school years.
-
-
-### 📊 Final Deliverables
-
-[![Watch the demo](https://img.youtube.com/vi/A4ATo3WMl-U/hqdefault.jpg)](https://www.youtube.com/watch?v=A4ATo3WMl-U)

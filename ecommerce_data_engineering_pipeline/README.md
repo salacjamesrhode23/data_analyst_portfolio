@@ -1,3 +1,6 @@
+### Project Overview
+![Data Architecture](https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/ecommerce_data_engineering_pipeline/data_architecture.png?raw=true)
+
 ## E-commerce Data Engineering Pipeline
 
 **Role:** Data Engineer <br>
@@ -23,9 +26,6 @@ In addition, product and customer master data are accessible via REST APIs, prov
 
 
 ### ⚙️ Solution Approach
-**Overview** <br>
-![Data Architecture](https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/ecommerce_data_engineering_pipeline/data_architecture.png?raw=true)
-
 **Datasets:** <br>
 This project extracts and unifies data from multiple sources into a centralized data warehouse. Since no single public dataset fully meets the requirements, custom synthetic datasets were created using the Faker library.
 

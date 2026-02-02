@@ -14,4 +14,6 @@ In this challenge, you will analyze a dataset representing a European pharmacy c
 Your task is to build a Power BI report that helps stakeholders understand:  
 - How sales and profitability vary across countries, regions, and individual pharmacies.
 - How different product categories and brands perform in different locations.
-- •	How regional performance contributes to overall business results.
+- How regional performance contributes to overall business results.
+
+Additionally, key business questions and analytical challenges are used as a guide for this project: [click here for details](/maven_sales_challenge)
