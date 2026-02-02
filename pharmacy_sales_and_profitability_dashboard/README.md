@@ -16,4 +16,4 @@ Your task is to build a Power BI report that helps stakeholders understand:
 - How different product categories and brands perform in different locations.
 - How regional performance contributes to overall business results.
 
-Additionally, key business questions and analytical challenges are used as a guide for this project: [click here for details](/key_questions_and_challenges.docx)
+Additionally, this project is guided by key business questions and analytical challenges, which are detailed [in this document](https://docs.google.com/document/d/1T973twFhLPFYHE2yWMfu1OIrpF6c2j1j/edit?usp=sharing).
