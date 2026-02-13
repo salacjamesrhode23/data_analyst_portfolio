@@ -34,8 +34,8 @@ Limit rows to 100 for test/development runs only
 Delete or comment out for production
 */
 
-{% if var('is_test_run', default=true) %}
+-- {% if var('is_test_run', default=true) %}
 
-  limit 100
+--   limit 100
 
-{% endif %}
+-- {% endif %}
