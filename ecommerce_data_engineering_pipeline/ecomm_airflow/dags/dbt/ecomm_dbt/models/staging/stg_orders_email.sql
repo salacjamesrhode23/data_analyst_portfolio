@@ -1,26 +1,30 @@
 {{ config(materialized='view') }}
 
 SELECT
+  -- Order Information
   CAST(CUSTOMER AS STRING) AS CUSTOMER_NAME,
   CAST(PRODUCT AS STRING) AS PRODUCT_NAME,
   CAST(SKU AS STRING) AS PRODUCT_SKU,
-  
   CAST(QTY AS INTEGER) AS QUANTITY,
   CAST(PRICE AS STRING) AS UNIT_PRICE,
   CAST(LINE_TOTAL AS STRING) AS LINE_TOTAL,
   CAST(TOTAL_AMOUNT AS STRING) AS TOTAL_AMOUNT,
-  
+  -- Transaction Dates
   CAST(ORDER_DATE AS TIMESTAMP_NTZ) AS ORDER_DATE,
   CAST(PAYMENT_DATE AS TIMESTAMP_NTZ) AS PAYMENT_DATE,
   CAST(EMAIL_TIMESTAMP AS TIMESTAMP_NTZ) AS EMAIL_TIMESTAMP,
-  
+  -- Payment Information
   CAST(PAYMENT_METHOD AS STRING) AS PAYMENT_METHOD,
   CAST(PAYMENT_REFERENCE AS STRING) AS PAYMENT_REFERENCE
-
 FROM {{ source('raw_data', 'email_orders') }}
 
-{% if var('is_test_run', default=true) %}
+/*
+Limit rows to 100 for test/development runs only
+Delete or comment out for production
+*/
 
-  limit 100
+-- {% if var('is_test_run', default=true) %}
 
-{% endif %}
+--   limit 100
+
+-- {% endif %}

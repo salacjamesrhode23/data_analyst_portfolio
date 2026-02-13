@@ -1,8 +1,9 @@
 {{ config(materialized='view') }}
 
 SELECT
+  -- Order Identifier
   CAST(ORDER_NUMBER AS STRING) AS ORDER_NUMBER,
-  
+  -- Customer Information
   CAST(FIRST_NAME AS STRING) AS FIRST_NAME,
   CAST(LAST_NAME AS STRING) AS LAST_NAME,
   CAST(BILLING_NAME AS STRING) AS CUSTOMER_NAME,
@@ -12,7 +13,7 @@ SELECT
   CAST(ADDRESS_ZIP AS INTEGER) AS ADDRESS_ZIP,
   CAST(PHONE AS STRING) AS PHONE,
   CAST(EMAIL AS STRING) AS EMAIL,
-  
+  -- Product Information
   CAST(LINEITEM_NAME AS STRING) AS PRODUCT_NAME,
   CAST(LINEITEM_QTY AS INTEGER) AS QUANTITY,
   CAST(PRODUCT_CATEGORY AS STRING) AS PRODUCT_CATEGORY,
@@ -21,18 +22,22 @@ SELECT
   CAST(UNIT_PRICE AS FLOAT) AS UNIT_PRICE,
   CAST(VENDOR AS STRING) AS VENDOR,
   CAST(IMAGE_SRC AS STRING) AS IMAGE_SRC,
-  
+  -- Transaction Dates 
   CAST(ORDER_DATE AS TIMESTAMP_NTZ) AS ORDER_DATE,
   CAST(FULFILLMENT_DATE AS TIMESTAMP_NTZ) AS FULFILLMENT_DATE,
   CAST(PAYMENT_DATE AS TIMESTAMP_NTZ) AS PAYMENT_DATE,
-  
+  -- Payment Information
   CAST(PAYMENT_METHOD AS STRING) AS PAYMENT_METHOD,
   CAST(PAYMENT_REFERENCE AS STRING) AS PAYMENT_REFERENCE
-
 FROM {{ source('raw_data', 'parquet_orders') }}
 
-{% if var('is_test_run', default=true) %}
+/*
+Limit rows to 100 for test/development runs only
+Delete or comment out for production
+*/
 
-  limit 100
+-- {% if var('is_test_run', default=true) %}
 
-{% endif %}
+--   limit 100
+
+-- {% endif %}
