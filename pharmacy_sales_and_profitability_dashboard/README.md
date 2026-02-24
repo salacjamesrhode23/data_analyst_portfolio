@@ -8,10 +8,10 @@
 **Tools Used:** Power BI Service, Dataflow, DAX 
 
 ### 🔍 Problem
-In this challenge, you will analyze a dataset representing a European pharmacy chain distributor operating across multiple European countries. The dataset includes daily sales transactions by pharmacy and product, with supporting dimensions for time, geography, and product hierarchy.
+This project analyzes a dataset representing a European pharmacy chain distributor operating across multiple European countries. The dataset includes daily sales transactions by pharmacy and product, with supporting dimensions for time, geography, and product hierarchy.
 
 ### 🎯 Objectives <br>
-Your task is to build a Power BI report that helps stakeholders understand:  
+The task is to build a Power BI report that helps stakeholders understand:  
 - How sales and profitability vary across countries, regions, and individual pharmacies.
 - How different product categories and brands perform in different locations.
 - How regional performance contributes to overall business results.
@@ -34,7 +34,7 @@ Additional filters vary depending on the page focus:
 All filters are accessible via a bookmark button in the upper-right corner, along with a reset button and report guide.
 
 **KPI Cards:**  
-KPI cards are optimized not just to display key metrics but also to act as interactive filters for the entire report. This is achieved by overlaying an invisible button slicer on the cards, creating the illusion that the card itself is selectable.
+KPI cards (Revenue, Cost, Margin, Units Sold) are optimized not just to display key metrics but also to act as interactive filters for the entire report.
 
 ---
 
@@ -42,8 +42,8 @@ KPI cards are optimized not just to display key metrics but also to act as inter
 
 From an executive or manager perspective, it is important to see how countries and regions perform across different KPIs, be able to drill down from country to region, and view the top-ranked pharmacies based on selected KPIs. To support this:
 
-- A **bar chart with Pareto analysis** highlights top-performing countries and regions and their contribution to overall results, complemented by a **map** to show geographic patterns.  
-- A **matrix table** displays pharmacy-level details, including pharmacy count and KPI contribution by type and size, along with a **performance ranking table**.  
+- A **drill down bar chart with Pareto analysis** highlights top-performing countries and regions and their contribution to overall results, complemented by a **map** to show geographic patterns.  
+- A **matrix table** displays pharmacy-level details, including pharmacy count and KPI contribution by type and size.  
 - A **decomposition chart** allows stakeholders to explore KPIs by product categories, brands, and individual products.
 
 ---
@@ -74,8 +74,19 @@ Supporting visuals include:
 - **Promoted vs Non-Promoted Sales bar charts:** Show trade-offs between profit per unit and transaction volume.  
 - **Promotion comparison YoY:** Displays whether an increase in promotions correlates with changes in profit margin.
 
+### 📈 Key Results (Executives Perspective)
+
+- The top three countries (Germany, France, Italy) contribute 50% of overall business performance.<br>
+- Prescription Drugs generate the highest revenue, cost, and margin, while OTC products lead in units sold.<br>
+- Current-year trends show performance improvements across all product categories except Medical Devices.<br>
+- For all product categories, performance typically dips in the first four months of the year (January–April).<br>
+- 28 high-volume, low-margin products were identified as reducing profitability and distorting performance reporting.<br>
+- After excluding discontinued products, items cluster into: Specialized Medical Devices (expensive, low-frequency), Prescription Drugs (slow-moving, regulated), and FMCG (OTC, Personal Care, Wellness).<br>
+- Prioritize on the 88 high-volume, high-margin products by optimizing inventory, expanding market reach to maximize revenue and profitability.
 
 
+**Acknowledgements/References:** <br  >
 
-
-
+This dashboard was inspired by design and work of:
+- **Tiffanny Effinger** Maven Northwind Challenge Dashboard
+- **Gerard Duggan** Maven Churn Challenge
