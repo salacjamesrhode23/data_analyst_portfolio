@@ -1,5 +1,6 @@
 ### Project Overview
-[![Dashboard Preview](https://raw.githubusercontent.com/salacjamesrhode77/portfolio_assets/main/images/pharmacy_sales_and_profitability_dashboard/onyx_data_challenge_thumbnail_1.png)](https://app.powerbi.com/view?r=eyJrIjoiYzFhNWQ4N2EtYzNlYS00NDg3LWFhYTctMjY4YTZmMzk2ZDJlIiwidCI6IjUzYzdjMDZlLWM1ODgtNDhjNC1hZjc0LTk2Mjg1MDdhM2NkMSIsImMiOjEwfQ%3D%3D)
+[![Dashboard Preview](https://raw.githubusercontent.com/salacjamesrhode77/portfolio_assets/main/images/pharmacy_sales_and_profitability_dashboard/onyx_data_challenge_thumbnail_1.png)](https://app.powerbi.com/view?r=eyJrIjoiOWM2NDQzNDAtOTE0Yi00MjI4LTg4OGUtMzc1ODFiN2FiNTM2IiwidCI6IjQ2NTRiNmYxLTBlNDctNDU3OS1hOGExLTAyZmU5ZDk0M2M3YiIsImMiOjl9)
+
 
 
 ## Pharmacy Sales and Profitability Dashboard
@@ -36,7 +37,6 @@ All filters are accessible via a bookmark button in the upper-right corner, alon
 **KPI Cards:**  
 KPI cards (Revenue, Cost, Margin, Units Sold) are optimized not just to display key metrics but also to act as interactive filters for the entire report.
 
----
 
 ### Page 1: Geography
 
@@ -46,7 +46,6 @@ From an executive or manager perspective, it is important to see how countries a
 - A **matrix table** displays pharmacy-level details, including pharmacy count and KPI contribution by type and size.  
 - A **decomposition chart** allows stakeholders to explore KPIs by product categories, brands, and individual products.
 
----
 
 ### Page 2: Trends
 
@@ -55,7 +54,6 @@ Trend analysis can be overwhelming and noisy if done at the individual product l
 - Visualizations focus on **product categories**, with tooltips showing top brands and products when hovering over line charts.  
 - Charts compare **current-year vs previous-year performance**, highlight overall trend direction, and identify peak and low points.
 
----
 
 ### Page 3: Product Analysis
 
@@ -82,10 +80,11 @@ Supporting visuals include:
 - For all product categories, performance typically dips in the first four months of the year (January–April).<br>
 - 28 high-volume, low-margin products were identified as reducing profitability and distorting performance reporting.<br>
 - After excluding discontinued products, items cluster into: Specialized Medical Devices (expensive, low-frequency), Prescription Drugs (slow-moving, regulated), and FMCG (OTC, Personal Care, Wellness).<br>
-- Prioritize on the 88 high-volume, high-margin products by optimizing inventory, expanding market reach to maximize revenue and profitability.
+- 88 high-volume, high-margin products were identified as primary profit drivers that support revenue growth and overall margin expansion.
 
 
-**Acknowledgements/References:** <br  >
+
+### Acknowledgement/References
 
 This dashboard was inspired by design and work of:
 - **Tiffanny Effinger** Maven Northwind Challenge Dashboard
