@@ -1,19 +1,16 @@
 {{ config(materialized='table') }}
 
-with int_customers as (
-    select
-        *
-    from {{ ref('int_customers') }}
-)
-
-select
+SELECT
     CUSTOMER_ID,
     CUSTOMER_NAME,
+    FIRST_NAME,
+    LAST_NAME,
     EMAIL,
     STREET_ADDRESS,
     CITY,
+    LATITUDE,
+    LONGITUDE,
     PROVINCE,
     ZIP,
     PHONE
-from int_customers
-
+FROM {{ ref('int_customers') }}

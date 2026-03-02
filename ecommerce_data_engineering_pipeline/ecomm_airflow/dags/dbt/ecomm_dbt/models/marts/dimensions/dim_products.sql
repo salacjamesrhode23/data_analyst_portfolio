@@ -1,17 +1,11 @@
 {{ config(materialized='table') }}
 
-with int_products as (
-    select
-        *
-    from {{ ref('int_products') }}
-)
-
-select
-    PRODUCT_ID,
+SELECT
+    PRODUCT_SKU,
     PRODUCT_NAME,
     PRODUCT_DESCRIPTION,
     PRODUCT_CATEGORY,
-    UNIT_PRICE,
     VENDOR,
+    UNIT_PRICE,
     IMAGE_SRC
-from int_products
+FROM {{ ref('int_products') }}
