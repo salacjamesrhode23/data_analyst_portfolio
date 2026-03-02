@@ -72,7 +72,7 @@ Supporting visuals include:
 - **Promoted vs Non-Promoted Sales bar charts:** Show trade-offs between profit per unit and transaction volume.  
 - **Promotion comparison YoY:** Displays whether an increase in promotions correlates with changes in profit margin.
 
-### 📈 Key Results (Executives Perspective)
+### 📈 Key Insights (Executive Focus)
 
 - The top three countries (Germany, France, Italy) contribute 50% of overall business performance.<br>
 - Prescription Drugs generate the highest revenue, cost, and margin, while OTC products lead in units sold.<br>
@@ -80,7 +80,7 @@ Supporting visuals include:
 - For all product categories, performance typically dips in the first four months of the year (January–April).<br>
 - 28 high-volume, low-margin products were identified as reducing profitability and distorting performance reporting.<br>
 - After excluding discontinued products, items cluster into: Specialized Medical Devices (expensive, low-frequency), Prescription Drugs (slow-moving, regulated), and FMCG (OTC, Personal Care, Wellness).<br>
-- 88 high-volume, high-margin products were identified as primary profit drivers that support revenue growth and overall margin expansion.
+- 99 high-volume, high-margin products were identified as primary profit drivers that support revenue growth and overall margin expansion.
 
 
 

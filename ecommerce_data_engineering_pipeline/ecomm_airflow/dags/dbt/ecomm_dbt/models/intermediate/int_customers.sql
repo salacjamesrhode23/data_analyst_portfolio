@@ -1,19 +1,15 @@
 {{ config(materialized='table') }}
 
-with stg_customers as (
-    select
-        *
-    from {{ ref('stg_customers') }}
+WITH CUSTOMERS AS (
+    SELECT
+        CST.CUSTOMER_ID, CST.CUSTOMER_NAME, CST.FIRST_NAME,
+        CST.LAST_NAME, CST.EMAIL, CST.STREET_ADDRESS,
+        CST.CITY, CT.LATITUDE, CT.LONGITUDE,
+        CST.PROVINCE, CST.ZIP, CST.PHONE
+    FROM    {{ ref('stg_customers') }} CST
+    LEFT JOIN   {{ ref('stg_cities') }} CT
+    ON      CST.CITY = CT.CITY
 )
 
-select
-    {{ dbt_utils.generate_surrogate_key(['CUSTOMER_NAME', 'EMAIL']) }} as CUSTOMER_ID,
-    CUSTOMER_NAME,
-    EMAIL,
-    STREET_ADDRESS,
-    CITY,
-    PROVINCE,
-    ZIP,
-    PHONE
-from stg_customers
+SELECT * FROM CUSTOMERS
 

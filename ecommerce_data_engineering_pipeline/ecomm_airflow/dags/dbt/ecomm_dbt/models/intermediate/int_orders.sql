@@ -1,59 +1,43 @@
 {{ config(materialized='table') }}
 
-with orders_email as (
-    select
-        CUSTOMER_NAME,  
-        PRODUCT_NAME,            
-        PRODUCT_SKU,
-        QUANTITY,  
-        cast({{ remove_peso_sign("UNIT_PRICE") }} as FLOAT) as UNIT_PRICE,
-        cast({{ remove_peso_sign("LINE_TOTAL") }} as FLOAT) as LINE_TOTAL,
-        {{ dbt_utils.generate_surrogate_key(['ORDER_DATE', 'CUSTOMER_NAME']) }} as ORDER_NUMBER,
-        ORDER_DATE,
-        PAYMENT_DATE,
-        PAYMENT_METHOD,
-        PAYMENT_REFERENCE,
-        'email' as SOURCE
-    from {{ ref('stg_orders_email') }}
-),
+WITH ORDERS_CONSOLIDATED AS (
+SELECT
+    TRANSACTION_ID, ORDER_NUMBER, CUSTOMER_NAME,
+    PRODUCT_NAME, QUANTITY, PRODUCT_SKU,
+    CAST({{ remove_peso_sign("UNIT_PRICE") }} AS DECIMAL(10,2)) AS UNIT_PRICE,
+    ORDER_DATE, PAYMENT_DATE, PAYMENT_METHOD,
+    'EMAIL' AS DATASOURCE
+FROM {{ ref('stg_orders_email') }}
 
-orders_parquet as (
-    select
-        CUSTOMER_NAME,
-        PRODUCT_NAME,
-        PRODUCT_SKU,
-        QUANTITY,
-        UNIT_PRICE,
-        CAST(QUANTITY * UNIT_PRICE AS FLOAT) as LINE_TOTAL,
-        {{ dbt_utils.generate_surrogate_key(['ORDER_DATE', 'CUSTOMER_NAME']) }} as ORDER_NUMBER,
-        ORDER_DATE,
-        PAYMENT_DATE,
-        PAYMENT_METHOD,
-        PAYMENT_REFERENCE,
-        'parquet' as SOURCE
-    from {{ ref('stg_orders_parquet') }}
-),
+UNION
 
-orders_database as (
-    select
-        CUSTOMER_NAME,
-        PRODUCT_NAME,
-        PRODUCT_SKU,
-        QUANTITY,
-        UNIT_PRICE,
-        CAST(QUANTITY * UNIT_PRICE AS FLOAT) as LINE_TOTAL,
-        {{ dbt_utils.generate_surrogate_key(['ORDER_DATE', 'CUSTOMER_NAME']) }} as ORDER_NUMBER,
-        ORDER_DATE,
-        PAYMENT_DATE,
-        PAYMENT_METHOD,
-        PAYMENT_REFERENCE,
-        'database' as SOURCE
-    from {{ ref('stg_orders_database') }}
+SELECT
+    TRANSACTION_ID, ORDER_NUMBER, CUSTOMER_NAME,
+    PRODUCT_NAME, QUANTITY, PRODUCT_SKU,
+    UNIT_PRICE, ORDER_DATE, PAYMENT_DATE, PAYMENT_METHOD,
+    'DATABASE' AS DATASOURCE
+FROM {{ ref('stg_orders_database') }}
+
+UNION
+
+SELECT
+    TRANSACTION_ID, ORDER_NUMBER, CUSTOMER_NAME,
+    PRODUCT_NAME, QUANTITY, PRODUCT_SKU,
+    UNIT_PRICE, ORDER_DATE, PAYMENT_DATE, PAYMENT_METHOD,
+    'PARQUET' AS DATASOURCE
+FROM {{ ref('stg_orders_parquet') }}
 )
 
+SELECT
+    OC.TRANSACTION_ID, OC.ORDER_NUMBER, SC.CUSTOMER_ID, OC.CUSTOMER_NAME,
+    COALESCE(SD.SKU_UPDATED, OC.PRODUCT_SKU) AS PRODUCT_SKU,
+    OC.PRODUCT_NAME, OC.QUANTITY, OC.UNIT_PRICE,
+    OC.ORDER_DATE, OC.PAYMENT_DATE, OC.PAYMENT_METHOD,
+    OC.DATASOURCE
+FROM    ORDERS_CONSOLIDATED OC
 
-select * from orders_email
-union all
-select * from orders_parquet
-union all
-select * from orders_database
+LEFT JOIN   {{ ref('stg_deduped_skus') }} AS SD
+    ON  OC.PRODUCT_SKU = SD.SKU
+    
+LEFT JOIN   {{ ref('stg_customers') }} AS SC
+    ON  OC.CUSTOMER_NAME = SC.CUSTOMER_NAME

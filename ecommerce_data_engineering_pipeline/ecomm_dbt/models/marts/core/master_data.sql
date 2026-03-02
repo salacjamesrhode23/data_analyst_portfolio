@@ -1,77 +1,16 @@
 {{ config(materialized='table') }}
 
-with orders as (
-    select
-        CUSTOMER_NAME,
-        PRODUCT_SKU,
-        QUANTITY,
-        UNIT_PRICE,
-        LINE_TOTAL,
-        ORDER_NUMBER,
-        ORDER_DATE,
-        PAYMENT_DATE,
-        PAYMENT_METHOD,
-        PAYMENT_REFERENCE,
-        SOURCE
-    from {{ ref('int_orders') }}
-),
-
-customers as (
-    select
-        CUSTOMER_ID,
-        CUSTOMER_NAME,
-        EMAIL,
-        STREET_ADDRESS,
-        CITY,
-        PROVINCE,
-        ZIP,
-        PHONE
-    from {{ ref('int_customers') }}
-),
-
-products as (
-    select
-        PRODUCT_ID,
-        PRODUCT_NAME,
-        PRODUCT_SKU,
-        PRODUCT_DESCRIPTION,
-        PRODUCT_CATEGORY,
-        VENDOR,
-        IMAGE_SRC
-    from {{ ref('int_products') }}
-)
-
 SELECT
+    IO.ORDER_DATE, IP.PRODUCT_NAME, IP.PRODUCT_DESCRIPTION, IP.PRODUCT_CATEGORY,
+    IP.VENDOR, IP.IMAGE_SRC, IC.FIRST_NAME, IC.LAST_NAME, IC.CUSTOMER_NAME,
+    IC.EMAIL, IC.STREET_ADDRESS, IC.CITY, IC.LATITUDE, IC.LONGITUDE,
+    IC.PROVINCE, IC.ZIP, IC.PHONE, IO.QUANTITY, IO.UNIT_PRICE,
+    IO.PAYMENT_DATE, IO.PAYMENT_METHOD, IO.DATASOURCE
+FROM    {{ ref('int_orders') }} IO
 
-    c.CUSTOMER_ID,
-    c.CUSTOMER_NAME,
-    c.EMAIL,
-    c.STREET_ADDRESS,
-    c.CITY,
-    c.PROVINCE,
-    c.ZIP,
-    c.PHONE,
+LEFT JOIN   {{ ref('int_customers') }} IC
+    ON IC.CUSTOMER_ID = IO.CUSTOMER_ID
     
-    p.PRODUCT_ID,
-    p.PRODUCT_NAME,
-    p.PRODUCT_DESCRIPTION,
-    p.PRODUCT_CATEGORY,
-    p.VENDOR,
-    p.IMAGE_SRC,
+LEFT JOIN   {{ ref('int_products') }} IP
+    ON IP.PRODUCT_SKU = IO.PRODUCT_SKU
     
-    o.ORDER_NUMBER,
-    o.QUANTITY,
-    o.UNIT_PRICE,
-    o.LINE_TOTAL,
-    o.ORDER_DATE,
-    o.PAYMENT_DATE,
-    o.PAYMENT_METHOD,
-    o.PAYMENT_REFERENCE,
-    o.SOURCE
-
-FROM orders o
-LEFT JOIN customers c
-    ON o.CUSTOMER_NAME = c.CUSTOMER_NAME
-JOIN products p
-    ON o.PRODUCT_SKU = p.PRODUCT_SKU
-ORDER BY o.ORDER_DATE, c.CUSTOMER_NAME, p.PRODUCT_NAME

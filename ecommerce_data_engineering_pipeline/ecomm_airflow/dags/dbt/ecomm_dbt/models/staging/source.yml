@@ -10,4 +10,5 @@ sources:
       - name: database_orders
       - name: customers
       - name: products
+      - name: cities
 
