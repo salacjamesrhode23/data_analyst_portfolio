@@ -1,10 +1,38 @@
 {{ config(materialized='view') }}
 
+WITH deduped_parquet_orders AS (
+    SELECT DISTINCT
+        ORDER_DATE,
+        ORDER_NUMBER,
+        FIRST_NAME,
+        LAST_NAME,
+        BILLING_NAME,
+        ADDRESS_COMPANY,
+        ADDRESS_CITY,
+        ADDRESS_PROVINCE,
+        ADDRESS_ZIP,
+        PHONE,
+        EMAIL,
+        LINEITEM_NAME,
+        LINEITEM_QTY,
+        PRODUCT_CATEGORY,
+        PRODUCT_DESCRIPTION,
+        PRODUCT_SKU,
+        UNIT_PRICE,
+        VENDOR,
+        IMAGE_SRC,
+        FULFILLMENT_DATE,
+        PAYMENT_DATE,
+        PAYMENT_METHOD,
+        PAYMENT_REFERENCE
+    FROM {{ source('raw_data', 'parquet_orders') }}
+)
+
 SELECT
     -- Order Identifier
-    CAST(UPPER(SUBSTR(MD5(ORDER_DATE || BILLING_NAME || LINEITEM_NAME), 1, 12)) AS STRING) AS TRANSACTION_ID,
+    CAST(UPPER(SUBSTR(MD5(ORDER_DATE || BILLING_NAME || LINEITEM_NAME || PAYMENT_DATE || LINEITEM_QTY), 1, 12)) AS STRING) AS TRANSACTION_ID,
     CAST(ORDER_NUMBER AS STRING) AS ORDER_NUMBER,
-    --  Customer Information
+    -- Customer Information
     CAST(FIRST_NAME AS STRING) AS FIRST_NAME,
     CAST(LAST_NAME AS STRING) AS LAST_NAME,
     CAST(BILLING_NAME AS STRING) AS CUSTOMER_NAME,
@@ -30,7 +58,7 @@ SELECT
     -- Payment Information
     CAST(PAYMENT_METHOD AS STRING) AS PAYMENT_METHOD,
     CAST(PAYMENT_REFERENCE AS STRING) AS PAYMENT_REFERENCE
-FROM {{ source('raw_data', 'parquet_orders') }}
+FROM deduped_parquet_orders
 
 /*
 Limit rows to 100 for test/development runs only
