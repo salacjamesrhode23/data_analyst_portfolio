@@ -1,0 +1,75 @@
+version: 2
+
+models:
+  - name: int_orders
+    description: "Intermediate model for orders data"
+    columns:
+
+      - name: transaction_id
+        tests:
+          - not_null
+          - unique
+
+      - name: order_number
+        tests:
+          - not_null
+
+      - name: customer_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customers')
+                field: customer_id
+
+      - name: customer_name
+        tests:
+          - not_null
+
+      - name: product_sku
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_products')
+                field: product_sku
+
+      - name: product_name
+        tests:
+          - not_null
+
+      - name: quantity
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              arguments:
+                expression: "{{ column_name }} > 0"
+
+      - name: unit_price
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              arguments:
+                expression: "{{ column_name }} >= 0"
+
+      - name: order_date
+        tests:
+          - not_null
+          
+      - name: payment_date
+        tests:
+          - not_null
+
+      - name: payment_method
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['PayPal', 'Digital Wallet', 'Cash on Delivery', 'Bank Transfer']
+
+      - name: datasource
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['PARQUET', 'DATABASE', 'EMAIL']

@@ -5,10 +5,11 @@ sources:
     schema: ecomm
     description: "Raw ecommerce data ingested from different sources"
     tables:
-      - name: parquet_orders
-      - name: email_orders
-      - name: database_orders
       - name: customers
       - name: products
       - name: cities
+      - name: parquet_orders
+      - name: email_orders
+      - name: database_orders
+
 
