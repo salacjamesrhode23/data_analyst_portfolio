@@ -47,13 +47,13 @@ The initial results revealed broad themes related to cleanliness and comfort, am
 | Local Transit Explorers | Topic 1: BTS, station, walk, restaurant, food, local | Solo travelers, backpackers, business travelers; short-stay or active explorers | Prefer walking access to BTS/MRT; prioritize food and local areas; spend more time outside; value convenience over luxury; choose based on accessibility and neighborhood vibrancy |
 
 
-## Product Offering
+## Product Offering: What types of accommodations and which amenities are essential for the product offering?
 
 Exploratory data analysis is conducted to understand the expressed preferences of the target customer segments. Specifically, this process identifies the most common features guests look for when booking an Airbnb, such as property type, guest capacity, bedrooms, and amenities.
 
 Based on the results, the following standardized product offering is recommended to serve both Home Comfort Seekers and Local Transit Explorers.
 
-### 1. Standard Listing Configuration
+#### Standard Listing Configuration
 
 Property Type: Entire Place (entire condo or entire apartment)  
 Guest Capacity: 2 guests (up to 4 guests allowed upon request with an additional fee)  
@@ -61,7 +61,7 @@ Bedrooms: 1 bedroom
 Beds: 1 bed (additional bedding available upon request)  
 Bathrooms: 1 full private bathroom  
 
-### 2. Core Amenities
+#### Core Amenities
 
 **Comfort & Living Essentials**  
 Air Conditioning  
@@ -101,7 +101,7 @@ Washlet
 Flexible Stays  
 
 
-## Pricing Strategy
+## Pricing Strategy: How can pricing be aligned with customer value perception? How much should be charged for premiums?
 
 ### Baseline Price
 
@@ -128,7 +128,7 @@ These effects are converted into percentage price adjustments, which serve as th
 
 Based on the results of the pricing strategies, these are the recommended base price and premiums for each target customer.
 
-## Home Comfort Seeker
+#### Home Comfort Seeker
 
 Base Price Offer: 871 THB  
 Premium per Added Guest: 142 THB  
@@ -145,7 +145,7 @@ luxury services +3%
 outdoor recreation +2%  
 
 
-## Local Transit Explorer
+#### Local Transit Explorer
 
 Base Price Offer: 828 THB  
 Premium per Added Guest: 99 THB  
@@ -160,21 +160,3 @@ housekeeping +5%
 cleaning +2%  
 pet friendly features +2%  
 view +1% 
-
-
-## Home Comfort Seeker                                | ## Local Transit Explorer
-
-Base Price Offer: 871 THB                             | Base Price Offer: 828 THB
-Premium per Added Guest: 142 THB                      | Premium per Added Guest: 99 THB
-
-Recommended Premium Amenities:                        | Recommended Premium Amenities:
-
-child friendly feature +16%                           | pool +28%
-pool +15%                                             | child friendly feature +20%
-breakfast +11%                                        | ev support +10%
-ev support +9%                                         | sound system +9%
-exercise +5%                                          | breakfast +7%
-sound system +4%                                      | housekeeping +5%
-housekeeping +4%                                      | cleaning +2%
-luxury services +3%                                   | pet friendly features +2%
-outdoor recreation +2%                                | view +1%
