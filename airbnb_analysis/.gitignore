@@ -1,0 +1,5 @@
+.env
+dataset/calendar.csv
+dataset/listings.csv
+dataset/reviews.csv
+dataset/.env
