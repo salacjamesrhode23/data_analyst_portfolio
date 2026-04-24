@@ -30,7 +30,7 @@ Replace the existing rule-based fraud detection logic with a machine learning mo
 
 To execute the following tasks, the workflow is being implemented:
 
-![Machine Learning and Analytics Pipeline](images/machine_learning_and_analytics_pipeline.png)
+![Machine Learning and Analytics Pipeline](https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/paysim_mobile_money_dashboard/writeup/fraud_detection_and_data_enrichment_pipeline.jpg)
 
 The workflow follows an end-to-end ML and analytics pipeline, where:
 
@@ -73,7 +73,7 @@ Data transformation was implemented using dbt/SQL CTE queries on a PostgreSQL da
 
 ## Power BI Dashboard
 
-The transformed dataset is visualized across 3 dashboards designed to support different stakeholders. As the dashboard is interactive, usability was also prioritized for users who may not be familiar with Power BI. For this reason, a help page was added covering basic dashboard functionality such as navigation and filters (if applicable).
+The transformed dataset is visualized across 3 dashboards designed to support different stakeholders. As the dashboard is interactive, usability was also prioritized for users who may not be familiar with Power BI. For this reason, a help button was added covering basic dashboard functionality such as navigation and filters (if applicable).
 
 ### Page 1 — Executive Overview
 
