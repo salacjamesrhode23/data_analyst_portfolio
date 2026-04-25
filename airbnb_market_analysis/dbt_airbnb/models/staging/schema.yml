@@ -1,0 +1,14 @@
+
+version: 2
+
+sources:
+  - name: raw_data
+    schema: public
+    tables:
+      - name: listings
+      - name: reviews
+      - name: viz_base_price
+      - name: viz_median_price
+      - name: viz_amenity_premium1
+      - name: viz_amenity_premium2
+      - name: viz_parreto_customer1
