@@ -49,13 +49,13 @@ The initial results revealed broad themes related to cleanliness and comfort, am
 
 ## Product Offering: What types of accommodations and which amenities are essential for the product offering?
 
-Exploratory data analysis is conducted to understand the expressed preferences of the target customer segments. Specifically, this process identifies the most common features guests look for when booking an Airbnb, such as property type, guest capacity, bedrooms, and amenities.
+Exploratory data analysis is conducted to understand the expressed preferences of the target customer segments. Specifically, this process identifies the most common features guests look for when booking an Airbnb, such as accommodation capacity, bedrooms, bathrooms, and amenities.
 
 Based on the results, the following standardized product offering is recommended to serve both Home Comfort Seekers and Local Transit Explorers.
 
 ### Standard Listing Configuration
 
-Property Type: Entire Place (entire condo or entire apartment)  
+Property Type: Entire Place / Entire Condo / Entire Apartment 
 Guest Capacity: 2 guests (up to 4 guests allowed upon request with an additional fee)  
 Bedrooms: 1 bedroom  
 Beds: 1 bed (additional bedding available upon request)  
@@ -64,74 +64,76 @@ Bathrooms: 1 full private bathroom
 ### Core Amenities
 
 **Comfort & Living Essentials**  
-Air Conditioning  
-WiFi  
-TV (with Netflix access)  
-Hot Water  
-Toiletries (shampoo, conditioner, soap, body wash)  
-Beddings (linens, pillows, blankets, bed sheets)  
+Air conditioning  
+Hot water
+Beddings
+Wifi
+TV
 
-**Safety & Security**  
-Safety Features (alarm, fire extinguisher, CCTV camera, first aid kit, locks, etc.)  
-Self Check-in  
+**Bathroom & Hygiene**  
+Toiletries
+Bathroooooom fixtures
 
-**Convenience & Utilities**  
-Washer/Dryer (or access to a laundromat nearby)  
-Refrigerator  
-Dining Area  
-Storage (hangers, closet, wardrobe, rack, dresser, clothing storage, etc.)  
-Parking Space  
-Elevator  
+**Kitchen & Dining**  
+Kitchen
+Refrigerator
+Basic Cooking
+Dining
 
-**Kitchen & Food Preparation**  
-Kitchen  
-Basic Cooking Equipment:  
-Hot water kettle  
-Rice cooker  
-Coffee maker  
-Toaster  
+**Kitchen & Dining**  
+Kitchen
+Refrigerator
+Basic Cooking
+Dining
 
-**Bathroom Fixtures**  
-Shower  
-Bathtub / Bath  
-Bidet  
-Washlet  
+**Laundry & Storage**  
+Washer
+Dryer 
+Laundromat nearby
+Storage
 
-**Other Amenities**  
-Flexible Stays  
+**Safety Features**  
+Fire extinguisher
+Smoke alarm
+Carbon monoxide alarm
+
+**Access & Convenience**  
+Self check-in
+Flexible Stays
+Elevator
+Parking Space
 
 
 ## Pricing Strategy: How can pricing be aligned with customer value perception? How much should be charged for premiums?
 
 ### Baseline Price
 
-For the baseline price, the price distribution across target customer segments will be analyzed to assess differences in willingness to pay between Home Comfort Seekers and Local Transit Explorers. Price points (median and mode) are examined to identify the most representative pricing level, which in this case is the modal price, as it is where demand is most concentrated and will serve as the basis for determining an optimal base price to maximize occupancy.
+For the baseline price, the price distribution across target customer segments is analyzed to assess differences in willingness to pay between Home Comfort Seekers and Local Transit Explorers. Price points (median and mode) are examined to identify the most representative pricing level, which in this case is the modal price, as it reflects the highest concentration of demand and serves as the basis for determining an optimal base price that maximizes occupancy.
+
 
 ### Extra Guest Premiums
 
-The property can comfortably accommodate 2 guests but allows up to 4 guests for an additional charge. To determine this charge, listings within each customer segment are grouped by the number of guests accommodated, and the median prices are computed per segment to observe how prices change as guest capacity increases.
+The property can comfortably accommodate 2 guests but allows up to 4 guests for an additional charge. To determine this charge, listings within each customer segment are grouped by the number of guests accommodated, and median prices are computed per segment to observe how prices change as guest capacity increases.
 
-From this, we estimate how much prices typically increase for each additional guest by observing the overall trend between lower-capacity and higher-capacity listings. This provides a practical estimate of the average price increase per extra guest, which is then used as the basis for the additional guest charge.
-
-Each segment is analyzed separately to reflect differences in willingness to pay, ensuring that extra guest fees are aligned with actual demand behavior rather than a fixed rule.
+From this, the price increase per additional guest is estimated by analyzing the overall trend between lower-capacity and higher-capacity listings, with the slope of the trend line providing a practical estimate of the marginal price impact of each extra guest. This serves as the basis for the additional guest charge.
 
 
 ### Amenities Premiums
 
-On top of the baseline price, which includes commonly expected amenities, a premium can be charged for additional amenities depending on how much their presence increases listing prices relative to the baseline.
+On top of the baseline price, which already includes commonly expected amenities, an additional premium is applied for extra amenities based on how much they increase listing prices relative to the baseline.
 
-For each segment, listing prices are compared against the baseline to measure how each amenity affects overall price levels. This helps isolate which amenities are associated with higher pricing.
+For each segment, listing prices are compared to the baseline to measure the effect of each amenity on overall price levels and identify which amenities are associated with higher prices.
 
-A log-linear (Ordinary Least Squares) regression model is used to estimate the impact of each amenity on price. The resulting coefficients indicate how much more (or less) guests are typically willing to pay when a specific amenity is included.
+A log-linear Ordinary Least Squares (OLS) regression model is then used within each segment to estimate the impact of multiple amenities on price, where listing prices (relative to the baseline) are modeled as a function of amenity variables. The resulting coefficients represent the marginal effect of each amenity on price.
 
-These effects are converted into percentage price adjustments, which serve as the recommended premium to be added to the base price when a given amenity is offered.
+These coefficients are converted into percentage price adjustments, which are used as the recommended premium added to the base price when a specific amenity is included.
 
 Based on the results of the pricing strategies, these are the recommended base price and premiums for each target customer.
 
 #### Home Comfort Seeker
 
 Base Price Offer: 871 THB  
-Premium per Added Guest: 142 THB  
+Premium per Extra Guest: 142 THB  
 
 Recommended Price Percentage Adjustment for Premium Amenities:  
 child friendly feature +16%  
@@ -148,7 +150,7 @@ outdoor recreation +2%
 #### Local Transit Explorer
 
 Base Price Offer: 828 THB  
-Premium per Added Guest: 99 THB  
+Premium per Extra Guest: 99 THB  
 
 Recommended Price Percentage Adjustment for Premium Amenities:  
 pool +28%  
