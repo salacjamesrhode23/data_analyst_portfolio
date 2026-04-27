@@ -1,3 +1,7 @@
+## Project Overview
+
+![Project Overview](https://raw.githubusercontent.com/salacjamesrhode77/portfolio_assets/refs/heads/main/images/paysim_mobile_money_dashboard/paysim_thumbnail.jpg)
+
 ## Problem Statement
 
 Mobile money platforms have significantly improved the speed and accessibility of financial transactions. However, this growth has also made it more complex to monitor daily transaction activity, assess overall business performance, and detect fraudulent behavior in a timely and accurate manner.
