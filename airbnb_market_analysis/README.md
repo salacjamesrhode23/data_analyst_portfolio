@@ -1,3 +1,7 @@
+## Project Overview
+
+![Project Overview](https://raw.githubusercontent.com/salacjamesrhode77/portfolio_assets/refs/heads/main/images/airbnb_market_analysis/airbnb_thumbnail.png)
+
 ## Problem Statement
 
 The increasing popularity of Airbnb has created a highly competitive environment for short-term rentals, making it difficult for hosts and investors to make decisions that maximize revenue and occupancy while ensuring guest satisfaction. Many listings are created based on assumptions rather than empirical evidence, resulting in suboptimal pricing, mismatched amenities, and poorly defined target markets.
