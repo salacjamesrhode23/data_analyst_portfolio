@@ -1,0 +1,7 @@
+logs/
+.env
+notebooks/.ipynb_checkpoints
+notebooks/.env
+notebooks/dataset/listings/listings.csv
+notebooks/dataset/reviews/reviews.csv
+notebooks/initial_setup_helper.ipynb
