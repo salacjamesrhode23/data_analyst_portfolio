@@ -115,7 +115,7 @@ Parking Space
 For the baseline price, the price distribution across target customer segments is analyzed to assess differences in willingness to pay between Home Comfort Seekers and Local Transit Explorers. Price points (median and mode) are examined to identify the most representative pricing level, which in this case is the modal price, as it reflects the highest concentration of demand and serves as the basis for determining an optimal base price that maximizes occupancy.
 
 
-### Extra Guest Premiums
+### Guest Surcharges
 
 The property can comfortably accommodate 2 guests but allows up to 4 guests for an additional charge. To determine this charge, listings within each customer segment are grouped by the number of guests accommodated, and median prices are computed per segment to observe how prices change as guest capacity increases.
 
