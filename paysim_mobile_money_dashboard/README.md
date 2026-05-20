@@ -77,7 +77,8 @@ Data transformation was implemented using dbt/SQL CTE queries on a PostgreSQL da
 - Intermediate layer (business logic and feature engineering)
 - Marts layer (analytics-ready dataset for Power BI visualization)
 
-[Click here to see SQL queries used in data transformation](https://github.com/salacjamesrhode77/dbt_paysim/tree/main/models)
+[Click here to see SQL queries used in data transformation](https://github.com/salacjamesrhode77/data_analyst_portfolio/tree/main/paysim_mobile_money_dashboard/dbt_paysim/models)
+
 
 ### Data Modeling (Power BI)
 
@@ -97,24 +98,23 @@ DAX measures are used not only to aggregate values but also to create dynamic ca
 
 Below are sample DAX implementations for each use case:
 
-**Key business metrics created using DAX:**
-![Paysim DAX KPI](https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/paysim_mobile_money_dashboard/writeup/paysim_DAX_KPI.png)
+<b>Key business metrics created using DAX:</b><br>
+<img src="https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/paysim_mobile_money_dashboard/writeup/paysim_DAX_KPI.png" width="600"><br><br>
 
-**Sample DAX for dynamic calculations:**
-![Paysim DAX dynamic calculation](https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/paysim_mobile_money_dashboard/writeup/paysim_DAX_dynamic_calculation.png)
+<b>Sample DAX for dynamic calculations:</b><br>
+<img src="https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/paysim_mobile_money_dashboard/writeup/paysim_DAX_dynamic_calculation.png" width="600"><br><br>
 
-**Sample DAX for conditional logic:**
-![Paysim DAX conditional logic](https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/paysim_mobile_money_dashboard/writeup/paysim_DAX_conditional_logic.png)
+<b>Sample DAX for conditional logic:</b><br>
+<img src="https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/paysim_mobile_money_dashboard/writeup/paysim_DAX_conditional_logic.png" width="600"><br><br>
 
-**Sample DAX for time intelligence:**
-![Paysim DAX time intelligence](https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/paysim_mobile_money_dashboard/writeup/paysim_DAX_time_intelligence.png)
+<b>Sample DAX for time intelligence:</b><br>
+<img src="https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/paysim_mobile_money_dashboard/writeup/paysim_DAX_time_intelligence.png" width="600"><br><br>
 
-**Sample DAX for text formatting:**
-![Paysim DAX text formatting](https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/paysim_mobile_money_dashboard/writeup/paysim_DAX_text_formatting.png)
+<b>Sample DAX for text formatting:</b><br>
+<img src="https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/paysim_mobile_money_dashboard/writeup/paysim_DAX_text_formatting.png" width="600"><br><br>
 
-**Sample DAX for calculated tables:**
-![Paysim DAX calculated table](https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/paysim_mobile_money_dashboard/writeup/paysim_DAX_calculated_table.png)
-
+<b>Sample DAX for calculated tables:</b><br>
+<img src="https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/paysim_mobile_money_dashboard/writeup/paysim_DAX_calculated_table.png" width="600">
 
 ## Power BI Dashboard
 
