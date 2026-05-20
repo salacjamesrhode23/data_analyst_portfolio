@@ -98,22 +98,22 @@ DAX measures are used not only to aggregate values but also to create dynamic ca
 
 Below are sample DAX implementations for each use case:
 
-<b>Key business metrics created using DAX:</b><br>
+<b>Key business metrics created using DAX:</b><br><br>
 <img src="https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/paysim_mobile_money_dashboard/writeup/paysim_DAX_KPI.png" width="800"><br><br>
 
-<b>Sample DAX for dynamic calculations:</b><br>
+<b>Sample DAX for dynamic calculations:</b><br><br>
 <img src="https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/paysim_mobile_money_dashboard/writeup/paysim_DAX_dynamic_calculation.png" width="800"><br><br>
 
-<b>Sample DAX for conditional logic:</b><br>
+<b>Sample DAX for conditional logic:</b><br><br>
 <img src="https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/paysim_mobile_money_dashboard/writeup/paysim_DAX_conditional_logic.png" width="800"><br><br>
 
-<b>Sample DAX for time intelligence:</b><br>
+<b>Sample DAX for time intelligence:</b><br><br>
 <img src="https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/paysim_mobile_money_dashboard/writeup/paysim_DAX_time_intelligence.png" width="800"><br><br>
 
-<b>Sample DAX for text formatting:</b><br>
+<b>Sample DAX for text formatting:</b><br><br>
 <img src="https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/paysim_mobile_money_dashboard/writeup/paysim_DAX_text_formatting.png" width="800"><br><br>
 
-<b>Sample DAX for calculated tables:</b><br>
+<b>Sample DAX for calculated tables:</b><br><br>
 <img src="https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/paysim_mobile_money_dashboard/writeup/paysim_DAX_calculated_table.png" width="800">
 
 ## Power BI Dashboard
