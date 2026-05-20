@@ -21,18 +21,25 @@ In an effort to become a data-driven organization, MavenTech, a company that spe
 In real-world application, datasets are continuously updated. However, this challenge gives a static source of data (CSV files). To simulate a dynamic, real-time data source, all csv files were uploaded to Google Sheets and converted into a public CSV export link. This approach allowed Airflow to pull updated data automatically, mimicking a live production scenario.
 
 **Docker:** <br>
-Two docker compose projects were provisioned for this project, one for Airflow services and another for dbt + PostgreSQL + pgAdmin setup. Both docker compose projects are connected via an external Docker network which enables communication and shared volumes so Airflow services can execute dbt commands.<br>
+Two Docker Compose projects were provisioned for this project: [Airflow services Docker Compose](https://github.com/salacjamesrhode77/data_analyst_portfolio/blob/main/maven_sales_challenge/maven_airflow/docker-compose.yml) and [dbt + PostgreSQL + pgAdmin setup](https://github.com/salacjamesrhode77/data_analyst_portfolio/blob/main/maven_sales_challenge/maven_dbt/docker-compose.yml). Both Docker Compose projects are connected via an external Docker network, enabling communication and shared volumes so Airflow services can execute dbt commands.<br>
 
-**Pipeline** <br>
-Tables were created in PostgreSQL to set up the database for incoming data from CSV files. Data from public CSV exports were then downloaded as temporary files to enable the COPY command in Postgres to load them into the database. After loading, the temporary CSV files were deleted. Finally, a series of dbt commands transformed the data within the database, producing datasets ready for analysis and visualization.
+
+
+**Data Pipeline** <br>
+
+![Data Architecture](https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/maven_sales_challenge/data_architecture.png?raw=true)
+
+- Public CSV files were prepared as data sources and stored in a structured format for processing
+- The data was loaded into a PostgreSQL database as tables
+- Temporary files used during loading were removed after successful import
+- dbt was used to clean and transform the raw data inside PostgreSQL
+- Final transformed datasets were produced and used for dashboard development
 
 **PowerBI dashboard** <br>
 The interactive Power BI dashboard is divided into three sections aligned with the project objectives: <br>
 - **First Page (Landing Page):** Focuses on visuals that provide managers with instant insights into how their teams are tracking against KPIs and how individual agents are performing. <br>
 - **Second Page:** Highlights the products, sectors, and accounts the team should focus on, as they contribute the most to sales. It also provides suggested markup percentages for the strategic selling of products. <br>
 - **Third Page:** Highlights the team’s performance compared to other sales teams across various metrics. Managers can see how their teams rank within the overall business and whether they are performing above or below average.
-
-![Data Architecture](https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/maven_sales_challenge/data_architecture.png?raw=true)
 
 ### 📈 Key Results
 
