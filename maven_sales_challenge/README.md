@@ -21,18 +21,71 @@ In an effort to become a data-driven organization, MavenTech, a company that spe
 In real-world application, datasets are continuously updated. However, this challenge gives a static source of data (CSV files). To simulate a dynamic, real-time data source, all csv files were uploaded to Google Sheets and converted into a public CSV export link. This approach allowed Airflow to pull updated data automatically, mimicking a live production scenario.
 
 **Docker:** <br>
-Two docker compose projects were provisioned for this project, one for Airflow services and another for dbt + PostgreSQL + pgAdmin setup. Both docker compose projects are connected via an external Docker network which enables communication and shared volumes so Airflow services can execute dbt commands.<br>
+Two Docker Compose projects were provisioned for this project: [Airflow services Docker Compose](https://github.com/salacjamesrhode77/data_analyst_portfolio/blob/main/maven_sales_challenge/maven_airflow/docker-compose.yml) and [dbt + PostgreSQL + pgAdmin setup](https://github.com/salacjamesrhode77/data_analyst_portfolio/blob/main/maven_sales_challenge/maven_dbt/docker-compose.yml). Both Docker Compose projects are connected via an external Docker network, enabling communication and shared volumes so Airflow services can execute dbt commands.<br>
 
-**Pipeline** <br>
-Tables were created in PostgreSQL to set up the database for incoming data from CSV files. Data from public CSV exports were then downloaded as temporary files to enable the COPY command in Postgres to load them into the database. After loading, the temporary CSV files were deleted. Finally, a series of dbt commands transformed the data within the database, producing datasets ready for analysis and visualization.
 
-**PowerBI dashboard** <br>
-The interactive Power BI dashboard is divided into three sections aligned with the project objectives: <br>
-- **First Page (Landing Page):** Focuses on visuals that provide managers with instant insights into how their teams are tracking against KPIs and how individual agents are performing. <br>
-- **Second Page:** Highlights the products, sectors, and accounts the team should focus on, as they contribute the most to sales. It also provides suggested markup percentages for the strategic selling of products. <br>
-- **Third Page:** Highlights the team’s performance compared to other sales teams across various metrics. Managers can see how their teams rank within the overall business and whether they are performing above or below average.
+
+**Data Pipeline** <br>
 
 ![Data Architecture](https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/maven_sales_challenge/data_architecture.png?raw=true)
+
+- Public CSV files were prepared as data sources and stored in a structured format for processing
+- The data was loaded into a PostgreSQL database as tables
+- Temporary files used during loading were removed after successful import
+- dbt was used to clean and transform the raw data inside PostgreSQL
+- Final transformed datasets were produced and used for dashboard development
+
+**Data Modeling (Power BI)** <br>
+
+![Data Model](https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/maven_sales_challenge/mavensales_data_model.png?raw=true)
+
+The data model follows a simple star schema, with multiple dimension tables connected to a central fact table. The tables are designed with one-to-many relationships to optimize performance and enable efficient filtering across the dashboards.
+
+There are also tables that are independent of relationships for specific UX purposes (disconnected slicers).
+
+Fact Table: fact_salespipeline
+Dimension Tables: dim_accounts, dim_calendar, dim_products, dim_salesteams
+Independent Tables: viz_price_deviation, viz_selection_manager
+
+**DAX Measures** <br>
+
+DAX measures are used not only to aggregate values but also to create dynamic calculations, implement conditional logic, perform time intelligence analysis, handle text formatting, color formatting, calculated columns, etc.
+
+Below are sample DAX implementations for each use case:
+
+<b>Key business metrics created using DAX:</b><br><br>
+<img src="https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/paysim_mobile_money_dashboard/writeup/mavensales_DAX_KPI.png" width="800"><br><br>
+
+<b>Sample DAX for dynamic calculations:</b><br><br>
+<img src="https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/paysim_mobile_money_dashboard/writeup/mavensales_DAX_dynamic_calculation.png" width="800"><br><br>
+
+<b>Sample DAX for conditional logic:</b><br><br>
+<img src="https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/paysim_mobile_money_dashboard/writeup/mavensales_DAX_conditional_logic.png" width="800"><br><br>
+
+<b>Sample DAX for time intelligence:</b><br><br>
+<img src="https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/paysim_mobile_money_dashboard/writeup/mavensales_DAX_time_intelligence.png" width="800"><br><br>
+
+<b>Sample DAX for text formatting:</b><br><br>
+<img src="https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/paysim_mobile_money_dashboard/writeup/mavensales_DAX_text_formatting.png" width="800"><br><br>
+
+<b>Sample DAX for color formatting:</b><br><br>
+<img src="https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/paysim_mobile_money_dashboard/writeup/mavensales_DAX_color_formatting.png" width="800"><br><br>
+
+<b>Sample DAX for calculated columns:</b><br><br>
+<img src="https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/paysim_mobile_money_dashboard/writeup/mavensales_DAX_calculated_columns.png" width="800"><br><br>
+**PowerBI dashboard** <br>
+The interactive Power BI dashboard is divided into three sections aligned with the project objectives: <br>
+
+![Maven Sales Page 1](https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/maven_sales_challenge/mavensales_dashboard_page1.png?raw=true)
+- **First Page (Landing Page):** Focuses on visuals that provide managers with instant insights into how their teams are tracking against KPIs and how individual agents are performing. <br>
+
+
+![Maven Sales Page 1](https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/maven_sales_challenge/mavensales_dashboard_page2.png?raw=true)
+- **Second Page:** Highlights the products, sectors, and accounts the team should focus on, as they contribute the most to sales. It also provides suggested markup percentages for the strategic selling of products. <br>
+
+
+![Maven Sales Page 1](https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/maven_sales_challenge/mavensales_dashboard_page3.png?raw=true)
+- **Third Page:** Highlights the team’s performance compared to other sales teams across various metrics.Managers can see how their teams rank within the overall business and whether they are performing above or below average.
 
 ### 📈 Key Results
 

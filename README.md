@@ -15,9 +15,11 @@
 ![Data Stack](https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/landing_page/tech_stack.png?raw=true)
 
 ## About Me
-Hi! I’m James, a Licensed Mechanical Engineer and Statistics Teacher transitioning into Data Analytics and Data Engineering. I build end-to-end data solutions ranging from scalable ETL/ELT pipelines and automated BI dashboards to workflow automation, turning complex, multi-source data into actionable insights that support more efficient decision-making.
+Hi! I’m James, a Licensed Mechanical Engineer and former Statistics Teacher transitioning into Data Analytics. I build end-to-end data solutions using SQL, Python, Excel, and Power BI—from data pipelines and analysis to dashboards and machine learning models.
 
-Feel free to connect with me for my data services or collaboration opportunities. 
+I focus on turning raw data into actionable insights, automating reporting processes, and supporting data-driven decision-making for business operations and performance monitoring.
+
+Feel free to connect with me for my data services or collaboration opportunities.
 
 📫 Contact: [LinkedIn](https://www.linkedin.com/in/jamesrhodesalac77/) | [salacjamesrhode77@gmail.com](salac.jamesrhode77@gmail.com) 
 

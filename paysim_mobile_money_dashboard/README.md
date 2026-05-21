@@ -70,16 +70,59 @@ Note: The logic behind these synthetic datasets may not simulate actual behavior
 
 ### SQL/dbt Transformation
 
+![Transformed Dataset](https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/paysim_mobile_money_dashboard/writeup/paysim_database.png)
+
 Data transformation was implemented using dbt/SQL CTE queries on a PostgreSQL database, moving from raw synthetic dataset to:
 - Staging layer (clean and standardized)
 - Intermediate layer (business logic and feature engineering)
 - Marts layer (analytics-ready dataset for Power BI visualization)
+
+[Click here to see SQL queries used in data transformation](https://github.com/salacjamesrhode77/data_analyst_portfolio/tree/main/paysim_mobile_money_dashboard/dbt_paysim/models)
+
+
+### Data Modeling (Power BI)
+
+![Paysim Data Model](https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/paysim_mobile_money_dashboard/writeup/paysim_data_model.png)
+
+The data model follows a hybrid (partially snowflaked) schema, with the outermost table being a custom table primarily used for sorting in data visualizations.
+
+- Fact Table: fact_transactions  
+- Dimension Tables: dim_calendar, dim_customer, dim_merchants  
+- Sorting Tables: sort_day, sort_time, sort_bin, sort_cfmatrix_columns, and sort_cfmatrix_rows  
+
+Relationships are designed as one-to-many to optimize performance and enable efficient filtering across the dashboards.
+
+### DAX Measures
+
+DAX measures are used not only to aggregate values but also to create dynamic calculations, implement conditional logic, perform time intelligence analysis, handle text formatting, and even generate calculated tables.
+
+Below are sample DAX implementations for each use case:
+
+<b>Key business metrics created using DAX:</b><br><br>
+<img src="https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/paysim_mobile_money_dashboard/writeup/paysim_DAX_KPI.png" width="800"><br><br>
+
+<b>Sample DAX for dynamic calculations:</b><br><br>
+<img src="https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/paysim_mobile_money_dashboard/writeup/paysim_DAX_dynamic_calculation.png" width="800"><br><br>
+
+<b>Sample DAX for conditional logic:</b><br><br>
+<img src="https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/paysim_mobile_money_dashboard/writeup/paysim_DAX_conditional_logic.png" width="800"><br><br>
+
+<b>Sample DAX for time intelligence:</b><br><br>
+<img src="https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/paysim_mobile_money_dashboard/writeup/paysim_DAX_time_intelligence.png" width="800"><br><br>
+
+<b>Sample DAX for text formatting:</b><br><br>
+<img src="https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/paysim_mobile_money_dashboard/writeup/paysim_DAX_text_formatting.png" width="800"><br><br>
+
+<b>Sample DAX for calculated tables:</b><br><br>
+<img src="https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/paysim_mobile_money_dashboard/writeup/paysim_DAX_calculated_table.png" width="800">
 
 ## Power BI Dashboard
 
 The transformed dataset is visualized across 3 dashboards designed to support different stakeholders. As the dashboard is interactive, usability was also prioritized for users who may not be familiar with Power BI. For this reason, a help button was added covering basic dashboard functionality such as navigation and filters (if applicable).
 
 ### Page 1 — Executive Overview
+
+![Paysim Dashboard Page 1](https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/paysim_mobile_money_dashboard/writeup/paysim_page1.png)
 
 The dashboard provides a high-level view of business performance, focusing on how transaction activity translates into profitability. It is designed to help executives quickly assess whether the business is growing, identify key profit drivers, and detect cost inefficiencies across different segments.
 
@@ -105,6 +148,8 @@ Given the data available is for one month only, no time-based filters were added
 
 ### Page 2: Financial Operations Monitoring (KPI Dashboard)
 
+![Paysim Dashboard Page 2](https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/paysim_mobile_money_dashboard/writeup/paysim_page2.png)
+
 This dashboard focuses on day-to-day financial operations, with the main objective of helping operations teams detect issues before they impact customers or result in financial loss. Ideally, this dashboard should stream data in real-time for monitoring; however, for this project, a static dataset is used, so real-time behavior is simulated.
 
 **Features:** <br>
@@ -118,6 +163,8 @@ Comparison of performance across Payment Methods is provided, with drill-down ca
 In addition to KPI monitoring, the dashboard also supports early detection of SLA breaches for failed transactions. It enables diagnosis of the main reasons for transaction failures and provides detailed visibility into the most recent failed transactions to support operational troubleshooting and root cause identification.
 
 ### Page 3: Fraud Detection Model Evaluation
+
+![Paysim Dashboard Page 3](https://github.com/salacjamesrhode77/portfolio_assets/blob/main/images/paysim_mobile_money_dashboard/writeup/paysim_page3.png)
 
 This dashboard provides the evaluation results of a machine learning model used for fraud detection. The results are based on the same evaluation outputs generated during model development in the Jupyter Notebook but are translated into Power BI to support data storytelling and model observability for data science teams.
 
